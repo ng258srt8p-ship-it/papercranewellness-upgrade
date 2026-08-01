@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Frequently Asked Questions about Paper Crane Wellness LLC - therapy services, insurance, scheduling, and what to expect from your sessions." />
+  <meta name="theme-color" content="#7E8F63" />
+  <title>FAQ | Paper Crane Wellness LLC</title>
+  <link rel="canonical" href="https://www.papercranewellness.com/faq" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="src/global.css" />
+  <link rel="stylesheet" href="src/components/OpeningsBanner.css" />
+  <link rel="stylesheet" href="src/components/NavBar.css" />
+  <link rel="stylesheet" href="src/components/ServicePage.css" />
+  <link rel="stylesheet" href="src/components/CTABanner.css" />
+  <link rel="stylesheet" href="src/components/Footer.css" />
+  <link rel="stylesheet" href="src/components/BookingModal.css" />
+
+  <style>
+    /* FAQ page specific styles */
+    .faq-hero {
+      background-color: var(--color-bg-alt);
+      padding-block: var(--spacing-12) var(--spacing-10);
+    }
+    .faq-hero__inner {
+      max-width: 860px;
+      margin-inline: auto;
+      padding-inline: var(--spacing-4);
+      text-align: center;
+    }
+    .faq-hero__heading {
+      margin-bottom: var(--spacing-4);
+    }
+    .faq-hero__subhead {
+      font-size: var(--text-md);
+      color: var(--color-text-muted);
+      line-height: var(--leading-loose);
+      max-width: 600px;
+      margin-inline: auto;
+    }
+
+    .faq-section {
+      padding-block: var(--section-padding-y);
+      background-color: var(--color-bg-primary);
+    }
+    .faq-section__inner {
+      max-width: 860px;
+      margin-inline: auto;
+      padding-inline: var(--spacing-4);
+    }
+    .faq-categories {
+      display: grid;
+      gap: var(--spacing-8);
+    }
+    .faq-category {
+      border-top: 2px solid var(--color-border);
+      padding-top: var(--spacing-6);
+    }
+    .faq-category__title {
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-4);
+    }
+    .faq-items {
+      display: grid;
+      gap: var(--spacing-4);
+    }
+    .faq-item {
+      background-color: var(--color-bg-alt);
+      border-radius: var(--radius-card);
+      padding: var(--spacing-5);
+      box-shadow: var(--shadow-card);
+    }
+    .faq-question {
+      font-size: var(--text-lg);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--spacing-3);
+      line-height: var(--leading-snug);
+    }
+    .faq-answer {
+      font-size: var(--text-base);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
+    }
+    .faq-answer p {
+      margin-bottom: var(--spacing-3);
+    }
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+    .faq-answer ul {
+      margin-left: var(--spacing-4);
+      margin-bottom: var(--spacing-3);
+    }
+    .faq-answer li {
+      margin-bottom: var(--spacing-2);
+    }
+    .faq-highlight {
+      color: var(--color-accent);
+      font-weight: var(--weight-semibold);
+    }
+
+    @media (max-width: 768px) {
+      .faq-hero__inner,
+      .faq-section__inner {
+        padding-inline: var(--spacing-3);
+      }
+      .faq-category {
+        padding-top: var(--spacing-4);
+      }
+      .faq-item {
+        padding: var(--spacing-4);
+      }
+    }
+  </style>
+
+  <meta property="og:image"       content="https://www.papercranewellness.com/src/assets/images/logo.webp" />
+  <meta property="og:image:alt"   content="Paper Crane Wellness LLC Logo" />
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="FAQ | Paper Crane Wellness" />
+  <meta name="twitter:image"       content="https://www.papercranewellness.com/src/assets/images/logo.webp" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- NAV BAR -->
+<header class="navbar" role="banner">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__logo" aria-label="Paper Crane Wellness LLC — home">
+      <img src="src/assets/images/logo.webp" alt="Paper Crane Wellness LLC" class="navbar__logo-img" width="120" height="120" loading="eager" />
+    </a>
+
+    <nav aria-label="Primary navigation">
+      <ul class="navbar__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog/index.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <a href="https://papercranewellness.clientsecure.me/request" class="btn btn--primary navbar__cta" data-booking-modal>Book a Free 15 Minute Consultation</a>
+
+    <button type="button" class="navbar__hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line class="hamburger-bar" x1="3" y1="6"  x2="21" y2="6" />
+        <line class="hamburger-bar" x1="3" y1="12" x2="21" y2="12" />
+        <line class="hamburger-bar" x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<nav class="navbar__mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+  <ul class="navbar__mobile-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="blog/index.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="navbar__mobile-cta">
+    <a href="https://papercranewellness.clientsecure.me/request" class="btn btn--primary" data-booking-modal>Book a Free 15 Minute Consultation</a>
+  </div>
+</nav>
+<main id="main-content">
+
+    <!-- FAQ HERO -->
+    <section class="faq-hero" aria-labelledby="faq-heading">
+      <div class="faq-hero__inner" data-reveal>
+        <span class="section-label">Frequently Asked Questions</span>
+        <h1 class="faq-hero__heading" id="faq-heading">Your Questions Answered</h1>
+        <p class="faq-hero__subhead">
+          Find answers to common questions about therapy services, insurance coverage, scheduling, and what to expect from your sessions at Paper Crane Wellness.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section" aria-label="Frequently asked questions">
+      <div class="faq-section__inner">
+        <div class="faq-categories">
+
+          <!-- Insurance & Payment -->
+          <div class="faq-category">
+            <h2 class="faq-category__title">Insurance & Payment</h2>
+            <div class="faq-items">
+              <div class="faq-item">
+                <h3 class="faq-question">Do you take insurance?</h3>
+                <div class="faq-answer">
+                  <p>Yes! I take insurance because I believe mental health care should be within reach. Paper Crane Wellness is in network with <span class="faq-highlight">Blue Cross Blue Shield, Optum/UHC, Cigna, Aetna, and Tricare East</span>.</p>
+                  <p>Private pay is available at <span class="faq-highlight">$150 per hour</span> and a superbill can be provided for potential reimbursement with insurance companies that have out of network benefits.</p>
+                </div>
+              </div>
+              <div class="faq-item">
+                <h3 class="faq-question">How do I verify my insurance benefits?</h3>
+                <div class="faq-answer">
+                  <p>You can verify your benefits by calling the member services number on your insurance card. Ask about:</p>
+                  <ul>
+                    <li>Mental health/behavioral health coverage</li>
+                    <li>Number of authorized sessions per year</li>
+                    <li>Copayment or coinsurance amount</li>
+                    <li>Whether pre-authorization is required</li>
+                  </ul>
+                  <p>I'm also happy to help you navigate this process during our consultation.</p>
+                </div>
+              </div>
+              <div class="faq-item">
+                <h3 class="faq-question">What if my insurance isn't listed?</h3>
+                <div class="faq-answer">
+                  <p>If your insurance provider isn't in our network, you can still access services through private pay or out-of-network benefits. Many insurance plans offer out-of-network coverage that can reimburse a significant portion of therapy costs.</p>
+                  <p>I can provide a superbill (detailed receipt) that you can submit to your insurance company for potential reimbursement.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Getting Started -->
+          <div class="faq-category">
+            <h2 class="faq-category__title">Getting Started</h2>
+            <div class="faq-items">
+              <div class="faq-item">
+                <h3 class="faq-question">How do I get started?</h3>
+                <div class="faq-answer">
+                  <p>The first step is to schedule a <span class="faq-highlight">free 15-minute consultation</span>. This gives us a chance to see if we're a good fit for each other and allows you to ask any questions you might have about the therapeutic process.</p>
+                  <p>You can schedule this consultation by clicking the "Book a Free 15 Minute Consultation" button on any page of our website, or by calling us directly at <span class="faq-highlight">843-256-2016</span>.</p>
+                </div>
+              </div>
+              <div class="faq-item">
+                <h3 class="faq-question">Do I need a referral from my doctor?</h3>
+                <div class="faq-answer">
+                  <p>In most cases, you don't need a referral to start therapy. However, some insurance plans may require a referral or pre-authorization. It's best to check with your insurance provider to understand their specific requirements.</p>
+                  <p>If you're unsure, I can help you navigate this during our consultation.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- What comes next? -->
+          <div class="faq-category">
+            <h2 class="faq-category__title">What comes next?</h2>
+            <div class="faq-items">
+              <div class="faq-item">
+                <h3 class="faq-question">What happens during the intake session?</h3>
+                <div class="faq-answer">
+                  <p>Your intake session is primarily about getting to know each other. We'll discuss what brings you to therapy, your goals, and what you hope to achieve. We'll work together to identify your symptoms and explore potential diagnoses to ensure we develop the most effective treatment approach for your specific needs.</p>
+                  <p>We'll also review important paperwork, including confidentiality policies and treatment planning information.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Therapy Process -->
+          <div class="faq-category">
+            <h2 class="faq-category__title">Therapy Process</h2>
+            <div class="faq-items">
+              <div class="faq-item">
+                <h3 class="faq-question">How often are therapy sessions?</h3>
+                <div class="faq-answer">
+                  <p>Typically, therapy sessions are held weekly, especially in the beginning. This consistency helps build momentum and provides regular support as you work toward your goals.</p>
+                  <p>As you progress, we may discuss adjusting frequency to bi-weekly or monthly sessions, depending on your needs and progress.</p>
+                </div>
+              </div>
+              <div class="faq-item">
+                <h3 class="faq-question">How long does therapy last?</h3>
+                <div class="faq-answer">
+                  <p>The length of therapy varies depending on your goals, needs, and circumstances. Some people find relief in just a few sessions, while others benefit from longer-term support.</p>
+                  <p>We'll regularly review your progress and adjust our treatment plan accordingly. There's no set timeline - therapy ends when you feel you've achieved your goals and have the tools to maintain your progress independently.</p>
+                </div>
+              </div>
+              <div class="faq-item">
+                <h3 class="faq-question">What types of therapy do you offer?</h3>
+                <div class="faq-answer">
+                  <p>I offer several evidence-based therapeutic approaches, including:</p>
+                  <ul>
+                    <li><span class="faq-highlight">EMDR</span> (Eye Movement Desensitization and Reprocessing) for trauma processing</li>
+                    <li><span class="faq-highlight">Prolonged Exposure Therapy</span> for PTSD and anxiety</li>
+                    <li><span class="faq-highlight">Acceptance and Commitment Therapy</span> (ACT) for mindfulness-based change</li>
+                    <li><span class="faq-highlight">Trauma-Informed Yoga</span> for embodied healing</li>
+                    <li><span class="faq-highlight">Cognitive Processing Therapy</span> for trauma recovery</li>
+                  </ul>
+                  <p>I'll recommend the approach that best fits your specific needs and goals.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Practical Details -->
+          <div class="faq-category">
+            <h2 class="faq-category__title">Practical Details</h2>
+            <div class="faq-items">
+              <div class="faq-item">
+                <h3 class="faq-question">Do you offer virtual therapy?</h3>
+                <div class="faq-answer">
+                  <p>Yes! I offer virtual therapy anywhere in South Carolina. This allows you to attend sessions from the comfort of your home or any private space where you feel safe and comfortable.</p>
+                  <p>I also offer in-person therapy at my Mount Pleasant office if you prefer face-to-face sessions.</p>
+                </div>
+              </div>
+              <div class="faq-item">
+                <h3 class="faq-question">What's your cancellation policy?</h3>
+                <div class="faq-answer">
+                  <p>I require at least 24 hours' notice for cancellations. Sessions cancelled with less than 24 hours' notice may be subject to the full session fee, as this time was reserved specifically for you.</p>
+                  <p>I understand that life happens, so if you need to reschedule, please contact me as soon as possible so we can find another time that works for both of us.</p>
+                </div>
+              </div>
+              <div class="faq-item">
+                <h3 class="faq-question">Is therapy confidential?</h3>
+                <div class="faq-answer">
+                  <p>Yes, therapy is completely confidential. Everything you discuss in session is protected by professional ethics and state laws, with very few exceptions (such as imminent risk of harm to yourself or others, or abuse of a child or vulnerable adult).</p>
+                  <p>I'll explain the specific limits of confidentiality during our first session so you have a complete understanding of your privacy rights.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner" aria-label="Call to action">
+      <div class="cta-banner__inner" data-reveal>
+        <h2 class="cta-banner__heading">Still have questions?</h2>
+        <p class="cta-banner__body">Schedule a free 15-minute consultation to discuss your specific needs and learn how therapy can help.</p>
+        <a href="https://papercranewellness.clientsecure.me/request" class="btn btn--secondary" data-booking-modal>Book a Free 15 Minute Consultation</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo" aria-label="Paper Crane Wellness LLC — home">
+            <img src="src/assets/images/logo.webp" alt="Paper Crane Wellness LLC" class="footer__logo-img" width="80" height="80" loading="lazy" />
+          </a>
+          <p class="footer__tagline">Virtual therapy anywhere in South Carolina;<br>in-person therapy in Mount Pleasant.</p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <p class="footer__nav-heading">Links</p>
+          <ul class="footer__nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </nav>
+        <div class="footer__contact">
+          <p class="footer__contact-heading">Contact</p>
+          <address>
+            <a href="mailto:concierge@papercranewellness.com">concierge@papercranewellness.com</a>
+            <a href="tel:+18432562016">843-256-2016</a>
+            <span>1007 Johnnie Dodds Blvd. #106<br>Mount Pleasant, SC 29464</span>
+          </address>
+        </div>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="footer__trust-badges">
+        <!-- Psychology Today Verification Badge -->
+        <center><!-- Professional verification provided by Psychology Today -->
+        <a href="https://www.psychologytoday.com/profile/956010" class="sx-verified-seal"></a>
+        <script type="text/javascript" src="https://member.psychologytoday.com/verified-seal.js" data-badge="10" data-id="956010" data-code="aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy9bQkFER0VdL3Byb2ZpbGUvW1BST0ZJTEVfSURdP2NhbGxiYWNrPXN4Y2FsbGJhY2s="></script>
+        <!-- End Verification --></center>
+        
+        <!-- Safe Space Badge -->
+        <div class="trust-badge trust-badge--safe-space">
+          <img src="https://images.squarespace-cdn.com/content/v1/661863445145a83fe829c4fb/7dc29a00-cc9c-4535-9d52-de7764fc1dd3/Safe-Space-Alliance-logo-website-badge-transparent-background.png" alt="Safe Space" class="trust-badge__img" />
+        </div>
+      </div>
+
+      <hr class="footer__rule" />
+      <div class="footer__legal">
+        <ul class="footer__legal-links">
+          <li><a href="https://app.getterms.io/view/bhq6o/privacy/en-us" target="_blank" rel="noopener noreferrer">Privacy Policy</a></li>
+          <li><a href="https://app.getterms.io/view/bhq6o/cookie/en-us" target="_blank" rel="noopener noreferrer">Cookies Policy</a></li>
+          <li><a href="https://app.getterms.io/view/bhq6o/aup/en-us" target="_blank" rel="noopener noreferrer">Acceptable Use Policy</a></li>
+          <li><a href="https://www.cms.gov/nosurprises" target="_blank" rel="noopener noreferrer">No Surprises Act</a></li>
+        </ul>
+        <p class="footer__legal-copy">&copy; <script>document.write(new Date().getFullYear())</script> Paper Crane Wellness LLC</p>
+      </div>
+      <p class="footer__nosurprises">You have the right to receive a Good Faith Estimate of what your services may cost.</p>
+    </div>
+  </footer>
+
+  <script src="src/js/nav.js" defer></script>
+  <script src="src/js/scroll-reveal.js" defer></script>
+  <script src="src/js/booking-modal.js" defer></script>
+</body>
+</html>

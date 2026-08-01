@@ -1,0 +1,62 @@
+# Paper Crane Wellness — .gitignore
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build outputs (if a build tool is ever added)
+dist/
+build/
+out/
+.cache/
+
+# Node (future-proof)
+node_modules/
+
+# Assets that should not be versioned
+# (leave placeholder directories in git via .gitkeep)
+src/assets/images/*.jpg
+src/assets/images/*.jpeg
+src/assets/images/*.png
+src/assets/images/*.webp
+src/assets/images/*.gif
+src/assets/fonts/*.woff
+src/assets/fonts/*.woff2
+src/assets/fonts/*.ttf
+
+# But keep press sub-directory tracked
+!src/assets/images/press/
+!src/assets/images/press/.gitkeep
+
+# Spec-driven scaffolding (Specify / GitHub Copilot agent definitions)
+# These drive development but are not deployed to production.
+.specify/
+specs/
+.github/agents/
+.github/prompts/
+pc2/
+
+# Local audit artifacts
+audit-evidence/
+test-results/

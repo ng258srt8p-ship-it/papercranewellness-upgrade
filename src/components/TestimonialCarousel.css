@@ -1,0 +1,176 @@
+/* ==========================================================================
+   COMPONENT: TestimonialCarousel  (05 TESTIMONIALS)
+   Full-width carousel — white background
+   ========================================================================== */
+
+.testimonial-carousel {
+  background-color: var(--color-bg-primary);
+}
+
+.testimonial-carousel__inner {
+  max-width: 860px;
+  margin-inline: auto;
+  padding-inline: var(--spacing-4);
+  padding-block: var(--section-padding-y);
+  text-align: center;
+}
+
+.testimonial-carousel__section-label {
+  /* overrides global .section-label to center */
+  text-align: center;
+}
+
+.testimonial-carousel__heading {
+  margin-bottom: var(--spacing-8);
+}
+
+/* -------------------------------------------------------------------
+   Carousel track
+------------------------------------------------------------------- */
+
+.testimonial-carousel__track-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-carousel__track {
+  display: flex;
+  transition: transform 0.4s ease;
+  will-change: transform;
+}
+
+/* -------------------------------------------------------------------
+   Individual slide
+------------------------------------------------------------------- */
+
+.testimonial-slide {
+  min-width: 100%;
+  padding-inline: var(--spacing-2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.testimonial-slide__quote-mark {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 0.6;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-4);
+  user-select: none;
+  aria-hidden: 'true';
+}
+
+.testimonial-slide__text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-lg);
+  line-height: 1.65;
+  color: var(--color-text-primary);
+  max-width: 65ch;
+  margin-bottom: var(--spacing-4);
+}
+
+.testimonial-slide__attribution {
+  font-family: var(--font-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* -------------------------------------------------------------------
+   Controls
+------------------------------------------------------------------- */
+
+.testimonial-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-6);
+}
+
+.testimonial-carousel__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-circle);
+  background: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.testimonial-carousel__arrow:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.testimonial-carousel__arrow:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.testimonial-carousel__arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.testimonial-carousel__arrow svg {
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+/* Dots */
+.testimonial-carousel__dots {
+  display: flex;
+  gap: var(--spacing-2);
+  list-style: none;
+  align-items: center;
+}
+
+.testimonial-carousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-circle);
+  background-color: var(--color-border);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.testimonial-carousel__dot.is-active {
+  background-color: var(--color-accent);
+  transform: scale(1.3);
+}
+
+.testimonial-carousel__dot:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------
+   Responsive
+------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .testimonial-carousel__inner {
+    padding-block: var(--section-padding-y-mobile);
+  }
+
+  .testimonial-slide__text {
+    font-size: var(--text-base);
+  }
+
+  .testimonial-slide__quote-mark {
+    font-size: 3.5rem;
+  }
+}

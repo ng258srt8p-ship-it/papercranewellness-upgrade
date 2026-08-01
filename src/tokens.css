@@ -1,0 +1,145 @@
+/* ==========================================================================
+   DESIGN TOKENS — sourced from beacon.mindfulserver.com visual inspection
+   Do NOT override with papercranewellness.com values.
+   All components reference these custom properties — no hardcoded values.
+   ========================================================================== */
+
+:root {
+
+  /* -------------------------------------------------------------------
+     Colors
+  ------------------------------------------------------------------- */
+
+  /* Backgrounds */
+  --color-bg-primary:   #FFFFFF;        /* default section background */
+  --color-bg-alt:       #F0F4EE;        /* light sage alternating sections */
+  --color-bg-dark:      #24363A;        /* footer, dark CTA sections */
+
+  /* Text */
+  --color-text-primary: #24363A;        /* headings and primary copy */
+  --color-text-muted:   #6d797c;        /* body copy, secondary labels */
+
+  /* Accent / Interactive */
+  --color-accent:       #7E8F63;        /* CTA buttons, links — sage green */
+  --color-accent-hover: #5F7048;        /* CTA hover / focus state */
+
+  /* Labels */
+  --color-label:        #7E8F63;        /* section labels — sage accent */
+
+  /* Borders & overlays */
+  --color-border:       rgba(0, 0, 0, 0.08);
+  --color-border-light: rgba(255, 255, 255, 0.12);  /* on dark backgrounds */
+
+  /* -------------------------------------------------------------------
+     Typography
+  ------------------------------------------------------------------- */
+
+  --font-primary:  'Inter', system-ui, -apple-system, sans-serif;
+  --font-display:  'Playfair Display', Georgia, 'Times New Roman', serif;
+
+  /* Type scale */
+  --text-xs:    0.75rem;      /* 12px — section labels */
+  --text-sm:    0.8125rem;    /* 13px — legal / small */
+  --text-base:  1rem;         /* 16px — body */
+  --text-md:    1.125rem;     /* 18px — large body */
+  --text-lg:    1.25rem;      /* 20px — quote text */
+  --text-xl:    1.5rem;       /* 24px — card headings */
+  --text-2xl:   2rem;         /* 32px — page sub-headings */
+
+  /* Fluid heading sizes (clamp: [min], [fluid], [max]) */
+  --text-h2:    clamp(1.75rem, 3vw, 2.5rem);
+  --text-h1:    clamp(2.25rem, 5vw, 3.75rem);
+
+  /* Line heights */
+  --leading-tight:  1.15;
+  --leading-snug:   1.35;
+  --leading-normal: 1.6;
+  --leading-loose:  1.75;
+
+  /* Letter spacing */
+  --tracking-label: 0.1em;    /* section number labels */
+  --tracking-tight: -0.01em;  /* display headings */
+
+  /* Font weights */
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+
+  /* -------------------------------------------------------------------
+     Spacing (8px grid)
+  ------------------------------------------------------------------- */
+
+  --spacing-base: 8px;
+  --spacing-1:    8px;
+  --spacing-2:    16px;
+  --spacing-3:    24px;
+  --spacing-4:    32px;
+  --spacing-5:    40px;
+  --spacing-6:    48px;
+  --spacing-7:    56px;
+  --spacing-8:    64px;
+  --spacing-10:   80px;
+  --spacing-12:   96px;
+  --spacing-16:   128px;
+
+  /* Section padding */
+  --section-padding-y:        var(--spacing-7);    /* 56px desktop */
+  --section-padding-y-mobile: var(--spacing-6);    /* 48px mobile */
+  --section-padding-x:        var(--spacing-4);    /* 32px side padding */
+
+  /* Container */
+  --max-content-width: 1200px;
+
+  /* -------------------------------------------------------------------
+     Breakpoints (for use in JS; CSS uses @media directly)
+  ------------------------------------------------------------------- */
+
+  --bp-mobile:  375px;
+  --bp-tablet:  768px;
+  --bp-desktop: 1200px;
+  --bp-wide:    1440px;
+
+  /* -------------------------------------------------------------------
+     Borders & Radii
+  ------------------------------------------------------------------- */
+
+  --radius-sm:     4px;
+  --radius-button: 4px;
+  --radius-card:   8px;
+  --radius-circle: 50%;
+
+  /* -------------------------------------------------------------------
+     Shadows
+  ------------------------------------------------------------------- */
+
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 6px 24px rgba(0, 0, 0, 0.12);
+
+  /* -------------------------------------------------------------------
+     Transitions & Animations
+  ------------------------------------------------------------------- */
+
+  --transition-base:   all 0.2s ease;
+  --transition-slow:   all 0.35s ease;
+  --transition-reveal: opacity 0.4s ease-out, transform 0.4s ease-out;
+
+  /* Scroll reveal start state */
+  --reveal-translate: 24px;
+
+  /* -------------------------------------------------------------------
+     Z-index scale
+  ------------------------------------------------------------------- */
+
+  --z-banner: 100;
+  --z-nav:    90;
+  --z-modal:  200;
+
+  /* -------------------------------------------------------------------
+     NavBar sizing
+  ------------------------------------------------------------------- */
+
+  --nav-height:        112px;   /* 96px logo + 8px top + 8px bottom padding */
+  --banner-height:     0px;     /* openings banner removed */
+  --nav-total-height:  calc(var(--nav-height) + var(--banner-height));
+}

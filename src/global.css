@@ -1,0 +1,301 @@
+/* ==========================================================================
+   GLOBAL STYLES
+   Import order: tokens.css → global.css → component CSSes → page stylesheet
+   ========================================================================== */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+/* Design tokens */
+@import './tokens.css';
+
+/* -------------------------------------------------------------------
+   CSS Reset (modern, minimal)
+------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* -------------------------------------------------------------------
+   Layout helpers
+------------------------------------------------------------------- */
+
+/* Constrained content wrapper — universally used inside sections */
+.container {
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--spacing-4);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: var(--spacing-3);
+  }
+}
+
+/* Section rhythm wrapper — vertical padding only */
+.section {
+  padding-block: var(--section-padding-y);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-block: var(--section-padding-y-mobile);
+  }
+}
+
+/* Background variants */
+.section--alt  { background-color: var(--color-bg-alt); }
+.section--dark { background-color: var(--color-bg-dark); color: #fff; }
+
+/* -------------------------------------------------------------------
+   Typography — base element styles
+------------------------------------------------------------------- */
+
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+h3 {
+  font-family: var(--font-primary);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  color: var(--color-text-primary);
+}
+
+p {
+  color: var(--color-text-muted);
+  line-height: var(--leading-loose);
+  max-width: 65ch;
+}
+
+/* Section label — "01 THE PROBLEM", "02 OUR SOLUTION" etc */
+.section-label {
+  font-family: var(--font-primary);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-label);
+  margin-bottom: var(--spacing-3);
+  display: block;
+}
+
+/* -------------------------------------------------------------------
+   CTA Button — primary action style
+------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-1);
+  font-family: var(--font-primary);
+  font-size: 0.9375rem;
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  transition: var(--transition-base);
+  white-space: nowrap;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Primary: teal on white text */
+.btn--primary {
+  background-color: var(--color-accent);
+  color: #ffffff;
+  padding: 12px 24px;
+}
+
+.btn--primary:hover {
+  background-color: var(--color-accent-hover);
+  color: #ffffff;
+}
+
+.btn--primary:active {
+  transform: scale(0.98);
+}
+
+/* Secondary: white bg, teal text (for dark sections) */
+.btn--secondary {
+  background-color: #ffffff;
+  color: var(--color-accent);
+  padding: 12px 24px;
+}
+
+.btn--secondary:hover {
+  background-color: var(--color-bg-alt);
+  color: var(--color-accent-hover);
+}
+
+/* -------------------------------------------------------------------
+   Scroll-reveal
+   JS adds .is-visible; CSS drives the transition
+------------------------------------------------------------------- */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--reveal-translate));
+  transition: var(--transition-reveal);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Stagger for children */
+[data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(var(--reveal-translate));
+  transition: var(--transition-reveal);
+}
+
+[data-reveal-stagger].is-visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-reveal-stagger].is-visible > *:nth-child(2) { transition-delay: 100ms; }
+[data-reveal-stagger].is-visible > *:nth-child(3) { transition-delay: 200ms; }
+[data-reveal-stagger].is-visible > *:nth-child(4) { transition-delay: 300ms; }
+[data-reveal-stagger].is-visible > * { opacity: 1; transform: translateY(0); }
+
+/* -------------------------------------------------------------------
+   Visually-hidden (a11y) utility
+------------------------------------------------------------------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* -------------------------------------------------------------------
+   Skip-to-content link (a11y)
+------------------------------------------------------------------- */
+
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-accent);
+  color: #fff;
+  padding: var(--spacing-2) var(--spacing-4);
+  z-index: var(--z-modal);
+  border-radius: var(--radius-button);
+  text-decoration: none;
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+}
+
+.skip-link:focus {
+  top: var(--spacing-2);
+}
+
+/* -------------------------------------------------------------------
+   Body padding to clear sticky banner + nav
+------------------------------------------------------------------- */
+
+body.has-banner {
+  padding-top: var(--nav-total-height);
+}
+
+body:not(.has-banner) {
+  padding-top: var(--nav-height);
+}

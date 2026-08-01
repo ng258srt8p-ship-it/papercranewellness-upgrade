@@ -1,0 +1,64 @@
+/* ==========================================================================
+   COMPONENT: ProblemSection  (DOES THIS SOUND FAMILIAR?)
+   Beacon-style: full-width centered single-column narrative, no image
+   Light sage background
+   ========================================================================== */
+
+.problem-section {
+  background-color: var(--color-bg-alt);
+}
+
+.problem-section__inner {
+  max-width: 760px;
+  margin-inline: auto;
+  padding-inline: var(--spacing-4);
+  padding-block: var(--section-padding-y);
+  text-align: center;
+}
+
+/* -------------------------------------------------------------------
+   Text block
+------------------------------------------------------------------- */
+
+.problem-section__heading {
+  margin-bottom: var(--spacing-5);
+  text-align: center;
+}
+
+.problem-section__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.problem-section__body p {
+  color: var(--color-text-muted);
+  line-height: var(--leading-loose);
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+.problem-section__body p:first-child {
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+}
+
+/* -------------------------------------------------------------------
+   Responsive
+------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .problem-section__inner {
+    padding-block: var(--section-padding-y-mobile);
+    text-align: left;
+  }
+
+  .problem-section__heading {
+    text-align: left;
+  }
+
+  .problem-section__body p {
+    margin-inline: 0;
+  }
+}

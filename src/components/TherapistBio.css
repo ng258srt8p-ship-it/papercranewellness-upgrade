@@ -1,0 +1,129 @@
+/* ==========================================================================
+   COMPONENT: TherapistBio  (04 YOUR THERAPIST)
+   2-column: image left, text right — warm off-white background
+   ========================================================================== */
+
+.therapist-bio {
+  background-color: var(--color-bg-alt);
+}
+
+.therapist-bio__inner {
+  display: grid;
+  grid-template-columns: 45fr 55fr;
+  align-items: center;
+  gap: var(--spacing-8);
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--spacing-4);
+  padding-block: var(--section-padding-y);
+}
+
+/* -------------------------------------------------------------------
+   Image
+------------------------------------------------------------------- */
+
+.therapist-bio__image-wrap {
+  position: relative;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.therapist-bio__image {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* -------------------------------------------------------------------
+   Content
+------------------------------------------------------------------- */
+
+.therapist-bio__content {}
+
+.therapist-bio__heading {
+  margin-bottom: var(--spacing-4);
+}
+
+.therapist-bio__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-5);
+}
+
+.therapist-bio__body p {
+  color: var(--color-text-muted);
+  line-height: var(--leading-loose);
+}
+
+.therapist-bio__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-family: var(--font-primary);
+  font-size: 0.9375rem;
+  font-weight: var(--weight-medium);
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.therapist-bio__cta::after {
+  content: '→';
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.therapist-bio__cta:hover {
+  color: var(--color-accent-hover);
+}
+
+.therapist-bio__cta:hover::after {
+  transform: translateX(4px);
+}
+
+.therapist-bio__cta:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Psychology Today badge */
+.therapist-bio__pt-link {
+  display: inline-block;
+  margin-top: var(--spacing-3);
+  font-family: var(--font-primary);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.therapist-bio__pt-link:hover {
+  color: var(--color-accent);
+}
+
+/* -------------------------------------------------------------------
+   Responsive
+------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .therapist-bio__inner {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+    padding-block: var(--section-padding-y-mobile);
+  }
+
+  .therapist-bio__image-wrap {
+    order: 2;
+  }
+
+  .therapist-bio__image {
+    min-height: 280px;
+  }
+}

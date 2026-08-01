@@ -1,0 +1,99 @@
+/* ==========================================================================
+   COMPONENT: WhoWeHelp  (WHO WE HELP)
+   Beacon-style: 4-up persona card grid — light sage background
+   ========================================================================== */
+
+.who-we-help {
+  background-color: var(--color-bg-alt);
+}
+
+.who-we-help__inner {
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--spacing-4);
+  padding-block: var(--section-padding-y);
+}
+
+.who-we-help__intro {
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+  margin-bottom: var(--spacing-8);
+}
+
+.who-we-help__intro-heading {
+  margin-bottom: var(--spacing-3);
+}
+
+.who-we-help__intro-body {
+  font-family: var(--font-primary);
+  font-size: var(--text-md);
+  color: var(--color-text-muted);
+  line-height: var(--leading-loose);
+}
+
+/* -------------------------------------------------------------------
+   2×2 card grid
+------------------------------------------------------------------- */
+
+.who-we-help__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4);
+}
+
+.who-card {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-5) var(--spacing-5) var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  transition: box-shadow 0.2s ease;
+}
+
+.who-card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.who-card__icon {
+  width: 36px;
+  height: 36px;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-1);
+  flex-shrink: 0;
+}
+
+.who-card__heading {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+  color: var(--color-text-primary);
+}
+
+.who-card__body {
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  line-height: var(--leading-loose);
+  color: var(--color-text-muted);
+}
+
+/* -------------------------------------------------------------------
+   Responsive
+------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .who-we-help__inner {
+    padding-block: var(--section-padding-y-mobile);
+  }
+
+  .who-we-help__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .who-we-help__intro {
+    text-align: left;
+  }
+}

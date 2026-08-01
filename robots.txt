@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Disallow admin / booking redirect paths if needed
+# Disallow: /book-now-page
+
+Sitemap: https://www.papercranewellness.com/sitemap.xml

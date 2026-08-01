@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Meet Rebekah P. Tozer, LISW-CP — therapist, Harry Potter fan, podcast connoisseur, and member of the neurodivergent community. Founder of Paper Crane Wellness LLC." />
+  <meta name="theme-color" content="#7E8F63" />
+  <title>About Rebekah P. Tozer, LISW-CP | Paper Crane Wellness</title>
+  <link rel="canonical" href="https://www.papercranewellness.com/about" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="src/global.css" />
+  <link rel="stylesheet" href="src/components/OpeningsBanner.css" />
+  <link rel="stylesheet" href="src/components/NavBar.css" />
+  <link rel="stylesheet" href="src/components/TherapistBio.css" />
+  <link rel="stylesheet" href="src/components/CTABanner.css" />
+  <link rel="stylesheet" href="src/components/Footer.css" />
+  <link rel="stylesheet" href="src/components/BookingModal.css" />
+
+  <style>
+    /* Page-specific: full about page layout */
+    .about-hero {
+      background-color: var(--color-bg-primary);
+      padding-block: var(--spacing-12) var(--spacing-10);
+    }
+    .about-hero__inner {
+      max-width: var(--max-content-width);
+      margin-inline: auto;
+      padding-inline: var(--spacing-4);
+      display: grid;
+      grid-template-columns: 45fr 55fr;
+      gap: var(--spacing-8);
+      align-items: center;
+    }
+    .about-hero__image-wrap {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      aspect-ratio: 3 / 4;
+    }
+    .about-hero__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      display: block;
+    }
+    .about-hero__credentials {
+      font-family: var(--font-primary);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-2);
+      font-weight: var(--weight-medium);
+      letter-spacing: 0.04em;
+    }
+    .about-hero__heading {
+      margin-bottom: var(--spacing-5);
+    }
+    .about-hero__bio {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-3);
+      margin-bottom: var(--spacing-5);
+    }
+    .about-hero__bio p {
+      color: var(--color-text-muted);
+      line-height: var(--leading-loose);
+    }
+    .about-hero__pt {
+      display: inline-block;
+      font-family: var(--font-primary);
+      font-size: 0.9375rem;
+      font-weight: var(--weight-medium);
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .about-hero__pt:hover { color: var(--color-accent-hover); }
+    .about-hero__pt:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 4px; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .about-hero__inner {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-6);
+        padding-block: var(--spacing-4) 0;
+      }
+      .about-hero__image {
+        min-height: 300px;
+      }
+      .about-hero {
+        padding-block: var(--spacing-8);
+      }
+    }
+  </style>
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="About Rebekah Tozer, LISW-CP | Paper Crane Wellness" />
+  <meta property="og:url"         content="https://www.papercranewellness.com/about" />
+  <meta property="og:image"       content="https://www.papercranewellness.com/src/assets/images/logo.webp" />
+  <meta property="og:image:alt"   content="Paper Crane Wellness LLC Logo" />
+  <meta property="og:locale"      content="en_US" />
+  <meta property="og:site_name"   content="Paper Crane Wellness LLC" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="About Rebekah Tozer, LISW-CP | Paper Crane Wellness" />
+  <meta name="twitter:image"       content="https://www.papercranewellness.com/src/assets/images/logo.webp" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- NAV BAR -->
+  <header class="navbar" role="banner">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo" aria-label="Paper Crane Wellness LLC — home">
+        <img src="src/assets/images/logo.webp" alt="Paper Crane Wellness LLC" class="navbar__logo-img" width="120" height="120" loading="eager" />
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul class="navbar__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
+          <li><a href="blog/index.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="https://papercranewellness.clientsecure.me/request" class="btn btn--primary navbar__cta" data-booking-modal>Book a Free 15 Minute Consultation</a>
+      <button type="button" class="navbar__hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line class="hamburger-bar" x1="3" y1="6"  x2="21" y2="6" />
+          <line class="hamburger-bar" x1="3" y1="12" x2="21" y2="12" />
+          <line class="hamburger-bar" x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    </div>
+  </header>
+  <nav class="navbar__mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+    <ul class="navbar__mobile-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" aria-current="page">About</a></li>
+      <li><a href="blog/index.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="navbar__mobile-cta">
+      <a href="https://papercranewellness.clientsecure.me/request" class="btn btn--primary" data-booking-modal>Book a Free 15 Minute Consultation</a>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ABOUT HERO -->
+    <section class="about-hero" aria-labelledby="about-heading">
+      <div class="about-hero__inner">
+        <div class="about-hero__image-wrap">
+          <img
+            class="about-hero__image"
+            src="src/assets/images/rebekah-tozer.webp"
+            alt="Rebekah P. Tozer, LISW-CP — founder of Paper Crane Wellness"
+            width="1152"
+            height="1536"
+            loading="eager"
+          />
+        </div>
+        <div class="about-hero__content">
+          <p class="about-hero__credentials">Rebekah P. Tozer, LISW-CP</p>
+          <h1 class="about-hero__heading" id="about-heading">Hi! I'm Rebekah</h1>
+          <div class="about-hero__bio">
+            <p>Harry Potter fan, podcast connoisseur, and therapist who's seen my own fair share of therapy.</p>
+            <p>
+              I've done a lot of work to get where I am, figuring out how my own unique mind works as a
+              member of the neurodivergent community.
+            </p>
+            <p>
+              If I'm able to connect well with those who feel a bit out of step with the mainstream, I
+              come by it honestly &ndash; because that's the space I inhabit as well.
+            </p>
+          </div>
+          <a
+            class="about-hero__pt"
+            href="https://www.psychologytoday.com/profile/956010"
+            target="_blank"
+            rel="noopener noreferrer"
+          >View Psychology Today Profile &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner" aria-label="Call to action">
+      <div class="cta-banner__inner" data-reveal>
+        <h2 class="cta-banner__heading">Ready to start your journey?</h2>
+        <p class="cta-banner__body">Book a free 15-minute consultation to see if we're a good fit for each other.</p>
+        <a href="https://papercranewellness.clientsecure.me/request" class="btn btn--secondary" data-booking-modal>Book a Free 15 Minute Consultation</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">
+            <img src="src/assets/images/logo.webp" alt="Paper Crane Wellness LLC" class="footer__logo-img" width="80" height="80" loading="lazy" />
+          </a>
+          <p class="footer__tagline">Virtual therapy anywhere in South Carolina;<br>in-person therapy in Mount Pleasant.</p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <p class="footer__nav-heading">Links</p>
+          <ul class="footer__nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog/index.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="footer__contact">
+          <p class="footer__contact-heading">Contact</p>
+          <address>
+            <a href="mailto:concierge@papercranewellness.com">concierge@papercranewellness.com</a>
+            <a href="tel:+18432562016">843-256-2016</a>
+            <span>1007 Johnnie Dodds Blvd. #106<br>Mt. Pleasant, SC 29464</span>
+            <a href="https://www.psychologytoday.com/profile/956010" target="_blank" rel="noopener noreferrer">Psychology Today Profile</a>
+          </address>
+        </div>
+      </div>
+      <hr class="footer__rule" />
+      <div class="footer__legal">
+        <ul class="footer__legal-links">
+          <li><a href="https://app.getterms.io/view/bhq6o/privacy/en-us" target="_blank" rel="noopener noreferrer">Privacy Policy</a></li>
+          <li><a href="https://app.getterms.io/view/bhq6o/cookie/en-us" target="_blank" rel="noopener noreferrer">Cookies Policy</a></li>
+          <li><a href="https://app.getterms.io/view/bhq6o/aup/en-us" target="_blank" rel="noopener noreferrer">Acceptable Use Policy</a></li>
+          <li><a href="https://www.cms.gov/nosurprises" target="_blank" rel="noopener noreferrer">No Surprises Act</a></li>
+        </ul>
+        <p class="footer__legal-copy">&copy; <script>document.write(new Date().getFullYear())</script> Paper Crane Wellness LLC</p>
+      </div>
+      <p class="footer__nosurprises">You have the right to receive a Good Faith Estimate of what your services may cost.</p>
+    </div>
+  </footer>
+
+  <script src="src/js/nav.js" defer></script>
+  <script src="src/js/scroll-reveal.js" defer></script>
+  <script src="src/js/booking-modal.js" defer></script>
+  <script>
+    (function () {
+      const banner = document.getElementById('openings-banner');
+      const dismiss = document.getElementById('banner-dismiss');
+      const body = document.body;
+    })();
+  </script>
+</body>
+</html>

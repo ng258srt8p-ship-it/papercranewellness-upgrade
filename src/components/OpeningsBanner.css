@@ -1,0 +1,87 @@
+/* ==========================================================================
+   COMPONENT: OpeningsBanner
+   Full-width dismissible announcement strip — fixed top, above NavBar
+   ========================================================================== */
+
+.openings-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-banner);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-1);
+  height: var(--banner-height);
+  background-color: var(--color-bg-dark);
+  padding-inline: var(--spacing-6);
+}
+
+.openings-banner__text {
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: var(--weight-regular);
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.openings-banner__text a {
+  color: #ffffff;
+  font-weight: var(--weight-medium);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.openings-banner__text a:hover {
+  opacity: 0.8;
+}
+
+.openings-banner__dismiss {
+  position: absolute;
+  right: var(--spacing-3);
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.125rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: var(--spacing-1);
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.openings-banner__dismiss:hover {
+  color: #ffffff;
+}
+
+.openings-banner__dismiss:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Hidden state — JS toggles this class */
+.openings-banner.is-dismissed {
+  display: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .openings-banner {
+    padding-inline: var(--spacing-5);
+    height: auto;
+    min-height: var(--banner-height);
+    padding-block: var(--spacing-2);
+  }
+
+  .openings-banner__text {
+    font-size: 0.8125rem;
+    padding-right: var(--spacing-4);
+  }
+}

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Paper Crane Wellness LLC. Email: concierge@papercranewellness.com. Phone: 843-256-2016. Located at 1007 Johnnie Dodds Blvd. #106 Mt. Pleasant, SC." />
+  <meta name="theme-color" content="#7E8F63" />
+  <title>Contact | Paper Crane Wellness LLC</title>
+  <link rel="canonical" href="https://www.papercranewellness.com/contact" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="src/global.css" />
+  <link rel="stylesheet" href="src/components/OpeningsBanner.css" />
+  <link rel="stylesheet" href="src/components/NavBar.css" />
+  <link rel="stylesheet" href="src/components/CTABanner.css" />
+  <link rel="stylesheet" href="src/components/Footer.css" />
+  <link rel="stylesheet" href="src/components/BookingModal.css" />
+
+  <style>
+    /* Contact page layout */
+    .contact-hero {
+      background-color: var(--color-bg-alt);
+      padding-block: var(--spacing-12) var(--spacing-10);
+    }
+    .contact-hero__inner {
+      max-width: 860px;
+      margin-inline: auto;
+      padding-inline: var(--spacing-4);
+    }
+    .contact-hero__heading {
+      margin-bottom: var(--spacing-3);
+    }
+    .contact-hero__subhead {
+      font-size: var(--text-md);
+      color: var(--color-text-muted);
+      line-height: var(--leading-loose);
+    }
+
+    /* Contact details cards */
+    .contact-details {
+      padding-block: var(--section-padding-y);
+      background-color: var(--color-bg-primary);
+    }
+    .contact-details__inner {
+      max-width: 860px;
+      margin-inline: auto;
+      padding-inline: var(--spacing-4);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-4);
+    }
+    .contact-card {
+      background-color: var(--color-bg-alt);
+      border-radius: var(--radius-card);
+      padding: var(--spacing-5) var(--spacing-4);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+    .contact-card__label {
+      font-family: var(--font-primary);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-medium);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--color-label);
+    }
+    .contact-card__value {
+      font-family: var(--font-primary);
+      font-size: var(--text-base);
+      color: var(--color-text-primary);
+      font-weight: var(--weight-medium);
+      line-height: var(--leading-snug);
+    }
+    .contact-card__value a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .contact-card__value a:hover { color: var(--color-accent-hover); }
+    .contact-card__value a:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 4px; border-radius: 2px; }
+
+    /* Booking widget */
+    .booking-section {
+      padding-block: var(--section-padding-y);
+      background-color: var(--color-bg-alt);
+    }
+    .booking-section__inner {
+      max-width: 860px;
+      margin-inline: auto;
+      padding-inline: var(--spacing-4);
+    }
+    .booking-section__heading {
+      margin-bottom: var(--spacing-6);
+    }
+    .booking-widget-wrap {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: var(--color-bg-primary);
+    }
+    .booking-widget-wrap iframe {
+      width: 100%;
+      min-height: 600px;
+      border: none;
+      display: block;
+    }
+    .booking-widget-fallback {
+      padding: var(--spacing-8) var(--spacing-4);
+      text-align: center;
+    }
+    .booking-widget-fallback p {
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-4);
+    }
+
+    @media (max-width: 768px) {
+      .contact-details__inner {
+        grid-template-columns: 1fr;
+      }
+      .contact-hero {
+        padding-block: var(--spacing-8);
+      }
+      .contact-details,
+      .booking-section {
+        padding-block: var(--section-padding-y-mobile);
+      }
+    }
+  </style>
+
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Contact Paper Crane Wellness | Therapy in South Carolina" />
+  <meta property="og:url"         content="https://www.papercranewellness.com/contact" />
+  <meta property="og:image"       content="https://www.papercranewellness.com/src/assets/images/logo.webp" />
+  <meta property="og:image:alt"   content="Paper Crane Wellness LLC Logo" />
+  <meta property="og:locale"      content="en_US" />
+  <meta property="og:site_name"   content="Paper Crane Wellness LLC" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Contact Paper Crane Wellness | Therapy in South Carolina" />
+  <meta name="twitter:image"       content="https://www.papercranewellness.com/src/assets/images/logo.webp" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- NAV BAR -->
+  <header class="navbar" role="banner">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo" aria-label="Paper Crane Wellness LLC — home">
+        <img src="src/assets/images/logo.webp" alt="Paper Crane Wellness LLC" class="navbar__logo-img" width="120" height="120" loading="eager" />
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul class="navbar__links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog/index.html">Blog</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="https://papercranewellness.clientsecure.me/request" class="btn btn--primary navbar__cta" data-booking-modal>Book a Free 15 Minute Consultation</a>
+      <button type="button" class="navbar__hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line class="hamburger-bar" x1="3" y1="6"  x2="21" y2="6" />
+          <line class="hamburger-bar" x1="3" y1="12" x2="21" y2="12" />
+          <line class="hamburger-bar" x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+    </div>
+  </header>
+  <nav class="navbar__mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+    <ul class="navbar__mobile-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog/index.html">Blog</a></li>
+      <li><a href="contact.html" aria-current="page">Contact</a></li>
+    </ul>
+    <div class="navbar__mobile-cta">
+      <a href="https://papercranewellness.clientsecure.me/request" class="btn btn--primary" data-booking-modal>Book a Free 15 Minute Consultation</a>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- CONTACT HERO -->
+    <section class="contact-hero" aria-labelledby="contact-heading">
+      <div class="contact-hero__inner" data-reveal>
+        <span class="section-label">Get in Touch</span>
+        <h1 class="contact-hero__heading" id="contact-heading">Get in Touch</h1>
+        <p class="contact-hero__subhead">
+          Ready to take the first step? Reach out below or book a free 15-minute consultation to get started.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT DETAILS -->
+    <section class="contact-details" aria-label="Contact information">
+      <div class="contact-details__inner" data-reveal-stagger>
+        <div class="contact-card">
+          <span class="contact-card__label">Email</span>
+          <p class="contact-card__value">
+            <a href="mailto:concierge@papercranewellness.com">concierge@papercranewellness.com</a>
+          </p>
+        </div>
+        <div class="contact-card">
+          <span class="contact-card__label">Phone</span>
+          <p class="contact-card__value">
+            <a href="tel:+18432562016">843-256-2016</a>
+          </p>
+        </div>
+        <div class="contact-card">
+          <span class="contact-card__label">Address</span>
+          <p class="contact-card__value">
+            1007 Johnnie Dodds Blvd. #106<br>
+            Mt. Pleasant, SC 29464
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING WIDGET -->
+    <section class="booking-section" aria-labelledby="booking-heading">
+      <div class="booking-section__inner">
+        <h2 class="booking-section__heading" id="booking-heading">Book a Consultation</h2>
+
+        <div class="booking-widget-wrap">
+          <!--
+            SimplePractice booking widget.
+            Replace the src URL below with the embed URL provided by SimplePractice.
+            Current practice ID: 945851
+          -->
+          <iframe
+            src="https://widget.clientsecure.me/widget/v2/booking?practiceId=945851"
+            title="Book an appointment with Paper Crane Wellness"
+            loading="lazy"
+            allow="payment"
+          ></iframe>
+        </div>
+
+        <!-- Fallback if widget doesn't load -->
+        <div class="booking-widget-fallback" hidden aria-live="polite">
+          <p>
+            Our booking widget is temporarily unavailable. To schedule your free 15-minute
+            consultation, please reach out directly:
+          </p>
+          <a href="https://papercranewellness.clientsecure.me/request" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+            Book Online
+          </a>
+          &nbsp;&nbsp;
+          <a href="tel:+18432562016" class="btn btn--primary">Call 843-256-2016</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">
+            <img src="src/assets/images/logo.webp" alt="Paper Crane Wellness LLC" class="footer__logo-img" width="80" height="80" loading="lazy" />
+          </a>
+          <p class="footer__tagline">Virtual therapy anywhere in South Carolina;<br>in-person therapy in Mount Pleasant.</p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <p class="footer__nav-heading">Links</p>
+          <ul class="footer__nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog/index.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="footer__contact">
+          <p class="footer__contact-heading">Contact</p>
+          <address>
+            <a href="mailto:concierge@papercranewellness.com">concierge@papercranewellness.com</a>
+            <a href="tel:+18432562016">843-256-2016</a>
+            <span>1007 Johnnie Dodds Blvd. #106<br>Mt. Pleasant, SC 29464</span>
+          </address>
+        </div>
+      </div>
+      <hr class="footer__rule" />
+      <div class="footer__legal">
+        <ul class="footer__legal-links">
+          <li><a href="https://app.getterms.io/view/bhq6o/privacy/en-us" target="_blank" rel="noopener noreferrer">Privacy Policy</a></li>
+          <li><a href="https://app.getterms.io/view/bhq6o/cookie/en-us" target="_blank" rel="noopener noreferrer">Cookies Policy</a></li>
+          <li><a href="https://app.getterms.io/view/bhq6o/aup/en-us" target="_blank" rel="noopener noreferrer">Acceptable Use Policy</a></li>
+          <li><a href="https://www.cms.gov/nosurprises" target="_blank" rel="noopener noreferrer">No Surprises Act</a></li>
+        </ul>
+        <p class="footer__legal-copy">&copy; <script>document.write(new Date().getFullYear())</script> Paper Crane Wellness LLC</p>
+      </div>
+      <p class="footer__nosurprises">You have the right to receive a Good Faith Estimate of what your services may cost.</p>
+    </div>
+  </footer>
+
+  <script src="src/js/nav.js" defer></script>
+  <script src="src/js/scroll-reveal.js" defer></script>
+  <script src="src/js/booking-modal.js" defer></script>
+  <script src="src/js/widget-fallback.js" defer></script>
+  <script>
+    (function () {
+      const banner = document.getElementById('openings-banner');
+      const dismiss = document.getElementById('banner-dismiss');
+      const body = document.body;
+    })();
+  </script>
+</body>
+</html>

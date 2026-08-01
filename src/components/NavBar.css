@@ -1,0 +1,262 @@
+/* ==========================================================================
+   COMPONENT: NavBar
+   Sticky header: logo left · links center · CTA right
+   ========================================================================== */
+
+.navbar {
+  position: fixed;
+  top: var(--banner-height);
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  height: var(--nav-height);
+  background-color: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border);
+  transition: box-shadow 0.2s ease, top 0.2s ease;
+}
+
+/* When banner is dismissed, nav slides to top-0 (JS removes has-banner from body and sets top:0) */
+.navbar.banner-gone {
+  top: 0;
+}
+
+/* Scrolled state — JS adds .is-scrolled */
+.navbar.is-scrolled {
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: var(--max-content-width);
+  margin-inline: auto;
+  padding-inline: var(--spacing-4);
+  gap: var(--spacing-4);
+}
+
+/* -------------------------------------------------------------------
+   Logo
+------------------------------------------------------------------- */
+
+.navbar__logo {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.2s ease;
+}
+
+.navbar__logo-img {
+  display: block;
+  height: 96px;       /* rendered height in navbar — doubled from 48px */
+  width: auto;        /* preserve aspect ratio */
+  object-fit: contain;
+}
+
+.navbar__logo:hover {
+  opacity: 0.8;
+}
+
+.navbar__logo:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* -------------------------------------------------------------------
+   Nav links — desktop
+------------------------------------------------------------------- */
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-5);
+  list-style: none;
+}
+
+.navbar__links a {
+  font-family: var(--font-primary);
+  font-size: 0.9375rem;
+  font-weight: var(--weight-regular);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  position: relative;
+  padding-block: 4px;
+  transition: color 0.2s ease;
+}
+
+.navbar__links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.navbar__links a:hover,
+.navbar__links a[aria-current='page'] {
+  color: var(--color-accent);
+}
+
+.navbar__links a:hover::after,
+.navbar__links a[aria-current='page']::after {
+  transform: scaleX(1);
+}
+
+.navbar__links a:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* -------------------------------------------------------------------
+   CTA Button (right side)
+------------------------------------------------------------------- */
+
+.navbar__cta {
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------------
+   Hamburger — mobile only
+------------------------------------------------------------------- */
+
+.navbar__hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-1);
+  color: var(--color-text-primary);
+  flex-shrink: 0;
+}
+
+.navbar__hamburger:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.navbar__hamburger svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Hamburger icon lines */
+.hamburger-bar {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+/* Open state — animated to X */
+.navbar__hamburger[aria-expanded='true'] .hamburger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.navbar__hamburger[aria-expanded='true'] .hamburger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.navbar__hamburger[aria-expanded='true'] .hamburger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* -------------------------------------------------------------------
+   Mobile menu drawer
+------------------------------------------------------------------- */
+
+.navbar__mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--nav-total-height);
+  left: 0;
+  right: 0;
+  background-color: var(--color-bg-primary);
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-4);
+  flex-direction: column;
+  gap: var(--spacing-4);
+  z-index: calc(var(--z-nav) - 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.navbar__mobile-menu.is-open {
+  display: flex;
+}
+
+.navbar__mobile-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.navbar__mobile-links a {
+  display: block;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: var(--weight-regular);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  padding-block: var(--spacing-2);
+  border-bottom: 1px solid var(--color-border);
+  transition: color 0.2s ease;
+}
+
+.navbar__mobile-links a:hover,
+.navbar__mobile-links a[aria-current='page'] {
+  color: var(--color-accent);
+}
+
+.navbar__mobile-links a:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.navbar__mobile-cta {
+  margin-top: var(--spacing-2);
+  width: 100%;
+  text-align: center;
+}
+
+/* -------------------------------------------------------------------
+   Responsive — ≤768px
+------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__cta {
+    display: none;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar__mobile-menu {
+    top: calc(var(--banner-height) + var(--nav-height));
+  }
+
+  .navbar.banner-gone + .navbar__mobile-menu,
+  .navbar.banner-gone ~ .navbar__mobile-menu {
+    top: var(--nav-height);
+  }
+}
