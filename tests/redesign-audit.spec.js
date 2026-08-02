@@ -5,47 +5,26 @@ const path = require('path');
 const PC = path.resolve(__dirname, '..');
 
 const PAGES = [
-  { file: 'index.html',      current: 'Home'   },
-  { file: 'about.html',      current: 'About'  },
-  { file: 'contact.html',    current: 'Contact' },
-  { file: 'faq.html',        current: null     },
-  { file: 'individual-therapy-for-adults.html',        current: null },
-  { file: 'neurodivergent-affirming-therapy.html',     current: null },
-  { file: 'trauma-ptsd-emdr-and-prolonged-exposure-therapy.html', current: null },
-  { file: '404.html',        current: null     },
-  { file: 'blog/index.html', current: 'Blog'   },
+ { file: 'index.html', current: 'Home' },
+ { file: 'about.html', current: 'About' },
+ { file: 'contact.html', current: 'Contact' },
+ { file: 'faq.html', current: 'FAQ' },
+ { file: 'individual-therapy-for-adults.html', current: null },
+ { file: 'neurodivergent-affirming-therapy.html', current: null },
+ { file: 'trauma-ptsd-emdr-and-prolonged-exposure-therapy.html', current: null },
+ { file: '404.html', current: null },
 ];
 
 const CANON = [
-  { href: 'index.html',      text: 'Home'   },
-  { href: 'about.html',      text: 'About'  },
-  { href: 'blog/index.html', text: 'Blog'   },
-  { href: 'contact.html',    text: 'Contact' },
+ { href: 'index.html',  text: 'Home'   },
+ { href: 'about.html',  text: 'About'  },
+ { href: 'faq.html',     text: 'FAQ'    },
+ { href: 'contact.html', text: 'Contact' },
 ];
 
-// blog/index.html lives one level below repo root, so its nav hrefs use ../ prefixes.
-// Anything else should use bare hrefs from the repo root.
-// helper: does this page need a ../ prefix on its nav hrefs?
-const needsParentPrefix = (p) => p.file === 'blog/index.html';
-// Current-page link: if the page IS the canonical target, it points to itself.
-// From blog/index.html, "Blog" (the current page) is href="index.html" (same dir).
-// From other pages, "Blog" is href="blog/index.html".
-const isCurrent = (i, page) => CANON[i].text === page.current;
-const basename = (href) => {
-  const i = href.lastIndexOf('/');
-  return i >= 0 ? href.slice(i + 1) : href;
-};
-const normalize = (href, prefix, current) => {
-  if (current) {
-    // current page: blog's "Blog" link → just "index.html" (same dir as blog/index.html)
-    return basename(href);
-  }
-  if (prefix && href && !href.startsWith('../') && !href.startsWith('http')) {
-    return `../${href}`;
-  }
-  return href;
-};
-const expectedHref = (i, page) => normalize(CANON[i].href, needsParentPrefix(page) ? '../' : '', isCurrent(i, page));
+// All pages and nav links are at repo root — no ../ prefix needed.
+// FAQ is at repo root (faq.html), same as the other pages.
+const expectedHref = (i, page) => CANON[i].href;
 
 for (const p of PAGES) {
   test.describe(`Redesign audit: ${p.file} (current=${p.current})`, () => {
