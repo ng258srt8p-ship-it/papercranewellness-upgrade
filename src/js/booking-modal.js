@@ -76,27 +76,22 @@
     header.appendChild(title);
     header.appendChild(closeBtn);
 
-    // Body — SimplePractice widget button lives here
+    // Body — SimplePractice booking widget renders here directly
     var body = document.createElement('div');
     body.className = 'booking-modal__body';
-
-    // Create the SimplePractice widget button
-    var wrapper = document.createElement('div');
-    wrapper.className = 'spwidget-button-wrapper';
     
-    var link = document.createElement('a');
-    link.href = 'https://papercranewellness.clientsecure.me';
-    link.className = 'spwidget-button';
-    link.setAttribute('data-spwidget-scope-id', WIDGET_SCOPE_ID);
-    link.setAttribute('data-spwidget-scope-uri', WIDGET_SCOPE_URI);
-    link.setAttribute('data-spwidget-application-id', WIDGET_APPLICATION_ID);
-    link.setAttribute('data-spwidget-type', WIDGET_TYPE);
-    link.setAttribute('data-spwidget-scope-global', '');
-    link.setAttribute('data-spwidget-autobind', '');
-    link.textContent = 'Request Appointment';
+    // Create a container for the SimplePractice widget to render into
+    var spWidgetContainer = document.createElement('div');
+    spWidgetContainer.id = 'simplepractice-widget-container';
+    spWidgetContainer.setAttribute('data-spwidget-scope-id', WIDGET_SCOPE_ID);
+    spWidgetContainer.setAttribute('data-spwidget-scope-uri', WIDGET_SCOPE_URI);
+    spWidgetContainer.setAttribute('data-spwidget-application-id', WIDGET_APPLICATION_ID);
+    spWidgetContainer.setAttribute('data-spwidget-type', WIDGET_TYPE);
+    spWidgetContainer.setAttribute('data-spwidget-channel', 'embedded_widget');
+    spWidgetContainer.setAttribute('data-spwidget-scope-global', '');
+    spWidgetContainer.setAttribute('data-spwidget-autobind', '');
     
-    wrapper.appendChild(link);
-    body.appendChild(wrapper);
+    body.appendChild(spWidgetContainer);
 
     panel.appendChild(header);
     panel.appendChild(body);
