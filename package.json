@@ -3,10 +3,26 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ng258srt8p-ship-it/papercranewellness-upgrade.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ng258srt8p-ship-it/papercranewellness-upgrade/issues"
+  },
+  "homepage": "https://github.com/ng258srt8p-ship-it/papercranewellness-upgrade#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "serve": "^14.2.6"
+  }
 }
