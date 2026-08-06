@@ -1,0 +1,9 @@
+name = "papercranewellness"
+compatibility_date = "2024-01-01"
+
+[pages]
+production_branch = "main"
+
+[build]
+command = ""  # Static site - no build needed
+pages_build_output_dir = "."
