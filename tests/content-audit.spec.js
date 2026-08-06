@@ -46,10 +46,10 @@ for (const f of PAGES) {
       await expect(email.first()).toHaveCount(1);
     }
 
-    // 6. Address is #106 (correct)
+    // 6. Address is #129 (correct)
     const html = await page.content();
-    expect(html.includes('#106')).toBe(true);
-    expect(html.includes('#129')).toBe(false);
+    expect(html.includes('#129')).toBe(true);
+    expect(html.includes('#106')).toBe(false);
   });
 }
 
