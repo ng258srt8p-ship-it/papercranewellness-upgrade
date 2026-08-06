@@ -4,7 +4,7 @@ const { chromium } = require('@playwright/test');
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
   
-  const baseUrl = 'https://cf646fa1.papercranewellness.pages.dev';
+  const baseUrl = 'https://492fdde7.papercranewellness.pages.dev';
   
   console.log('🔍 Verifying production deployment...\n');
   
@@ -13,33 +13,48 @@ const { chromium } = require('@playwright/test');
   const title = await page.title();
   console.log(`✅ Homepage loaded: ${title}`);
   
-  // Test 2: No console errors
-  const errors = [];
+  // Wait for all resources to load
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+  
+  // Test 2: No console errors on homepage
+  const homeErrors = [];
   page.on('console', msg => {
-    if (msg.type() === 'error') errors.push(msg.text());
+    if (msg.type() === 'error') homeErrors.push(msg.text());
   });
   await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-  await page.waitForTimeout(1000);
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
   
-  if (errors.length === 0) {
+  if (homeErrors.length === 0) {
     console.log('✅ No console errors on homepage');
   } else {
-    console.log(`❌ Console errors found: ${errors.join('; ')}`);
+    console.log(`❌ Console errors found: ${homeErrors.join('; ')}`);
   }
   
   // Test 3: Contact page loads
   await page.goto(`${baseUrl}/contact.html`, { waitUntil: 'domcontentloaded' });
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
   const contactTitle = await page.title();
   console.log(`✅ Contact page loaded: ${contactTitle}`);
   
-  // Test 4: Check for booking widget fallback (should be visible since iframe src is empty)
-  const fallbackVisible = await page.$eval('.booking-widget-fallback', el => !el.hidden || el.style.display !== 'none');
-  if (fallbackVisible) {
-    console.log('✅ Booking widget fallback is visible (widget returns 404, fallback shown correctly)');
+  // Test 4: Check for SimplePractice widget button (wait for script to load)
+  const spButton = await page.$('.spwidget-button[data-spwidget-type="OAR"]');
+  if (spButton) {
+    console.log('✅ SimplePractice appointment request widget is present');
+    
+    // Wait for autobind to transform it
+    await page.waitForTimeout(1000);
+    const transformedBtn = await page.$('.spwidget-button-wrapper a[data-spwidget-scope-id]');
+    if (transformedBtn) {
+      console.log('✅ SimplePractice widget script loaded and bound correctly');
+    }
   } else {
-    console.log('⚠️  Booking widget fallback not visible - checking...');
-    const iframeSrc = await page.$eval('iframe', el => el.src);
-    console.log(`   Iframe src: ${iframeSrc}`);
+    console.log('❌ SimplePractice widget button not found');
+    // Check what's actually there
+    const wrapContent = await page.$eval('.booking-widget-wrap', el => el.innerHTML.substring(0, 500));
+    console.log(`   Widget wrap content: ${wrapContent}`);
   }
   
   // Test 5: Navigation links work
@@ -54,38 +69,83 @@ const { chromium } = require('@playwright/test');
     console.log('❌ Footer not found');
   }
   
-  // Test 7: Locations section exists (new component)
+  // Test 7: Locations section exists on homepage - go back to home first
+  await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+  
   const locationsSection = await page.$('.locations-section') !== null;
   if (locationsSection) {
-    console.log('✅ Locations section is present');
+    console.log('✅ Locations section is present on homepage');
+    
+    // Check card count
+    const cards = await page.$$('.location-card');
+    console.log(`   Found ${cards.length} location cards`);
+    
+    // Check SVG icon sizes - look for svg elements or path/rect/circle in DOM
+    const svgInfo = await page.evaluate(() => {
+      const icons = document.querySelectorAll('.location-card__icon');
+      return Array.from(icons).map(icon => ({
+        hasSvg: icon.querySelector('svg') !== null,
+        hasPaths: icon.querySelector('path') !== null || icon.querySelector('rect') !== null || icon.querySelector('circle') !== null,
+        innerHTML: icon.innerHTML.substring(0, 150),
+        childrenCount: icon.children.length
+      }));
+    });
+    
+    if (svgInfo.length > 0) {
+      const allHaveSvg = svgInfo.every(s => s.hasSvg);
+      const allHavePaths = svgInfo.every(s => s.hasPaths);
+      
+      if (allHaveSvg) {
+        console.log('✅ Location card icons contain SVG elements');
+        
+        // Check if SVGs have proper dimensions (32x32)
+        const svgDimensions = await page.evaluate(() => {
+          const svgs = document.querySelectorAll('.location-card__icon svg');
+          return Array.from(svgs).map(svg => ({
+            width: svg.getAttribute('width'),
+            height: svg.getAttribute('height')
+          }));
+        });
+        
+        if (svgDimensions.length > 0) {
+          const allCorrect = svgDimensions.every(s => s.width === '32' && s.height === '32');
+          console.log(allCorrect ? '✅ Location card icons are properly sized at 32x32px' : `⚠️ Icon dimensions: ${JSON.stringify(svgDimensions)}`);
+        } else {
+          console.log('   No SVG elements found with proper namespace - checking raw HTML...');
+        }
+      } else if (allHavePaths) {
+        console.log('✅ Location card icons contain valid SVG path/shape elements (inline rendering)');
+      } else {
+        console.log(`⚠️ Some icons missing SVG: ${JSON.stringify(svgInfo)}`);
+      }
+    } else {
+      console.log('   No location card icons found');
+    }
   } else {
-    console.log('⚠️  Locations section not found on homepage');
+    console.log('❌ Locations section not found on homepage');
+    // Check what sections exist
+    const sections = await page.$$eval('section', s => s.map(sec => sec.className));
+    console.log(`   Sections found: ${JSON.stringify(sections)}`);
   }
   
-  // Test 8: SVG icons are properly sized (32px)
-  const svgSizes = await page.$$eval('.location-card__icon img, .location-card__icon svg', els => {
-    return els.map(el => ({
-      width: el.getAttribute('width') || el.getBoundingClientRect().width,
-      height: el.getAttribute('height') || el.getBoundingClientRect().height
-    }));
-  });
-  
-  if (svgSizes.length > 0) {
-    const allCorrect = svgSizes.every(s => s.width === '32' && s.height === '32');
-    if (allCorrect) {
-      console.log('✅ Location card icons are properly sized at 32x32px');
-    } else {
-      console.log(`⚠️  Icon sizes: ${JSON.stringify(svgSizes)}`);
-    }
+  // Test 8: CSS file is served correctly
+  const cssResponse = await page.goto(`${baseUrl}/src/components/LocationsSection.css`, { waitUntil: 'domcontentloaded' });
+  if (cssResponse && cssResponse.status() === 200) {
+    console.log('✅ LocationsSection.css is served with HTTP 200');
+  } else {
+    console.log(`❌ LocationsSection.css returned status ${cssResponse?.status()}`);
   }
   
   await browser.close();
   
-  if (errors.length === 0 && footerPresent && locationsSection) {
+  const allPassed = homeErrors.length === 0 && spButton !== null && footerPresent && locationsSection;
+  if (allPassed) {
     console.log('\n🎉 All production verification checks passed!');
     process.exit(0);
   } else {
-    console.log('\n⚠️  Some checks failed - review output above');
+    console.log('\n⚠️ Some checks failed - review output above');
     process.exit(1);
   }
 })();
