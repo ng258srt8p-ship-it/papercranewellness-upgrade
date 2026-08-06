@@ -2,8 +2,8 @@
  * booking-modal.js
  *
  * Opens a SimplePractice booking widget in a modal overlay when any
- * [data-booking-modal] link is clicked. Keeps a plain href on the anchor
- * as a no-JS / no-script fallback.
+ * [data-booking-modal] link is clicked. Uses the new SimplePractice
+ * widget system with data-spwidget-* attributes and integration script.
  *
  * Usage: add data-booking-modal to any <a> that should open the modal.
  */
@@ -11,11 +11,27 @@
 (function () {
   'use strict';
 
-  var WIDGET_URL = 'https://widget.clientsecure.me/widget/v2/booking?practiceId=945851';
+  // SimplePractice widget configuration - using new widget system
+  var WIDGET_SCOPE_ID = 'ef573a05-79ef-46ab-9b18-d5c65a183d97';
+  var WIDGET_SCOPE_URI = 'papercranewellness';
+  var WIDGET_APPLICATION_ID = '7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b';
+  var WIDGET_TYPE = 'OAR'; // Online Appointment Request
 
-  var modal, panel, iframe, closeBtn, backdrop;
+  var modal, panel, closeBtn, backdrop;
   var lastFocus = null;
   var created   = false;
+
+  // ── Load SimplePractice integration script ────────────────────────────
+
+  function loadSimplePracticeWidget() {
+    if (document.getElementById('simplepractice-widget-script')) return;
+    
+    var script = document.createElement('script');
+    script.id = 'simplepractice-widget-script';
+    script.src = 'https://widget-cdn.simplepractice.com/assets/integration-1.0.js';
+    script.async = true;
+    document.head.appendChild(script);
+  }
 
   // ── Build modal DOM (once, on first open) ────────────────────────────
 
@@ -60,17 +76,28 @@
     header.appendChild(title);
     header.appendChild(closeBtn);
 
-    // Body — iframe lives here
+    // Body — SimplePractice widget button lives here
     var body = document.createElement('div');
     body.className = 'booking-modal__body';
 
-    iframe = document.createElement('iframe');
-    iframe.id    = 'booking-modal-iframe';
-    iframe.title = 'Request an appointment with Paper Crane Wellness';
-    iframe.setAttribute('allow', 'payment');
-    // src is set on the first open so we don't preload unnecessarily
+    // Create the SimplePractice widget button
+    var wrapper = document.createElement('div');
+    wrapper.className = 'spwidget-button-wrapper';
+    
+    var link = document.createElement('a');
+    link.href = 'https://papercranewellness.clientsecure.me';
+    link.className = 'spwidget-button';
+    link.setAttribute('data-spwidget-scope-id', WIDGET_SCOPE_ID);
+    link.setAttribute('data-spwidget-scope-uri', WIDGET_SCOPE_URI);
+    link.setAttribute('data-spwidget-application-id', WIDGET_APPLICATION_ID);
+    link.setAttribute('data-spwidget-type', WIDGET_TYPE);
+    link.setAttribute('data-spwidget-scope-global', '');
+    link.setAttribute('data-spwidget-autobind', '');
+    link.textContent = 'Request Appointment';
+    
+    wrapper.appendChild(link);
+    body.appendChild(wrapper);
 
-    body.appendChild(iframe);
     panel.appendChild(header);
     panel.appendChild(body);
 
@@ -88,10 +115,8 @@
 
     if (!created) buildModal();
 
-    // Set iframe src on first open (lazy-load)
-    if (!iframe.src || iframe.src === 'about:blank') {
-      iframe.src = WIDGET_URL;
-    }
+    // Load SimplePractice widget script on first open
+    loadSimplePracticeWidget();
 
     modal.hidden = false;
     document.body.classList.add('booking-modal-open');
