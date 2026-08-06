@@ -156,24 +156,23 @@
   display: block;
 }
 
-/* Hamburger icons — swap between lines and X via aria-expanded */
-.hamburger-icon {
-  width: 24px;
-  height: 24px;
-  display: block;
-  transition: opacity 0.2s ease;
+/* Hamburger icon lines */
+.hamburger-bar {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center center;
+  transform-box: fill-box;
 }
 
-.navbar__hamburger .hamburger-icon--x {
-  display: none !important;
+/* Open state — animated to X */
+.navbar__hamburger[aria-expanded='true'] .hamburger-bar:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
 }
-
-.navbar__hamburger[aria-expanded='true'] .hamburger-icon--lines {
-  display: none !important;
+.navbar__hamburger[aria-expanded='true'] .hamburger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
 }
-
-.navbar__hamburger[aria-expanded='true'] .hamburger-icon--x {
-  display: block !important;
+.navbar__hamburger[aria-expanded='true'] .hamburger-bar:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 /* -------------------------------------------------------------------
