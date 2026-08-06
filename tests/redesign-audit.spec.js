@@ -78,7 +78,7 @@ for (const p of PAGES) {
       }
 
       // Verify mobile CTA
-      const cta = page.locator('.navbar__mobile-cta a[data-booking-modal]');
+      const cta = page.locator('.navbar__mobile-cta a[data-spwidget-type="OAR"]');
       await expect(cta).toHaveCount(1);
       await expect(cta).toHaveAttribute('href', 'https://papercranewellness.clientsecure.me/request');
     });
