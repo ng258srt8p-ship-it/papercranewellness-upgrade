@@ -63,3 +63,6 @@ test-results/
 
 # Old Divi build output
 pc/
+
+# Pi agent
+.pi/
