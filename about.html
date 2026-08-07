@@ -111,6 +111,44 @@
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="About Rebekah Tozer, LISW-CP | Paper Crane Wellness" />
   <meta name="twitter:image"       content="https://www.papercranewellness.com/src/assets/images/logo.webp" />
+
+  <!-- Structured Data: LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalOrganization",
+    "name": "Paper Crane Wellness LLC",
+    "url": "https://www.papercranewellness.com",
+    "telephone": "+1-843-256-2016",
+    "email": "concierge@papercranewellness.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1007 Johnnie Dodds Blvd Suite 129",
+      "addressLocality": "Mount Pleasant",
+      "addressRegion": "SC",
+      "postalCode": "29464",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 32.7960,
+      "longitude": -79.8621
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    },
+    "sameAs": ["https://www.psychologytoday.com/profile/956010"],
+    "areaServed": {
+      "@type": "State",
+      "name": "South Carolina"
+    },
+    "medicalSpecialty": "Psychology",
+    "description": "Paper Crane Wellness provides individual therapy for trauma, depression, anxiety, and neurodivergent-affirming care in South Carolina."
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -172,7 +210,9 @@
           <div class="about-hero__bio">
             <p>I'm an avid audiobook listener, Game of Thrones enthusiast, and therapist who has experienced the therapeutic path from both sides of the couch. As a Clinical Social Worker in South Carolina, I bring nearly a decade of professional experience combined with personal insight to create a truly understanding therapeutic environment. I earned my Masters of Social Work from the University of South Carolina, building upon a Bachelor of Arts from Boston University. This educational foundation, combined with intentionally diverse clinical experience, has equipped me with the skills and knowledge to help adults navigate mental health challenges.</p>
             <p>I specialize in working with folks navigating depression, anxiety, PTSD, and challenges related to neurodivergence. If you are feeling overwhelmed, stuck, or like you are supposed to "just be happy" but cannot figure out how, that is something I deeply understand, both professionally and personally. My practice is particularly focused on trauma recovery, utilizing a variety of evidenced-based approaches to support healing, creating a space where you do not have to mask or hide any part of who you are.</p>
-            <p>My therapeutic approach integrates compassion, humor, and nerdy metaphors with evidence-based treatments like EMDR (Eye Movement Desensitization and Reprocessing), Prolonged Exposure Therapy, Acceptance and Commitment Therapy (ACT), and Cognitive Processing Therapy. Whether you are processing trauma, managing substance use concerns, dealing with depression, or navigating the complexities of dual diagnosis, I provide culturally sensitive, person-centered care. I am humble enough to know that I'm not the best fit for everyone and skilled enough to know when something a client is dealing with is beyond my scope of practice- and in those cases, I happily refer to a network of trusted and talented colleagues.</p>
+            <p>My therapeutic approach integrates compassion, humor, and nerdy metaphors with evidence-based treatments like EMDR (Eye Movement Desensitization and Reprocessing), Prolonged Exposure Therapy, Acceptance and Commitment Therapy (ACT), and Cognitive Processing Therapy. Whether you are processing trauma, managing substance use concerns, dealing with depression, or navigating the complexities of dual diagnosis, I provide culturally sensitive, person-centered care.</p>
+            <h4>When I Refer Out</h4>
+            <p>I am humble enough to know that I'm not the best fit for everyone and skilled enough to know when something a client is dealing with is beyond my scope of practice — and in those cases, I happily refer to a network of trusted and talented colleagues.</p>
             <p>At Paper Crane Wellness, I offer an affirming approach that honors all aspects of your identity and relationships. I work with veterans, moms, members of the LGBTQ+ community, neurodivergent folks, and just about anyone who has ever felt like they do not quite fit. My goal is to help you build a life that feels more manageable and meaningful, one where you can navigate challenges with confidence and authenticity.</p>
             <p>When you work with me, you can expect a therapeutic relationship that is collaborative, dynamic, and deeply attuned to your needs. Warning: Side effects may include unsolicited book recommendations.</p>
           </div>
@@ -220,11 +260,18 @@
         </div>
       </div>
 
+      <!-- Social Media Links — TODO: Replace # with actual social media URLs -->
+      <div class="footer__social">
+        <a href="#" aria-label="Facebook (opens in new tab)" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="#" aria-label="Instagram (opens in new tab)" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="#" aria-label="LinkedIn (opens in new tab)" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+
       <!-- Trust Badges -->
       <div class="footer__trust-badges">
         <!-- Psychology Today Verification Badge -->
         <center><!-- Professional verification provided by Psychology Today -->
-        <a href="https://www.psychologytoday.com/profile/956010" class="sx-verified-seal"></a>
+        <a href="https://www.psychologytoday.com/profile/956010" class="sx-verified-seal" aria-label="Verified on Psychology Today"></a>
         <script type="text/javascript" src="https://member.psychologytoday.com/verified-seal.js" data-badge="10" data-id="956010" data-code="aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy9bQkFER0VdL3Byb2ZpbGUvW1BST0ZJTEVfSURdP2NhbGxiYWNrPXN4Y2FsbGJhY2s="></script>
         <!-- End Verification --></center>
 

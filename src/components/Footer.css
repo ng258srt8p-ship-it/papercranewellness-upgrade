@@ -130,6 +130,37 @@
 }
 
 /* -----------------------------------------------------------------------
+   Social Media Links
+----------------------------------------------------------------------- */
+
+.footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding-block: var(--spacing-3);
+}
+
+.footer__social a {
+  font-family: var(--font-primary);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__social a:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer__social a:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* -----------------------------------------------------------------------
    Rule
 ----------------------------------------------------------------------- */
 

@@ -274,8 +274,8 @@ p {
   top: -9999px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--color-accent);
-  color: #fff;
+  background: #6B7C54; /* Darkened accent for WCAG AA contrast ≥4.5:1 with white text */
+  color: #ffffff;
   padding: var(--spacing-2) var(--spacing-4);
   z-index: var(--z-modal);
   border-radius: var(--radius-button);
@@ -298,4 +298,83 @@ body.has-banner {
 
 body:not(.has-banner) {
   padding-top: var(--nav-height);
+}
+
+/* -------------------------------------------------------------------
+   Print Stylesheet — hide UI chrome, show only content + link URLs
+------------------------------------------------------------------- */
+@media print {
+  /* Hide navigation, footer, CTAs, and widget buttons */
+  .navbar,
+  .footer,
+  .skip-link,
+  .booking-section,
+  .btn,
+  .spwidget-button-wrapper,
+  .cta-banner,
+  .testimonial-carousel,
+  .service-card__link,
+  .location-card__link {
+    display: none !important;
+  }
+
+  /* Reset body for print */
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Ensure main content is visible */
+  main,
+  .section {
+    display: block !important;
+  }
+
+  /* Remove shadows and backgrounds from sections */
+  section {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 1em 0 !important;
+  }
+
+  /* Show link URLs after text for accessibility in print */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+    word-break: break-all;
+  }
+
+  /* Don't add URLs for internal anchors or JS links */
+  a[href^="#"]::after,
+  a[href^="javascript"]::after,
+  a[aria-label]::after {
+    content: "";
+  }
+
+  /* Ensure images have reasonable sizing */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Page break handling for cards and sections */
+  .service-card,
+  .location-card,
+  blockquote {
+    page-break-inside: avoid;
+  }
+
+  /* Typography adjustments for readability on paper */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+
+  /* Remove any sticky/fixed positioning */
+  * {
+    position: static !important;
+  }
 }
