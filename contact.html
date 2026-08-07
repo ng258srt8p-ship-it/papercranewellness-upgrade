@@ -16,62 +16,78 @@
   <link rel="stylesheet" href="src/components/Footer.css" />
 
   <style>
-    /* Contact page layout */
-    .contact-hero {
-      background-color: var(--color-bg-alt);
-      padding-block: var(--spacing-12) var(--spacing-10);
+    /* Contact details section — white background */
+    .contact-details {
+      padding-block: var(--section-padding-y);
+      background-color: var(--color-bg-primary);
     }
-    .contact-hero__inner {
+
+    /* Centered inner container */
+    .contact-details__inner {
       max-width: 860px;
       margin-inline: auto;
       padding-inline: var(--spacing-4);
-    }
-    .contact-hero__heading {
-      margin-bottom: var(--spacing-5);
+      display: flex;
+      justify-content: center;
     }
 
-    /* Contact details card — single card with rows */
-    .contact-details-card {
-      background-color: var(--color-bg-primary);
+    /* White card with sage-green tint — centered, max-width ~500px */
+    .contact-card {
+      background-color: var(--color-bg-alt);
       border-radius: var(--radius-card);
       padding: var(--spacing-6) var(--spacing-5);
       box-shadow: var(--shadow-card);
+      width: 100%;
+      max-width: 500px;
     }
-    .contact-detail-row {
+
+    /* Card heading — centered */
+    .contact-card__heading {
+      font-size: var(--text-xl);
+      font-weight: var(--weight-semibold);
+      text-align: center;
+      margin-bottom: var(--spacing-4);
+    }
+
+    /* Column layout for contact info items */
+    .contact-info-item {
       display: flex;
-      gap: var(--spacing-4);
-      padding-block: var(--spacing-3);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      flex-direction: column;
+      gap: var(--spacing-1);
+      padding-block: var(--spacing-2);
     }
-    .contact-detail-row:last-child {
-      border-bottom: none;
-    }
-    .contact-detail-label {
+
+    /* Label — uppercase, small, sage accent color */
+    .contact-info-item__label {
       font-family: var(--font-primary);
-      font-size: var(--text-xs);
-      font-weight: var(--weight-medium);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
       letter-spacing: var(--tracking-label);
       text-transform: uppercase;
       color: var(--color-label);
-      min-width: 70px;
-      flex-shrink: 0;
     }
-    .contact-detail-value {
+
+    /* Value — accent-colored links */
+    .contact-info-item__value {
       font-family: var(--font-primary);
       font-size: var(--text-base);
       color: var(--color-text-primary);
       font-weight: var(--weight-medium);
       line-height: var(--leading-snug);
     }
-    .contact-detail-value a {
+    .contact-info-item__value a {
       color: var(--color-accent);
       text-decoration: none;
       transition: color 0.2s ease;
     }
-    .contact-detail-value a:hover { color: var(--color-accent-hover); }
-    .contact-detail-value a:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 4px; border-radius: 2px; }
+    .contact-info-item__value a:hover { color: var(--color-accent-hover); }
+    .contact-info-item__value a:focus-visible {
+      outline: 3px solid var(--color-accent);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
 
-    /* Booking widget */
+    /* Booking section — sage-green background */
     .booking-section {
       padding-block: var(--section-padding-y);
       background-color: var(--color-bg-alt);
@@ -80,53 +96,24 @@
       max-width: 860px;
       margin-inline: auto;
       padding-inline: var(--spacing-4);
+      text-align: center;
     }
     .booking-section__heading {
+      font-size: var(--text-h2);
+      font-weight: var(--weight-bold);
       margin-bottom: var(--spacing-3);
     }
-    .booking-widget-wrap {
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      background: var(--color-bg-primary);
-      padding: var(--spacing-6) 0;
-    }
 
-    /* Contact button — styled like header CTA (sage green) */
-    .spwidget-button.spwidget-contact-form {
-      display: inline-block;
-      padding: 12px 32px;
-      background-color: var(--color-accent);
-      color: #fff !important;
-      border: none !important; box-shadow: none !important;
-      border-radius: var(--radius-btn);
-      font-family: var(--font-primary);
-      font-size: var(--text-base);
-      font-weight: var(--weight-semibold);
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.15s ease;
-    }
-    .spwidget-button.spwidget-contact-form:hover {
-      background-color: var(--color-accent-hover);
-      color: #fff !important;
-      transform: translateY(-1px);
-    }
-    .spwidget-button.spwidget-contact-form:focus-visible {
-      outline: 3px solid var(--color-accent);
-      outline-offset: 4px;
+    /* SimplePractice button — sage green theme */
+    .spwidget-button-wrapper {
+      text-align: center;
+      margin-top: var(--spacing-4);
     }
 
     @media (max-width: 768px) {
-      .contact-hero {
-        padding-block: var(--spacing-8);
-      }
       .contact-details,
       .booking-section {
         padding-block: var(--section-padding-y-mobile);
-      }
-      .contact-detail-row {
-        flex-direction: column;
-        gap: 4px;
       }
     }
   </style>
@@ -167,6 +154,11 @@
           <li><a href="contact.html" aria-current="page">Contact</a></li>
         </ul>
       </nav>
+      <a href="https://papercranewellness.clientsecure.me/request"
+         class="btn btn--primary navbar__cta"
+         data-spwidget-scope-id="ef573a05-79ef-46ab-9b18-d5c65a183d97" data-spwidget-scope-uri="papercranewellness" data-spwidget-application-id="7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b" data-spwidget-type="OAR"
+      >Book a Free 15 Minute Consultation</a>
+
       <button type="button" class="navbar__hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <line class="hamburger-bar" x1="3" y1="6" x2="21" y2="6"></line>
@@ -183,31 +175,40 @@
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="contact.html" aria-current="page">Contact</a></li>
     </ul>
+    <div class="navbar__mobile-cta">
+      <a href="https://papercranewellness.clientsecure.me/request"
+         class="btn btn--primary"
+         data-spwidget-scope-id="ef573a05-79ef-46ab-9b18-d5c65a183d97" data-spwidget-scope-uri="papercranewellness" data-spwidget-application-id="7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b" data-spwidget-type="OAR"
+      >Book a Free 15 Minute Consultation</a>
+    </div>
   </nav>
 
   <main id="main-content">
 
-    <!-- CONTACT HERO -->
-    <section class="contact-hero" aria-labelledby="contact-heading">
-      <div class="contact-hero__inner" data-reveal>
-        <h1 class="contact-hero__heading" id="contact-heading">Contact Information</h1>
+    <!-- CONTACT DETAILS -->
+    <section class="contact-details" aria-labelledby="contact-heading">
+      <div class="contact-details__inner" data-reveal>
+        <div class="contact-card">
+          <h3 class="contact-card__heading" id="contact-heading">Contact Information</h3>
 
-        <div class="contact-details-card">
-          <div class="contact-detail-row">
-            <span class="contact-detail-label">EMAIL</span>
-            <a href="mailto:concierge@papercranewellness.com" class="contact-detail-value">concierge@papercranewellness.com</a>
+          <div class="contact-info-item">
+            <span class="contact-info-item__label">Email:</span>
+            <a href="mailto:concierge@papercranewellness.com" class="contact-info-item__value">concierge@papercranewellness.com</a>
           </div>
-          <div class="contact-detail-row">
-            <span class="contact-detail-label">PHONE</span>
-            <a href="tel:+18432562016" class="contact-detail-value">843-256-2016</a>
+
+          <div class="contact-info-item">
+            <span class="contact-info-item__label">Phone:</span>
+            <a href="tel:+18432562016" class="contact-info-item__value">843-256-2016</a>
           </div>
-          <div class="contact-detail-row">
-            <span class="contact-detail-label">FAX</span>
-            <a href="tel:+18437901772" class="contact-detail-value">843-790-1772</a>
+
+          <div class="contact-info-item">
+            <span class="contact-info-item__label">Fax:</span>
+            <a href="tel:+18437901772" class="contact-info-item__value">843-790-1772</a>
           </div>
-          <div class="contact-detail-row contact-detail-row--address">
-            <span class="contact-detail-label">ADDRESS</span>
-            <p class="contact-detail-value">1007 Johnnie Dodds Blvd Suite 129<br>Mount Pleasant, SC 29464</p>
+
+          <div class="contact-info-item">
+            <span class="contact-info-item__label">Address:</span>
+            <p class="contact-info-item__value">1007 Johnnie Dodds Blvd Suite 129<br>Mount Pleasant, SC 29464</p>
           </div>
         </div>
       </div>
@@ -217,18 +218,13 @@
     <section class="booking-section" aria-labelledby="booking-heading">
       <div class="booking-section__inner">
         <h2 class="booking-section__heading" id="booking-heading">Have Questions?</h2>
-        <p class="contact-hero__subhead" style="margin-bottom: var(--spacing-6); text-align: center;">
+        <p style="margin-bottom: var(--spacing-6); color: var(--color-text-muted);">
           Reach out and a member of the team will get back to you as soon as we can, usually within 24 hours.
         </p>
 
-        <div class="booking-widget-wrap">
-          <!-- SimplePractice Contact Form Widget -->
-          <style>.spwidget-button-wrapper{text-align: center}.spwidget-button{display: inline-block;padding: 6px 12px;color: #1371C8;background: #fff;border: 1px solid #1371C8;border-radius: 4px;font-size: 14px;font-weight: 600;text-decoration: none}.spwidget-button:hover{background: #fff;color: #0F5AA0}.spwidget-button:active{color: rgba(255, 255, 255, .75) !important;box-shadow: 0 1px 3px rgba(0, 0, 0, .15) inset}</style>
-          <div class="spwidget-button-wrapper">
-            <!-- SimplePractice Contact Form Widget -->
-            <a href="#" class="spwidget-button spwidget-contact-form" data-spwidget-scope-id="ef573a05-79ef-46ab-9b18-d5c65a183d97" data-spwidget-scope-uri="papercranewellness" data-spwidget-application-id="7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b" data-spwidget-channel="embedded_widget" data-spwidget-type="Contact form" data-spwidget-contact data-spwidget-scope-global data-spwidget-autobind>Contact</a>
-          </div>
-          <script src="https://widget-cdn.simplepractice.com/assets/integration-1.0.js"></script>
+        <!-- SimplePractice Contact Form Widget -->
+        <div class="spwidget-button-wrapper">
+          <a href="#" class="spwidget-button btn--primary" data-spwidget-scope-id="ef573a05-79ef-46ab-9b18-d5c65a183d97" data-spwidget-scope-uri="papercranewellness" data-spwidget-application-id="7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b" data-spwidget-channel="embedded_widget" data-spwidget-type="Contact form" data-spwidget-contact data-spwidget-scope-global data-spwidget-autobind>Contact</a>
         </div>
 
         <!-- Fallback if widget doesn't load -->
