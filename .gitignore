@@ -60,3 +60,9 @@ pc2/
 # Local audit artifacts
 audit-evidence/
 test-results/
+
+# Old Divi build output
+pc/
+
+# Pi agent
+.pi/

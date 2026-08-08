@@ -5,7 +5,8 @@
  * [data-booking-modal] link is clicked. SimplePractice handles its own modal.
  * Keeps a plain href on the anchor as a no-JS / no-script fallback.
  *
- * Usage: add data-booking-modal to any <a> that should open the modal.
+ * Usage: add data-booking-modal to any <a> or <button> that should open the modal.
+ *        Add data-widget-type="contact" for a contact form instead of booking.
  */
 
 (function () {

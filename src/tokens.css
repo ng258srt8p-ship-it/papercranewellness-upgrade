@@ -20,11 +20,11 @@
   --color-text-muted:   #6d797c;        /* body copy, secondary labels */
 
   /* Accent / Interactive */
-  --color-accent:       #7E8F63;        /* CTA buttons, links — sage green */
-  --color-accent-hover: #5F7048;        /* CTA hover / focus state */
+  --color-accent:       #6B7C54;        /* CTA buttons, links — sage green (WCAG AA ≥4.5:1 with white text) */
+  --color-accent-hover: #556342;        /* CTA hover / focus state */
 
   /* Labels */
-  --color-label:        #7E8F63;        /* section labels — sage accent */
+  --color-label:        #6B7C54;        /* section labels — sage accent (synced with --color-accent) */
 
   /* Borders & overlays */
   --color-border:       rgba(0, 0, 0, 0.08);

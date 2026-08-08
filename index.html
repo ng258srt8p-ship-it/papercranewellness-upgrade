@@ -8,12 +8,6 @@
 
   <title>Paper Crane Wellness LLC | Therapy in South Carolina</title>
 
-  <!-- Open Graph -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="Paper Crane Wellness LLC" />
-  <meta property="og:description" content="Things don't have to stay this way forever. Virtual therapy anywhere in South Carolina; in-person in Mount Pleasant." />
-  <meta property="og:url"         content="https://www.papercranewellness.com/" />
-
   <!-- Canonical -->
   <link rel="canonical" href="https://www.papercranewellness.com/" />
 
@@ -45,6 +39,7 @@
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
   <meta property="og:title"       content="Paper Crane Wellness LLC | Therapy in South Carolina" />
+  <meta property="og:description" content="Things don't have to stay this way forever. Virtual therapy anywhere in South Carolina; in-person in Mount Pleasant." />
   <meta property="og:url"         content="https://www.papercranewellness.com/" />
   <meta property="og:image"       content="https://www.papercranewellness.com/src/assets/images/logo.webp" />
   <meta property="og:image:alt"   content="Paper Crane Wellness LLC Logo" />
@@ -55,6 +50,44 @@
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="Paper Crane Wellness LLC | Therapy in South Carolina" />
   <meta name="twitter:image"       content="https://www.papercranewellness.com/src/assets/images/logo.webp" />
+
+  <!-- Structured Data: LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalOrganization",
+    "name": "Paper Crane Wellness LLC",
+    "url": "https://www.papercranewellness.com",
+    "telephone": "+1-843-256-2016",
+    "email": "concierge@papercranewellness.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1007 Johnnie Dodds Blvd Suite 129",
+      "addressLocality": "Mount Pleasant",
+      "addressRegion": "SC",
+      "postalCode": "29464",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 32.7960,
+      "longitude": -79.8621
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    },
+    "sameAs": ["https://www.psychologytoday.com/profile/956010"],
+    "areaServed": {
+      "@type": "State",
+      "name": "South Carolina"
+    },
+    "medicalSpecialty": "Psychology",
+    "description": "Paper Crane Wellness provides individual therapy for trauma, depression, anxiety, and neurodivergent-affirming care in South Carolina."
+  }
+  </script>
 </head>
 <body>
 
@@ -275,7 +308,7 @@
               Exposure Therapy, and Trauma-informed Yoga to help you reclaim your life, step by step.
             </p>
             <a class="service-card__link" href="types-of-therapy.html">
-              Learn More
+              Learn about Trauma Therapy
             </a>
           </article>
 
@@ -288,7 +321,7 @@
               celebrates neurodivergent ways of experiencing the world.
             </p>
             <a class="service-card__link" href="types-of-therapy.html">
-              Learn More
+              Learn about Neurodivergent Approaches
             </a>
           </article>
 
@@ -301,7 +334,7 @@
               stressors, or just need a sounding board, I'm here to listen and help you navigate.
             </p>
             <a class="service-card__link" href="types-of-therapy.html">
-              Learn More
+              Learn about Depression &amp; Anxiety Therapy
             </a>
           </article>
         </div>
@@ -478,7 +511,7 @@
           <div class="location-card">
             <svg class="location-card__icon" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
             <span class="location-card__type">Virtual</span>
-            <a href="types-of-therapy.html" class="location-card__link">Learn More</a>
+            <a href="types-of-therapy.html" class="location-card__link">More Info</a>
             <h3 class="location-card__heading">Online Throughout South Carolina</h3>
             <p class="location-card__detail">
               Secure, private video sessions from wherever you are &mdash;
@@ -488,7 +521,7 @@
           <div class="location-card">
             <svg class="location-card__icon" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             <span class="location-card__type">In-Person</span>
-            <a href="types-of-therapy.html" class="location-card__link">Learn More</a>
+            <a href="types-of-therapy.html" class="location-card__link">More Info</a>
             <h3 class="location-card__heading">Mount Pleasant, South Carolina</h3>
             <p class="location-card__detail">
               1007 Johnnie Dodds Blvd. #129<br>
@@ -539,13 +572,18 @@
 
       </div>
 
+      <!-- Social Media Links — TODO: Replace # with actual social media URLs -->
+      <div class="footer__social">
+        <a href="#" aria-label="Facebook (opens in new tab)" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="#" aria-label="Instagram (opens in new tab)" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="#" aria-label="LinkedIn (opens in new tab)" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+
       <!-- Trust Badges -->
       <div class="footer__trust-badges">
         <!-- Psychology Today Verification Badge -->
-        <center><!-- Professional verification provided by Psychology Today -->
-        <a href="https://www.psychologytoday.com/profile/956010" class="sx-verified-seal"></a>
+        <a href="https://www.psychologytoday.com/profile/956010" class="sx-verified-seal" aria-label="Verified on Psychology Today"></a>
         <script type="text/javascript" src="https://member.psychologytoday.com/verified-seal.js" data-badge="10" data-id="956010" data-code="aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy9bQkFER0VdL3Byb2ZpbGUvW1BST0ZJTEVfSURdP2NhbGxiYWNrPXN4Y2FsbGJhY2s="></script>
-        <!-- End Verification --></center>
 
         <!-- Safe Space Badge -->
         <div class="trust-badge trust-badge--safe-space">
