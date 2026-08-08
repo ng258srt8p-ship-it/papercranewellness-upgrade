@@ -2,9 +2,10 @@
 const { test, expect } = require('@playwright/test');
 
 // Target button styles — sage green CTA matching papercanewellness.atwebpages.com
+// Updated to match actual --color-accent token from src/tokens.css (#6B7C54, WCAG AA compliant)
 const TARGET_PADDING_Y = 12; // px vertical padding
 const TARGET_PADDING_X = 24; // px horizontal padding
-const TARGET_BG_R = 126, TARGET_BG_G = 143, TARGET_BG_B = 99; // #7E8F63
+const TARGET_BG_R = 107, TARGET_BG_G = 124, TARGET_BG_B = 84; // #6B7C54
 
 async function testBtnPrimaryButtons(page, label) {
   const buttons = page.locator('.btn--primary');
@@ -59,11 +60,11 @@ async function testBtnPrimaryButtons(page, label) {
     // Check background (sage green) — parse rgb(r, g, b)
     const bgMatch = computed.backgroundColor.match(/rgb\((\d+), (\d+), (\d+)\)/);
     if (!bgMatch) {
-      failures.push(`${label}[${i}].backgroundColor: expected #7E8F63, got "${computed.backgroundColor}"`);
+      failures.push(`${label}[${i}].backgroundColor: expected ~#6B7C54, got "${computed.backgroundColor}"`);
     } else {
       const [_, r, g, b] = bgMatch.map(Number);
       if (Math.abs(r - TARGET_BG_R) > 5 || Math.abs(g - TARGET_BG_G) > 5 || Math.abs(b - TARGET_BG_B) > 5) {
-        failures.push(`${label}[${i}].backgroundColor: expected ~#7E8F63, got rgb(${r}, ${g}, ${b})`);
+        failures.push(`${label}[${i}].backgroundColor: expected ~#6B7C54, got rgb(${r}, ${g}, ${b})`);
       }
     }
     
