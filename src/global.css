@@ -189,6 +189,7 @@ p {
   background-color: var(--color-accent);
   color: #ffffff;
   padding: 12px 24px;
+  border: none !important;
 }
 
 .btn--primary:hover {
@@ -198,6 +199,39 @@ p {
 
 .btn--primary:active {
   transform: scale(0.98);
+}
+
+/* -------------------------------------------------------------------
+   SimplePractice Widget Button — matches papercanewellness.atwebpages.com/contact
+------------------------------------------------------------------- */
+
+.spwidget-button {
+  display: inline-block;
+  padding: 12px 24px;
+  color: #ffffff;
+  background-color: var(--color-accent);
+  border: none !important;
+  border-radius: var(--radius-button);
+  font-size: 0.875rem;    /* 14px */
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.spwidget-button:hover {
+  background-color: var(--color-accent-hover);
+  color: #ffffff;
+}
+
+.spwidget-button:active {
+  transform: scale(0.98);
+}
+
+/* Footer nav links — spwidget buttons override footer link styles */
+.footer__nav-links .spwidget-button,
+.footer__legal-links .spwidget-button {
+  color: #ffffff !important;
+  font-size: 0.875rem !important; /* 14px — match target */
 }
 
 /* Secondary: white bg, teal text (for dark sections) */
