@@ -1,11 +1,12 @@
 /**
  * booking-modal.js
  *
- * Opens a SimplePractice booking widget in a modal overlay when any
- * [data-booking-modal] link is clicked. Uses the new SimplePractice
+ * Opens a SimplePractice widget (OAR or Contact form) in a modal overlay when any
+ * [data-booking-modal] link/button is clicked. Uses the new SimplePractice
  * widget system with data-spwidget-* attributes and integration script.
  *
- * Usage: add data-booking-modal to any <a> that should open the modal.
+ * Usage: add data-booking-modal to any <a> or <button> that should open the modal.
+ *        Add data-widget-type="contact" for a contact form instead of booking.
  */
 
 (function () {
@@ -15,7 +16,8 @@
   var WIDGET_SCOPE_ID = 'ef573a05-79ef-46ab-9b18-d5c65a183d97';
   var WIDGET_SCOPE_URI = 'papercranewellness';
   var WIDGET_APPLICATION_ID = '7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b';
-  var WIDGET_TYPE = 'OAR'; // Online Appointment Request
+  var WIDGET_TYPE_OAR = 'OAR'; // Online Appointment Request
+  var WIDGET_TYPE_CONTACT = 'Contact form';
 
   var modal, panel, closeBtn, backdrop;
   var lastFocus = null;
@@ -35,13 +37,13 @@
 
   // ── Build modal DOM (once, on first open) ────────────────────────────
 
-  function buildModal() {
+  function buildModal(widgetType, titleText, ariaLabel) {
     modal = document.createElement('div');
     modal.id        = 'booking-modal';
     modal.className = 'booking-modal';
     modal.setAttribute('role', 'dialog');
     modal.setAttribute('aria-modal', 'true');
-    modal.setAttribute('aria-label', 'Book a free 15 minute consultation');
+    modal.setAttribute('aria-label', ariaLabel || 'Book a free 15 minute consultation');
     modal.hidden = true;
 
     // Backdrop — clicking it closes the modal
@@ -59,7 +61,7 @@
 
     var title = document.createElement('p');
     title.className   = 'booking-modal__title';
-    title.textContent = 'Book a Free 15 Minute Consultation';
+    title.textContent = titleText || 'Book a Free 15 Minute Consultation';
 
     closeBtn = document.createElement('button');
     closeBtn.type      = 'button';
@@ -76,21 +78,21 @@
     header.appendChild(title);
     header.appendChild(closeBtn);
 
-    // Body — SimplePractice booking widget renders here directly
+    // Body — SimplePractice widget renders here directly
     var body = document.createElement('div');
     body.className = 'booking-modal__body';
-    
+
     // Create a container for the SimplePractice widget to render into
     var spWidgetContainer = document.createElement('div');
     spWidgetContainer.id = 'simplepractice-widget-container';
     spWidgetContainer.setAttribute('data-spwidget-scope-id', WIDGET_SCOPE_ID);
     spWidgetContainer.setAttribute('data-spwidget-scope-uri', WIDGET_SCOPE_URI);
     spWidgetContainer.setAttribute('data-spwidget-application-id', WIDGET_APPLICATION_ID);
-    spWidgetContainer.setAttribute('data-spwidget-type', WIDGET_TYPE);
+    spWidgetContainer.setAttribute('data-spwidget-type', widgetType || WIDGET_TYPE_OAR);
     spWidgetContainer.setAttribute('data-spwidget-channel', 'embedded_widget');
     spWidgetContainer.setAttribute('data-spwidget-scope-global', '');
     spWidgetContainer.setAttribute('data-spwidget-autobind', '');
-    
+
     body.appendChild(spWidgetContainer);
 
     panel.appendChild(header);
@@ -105,13 +107,10 @@
 
   // ── Open ─────────────────────────────────────────────────────────────
 
-  function openModal(triggerEl) {
+  function openModal(triggerEl, widgetType, titleText, ariaLabel) {
     lastFocus = triggerEl || document.activeElement;
 
-    if (!created) buildModal();
-
-    // Load SimplePractice widget script on first open
-    loadSimplePracticeWidget();
+    if (!created) buildModal(widgetType, titleText, ariaLabel);
 
     modal.hidden = false;
     document.body.classList.add('booking-modal-open');
@@ -175,16 +174,36 @@
   function onDocumentClick(e) {
     var trigger = e.target.closest('[data-booking-modal]');
     if (!trigger) return;
+    e.stopPropagation();
     e.preventDefault();
-    openModal(trigger);
+
+    // Determine widget type from data attribute (default: OAR booking)
+    var widgetType = trigger.getAttribute('data-widget-type') || '';
+    var titleText, ariaLabel;
+    if (widgetType === 'contact') {
+      widgetType = WIDGET_TYPE_CONTACT;
+      titleText = 'Contact Paper Crane Wellness';
+      ariaLabel = 'Contact form';
+    } else {
+      widgetType = WIDGET_TYPE_OAR;
+      titleText = 'Book a Free 15 Minute Consultation';
+      ariaLabel = 'Book a free 15 minute consultation';
+    }
+
+    openModal(trigger, widgetType, titleText, ariaLabel);
   }
 
   // ── Init ──────────────────────────────────────────────────────────────
 
   function init() {
     if (!document.querySelector('[data-booking-modal]')) return;
-    document.addEventListener('click', onDocumentClick);
+    // Non-passive listener so e.preventDefault() / e.stopPropagation() are guaranteed to work,
+    // even when other scripts (e.g. SimplePractice) attach handlers earlier in the capture phase.
+    document.addEventListener('click', onDocumentClick, { passive: false });
     document.addEventListener('keydown', onKeyDown);
+
+    // Load SimplePractice integration script eagerly so it is ready before any clicks happen.
+    loadSimplePracticeWidget();
   }
 
   if (document.readyState === 'loading') {

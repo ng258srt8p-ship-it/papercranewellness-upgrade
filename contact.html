@@ -90,31 +90,7 @@
       overflow: hidden;
       background: var(--color-bg-primary);
       padding: var(--spacing-6) 0;
-    }
-
-    /* Contact button — styled like header CTA (sage green) */
-    .spwidget-button.spwidget-contact-form {
-      display: inline-block;
-      padding: 12px 32px;
-      background-color: var(--color-accent);
-      color: #fff !important;
-      border: none;
-      border-radius: var(--radius-btn);
-      font-family: var(--font-primary);
-      font-size: var(--text-base);
-      font-weight: var(--weight-semibold);
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.15s ease;
-    }
-    .spwidget-button.spwidget-contact-form:hover {
-      background-color: var(--color-accent-hover);
-      color: #fff !important;
-      transform: translateY(-1px);
-    }
-    .spwidget-button.spwidget-contact-form:focus-visible {
-      outline: 3px solid var(--color-accent);
-      outline-offset: 4px;
+      text-align: center;
     }
 
     @media (max-width: 768px) {
@@ -264,13 +240,8 @@
         </p>
 
         <div class="booking-widget-wrap">
-          <!-- SimplePractice Contact Form Widget -->
-          <style>.spwidget-button-wrapper{text-align: center}.spwidget-button{display: inline-block;padding: 6px 12px;color: #1371C8;background: #fff;border: 1px solid #1371C8;border-radius: 4px;font-size: 14px;font-weight: 600;text-decoration: none}.spwidget-button:hover{background: #fff;color: #0F5AA0}.spwidget-button:active{color: rgba(255, 255, 255, .75) !important;box-shadow: 0 1px 3px rgba(0, 0, 0, .15) inset}</style>
-          <div class="spwidget-button-wrapper">
-            <!-- SimplePractice Contact Form Widget -->
-            <a href="#" class="spwidget-button spwidget-contact-form" data-spwidget-scope-id="ef573a05-79ef-46ab-9b18-d5c65a183d97" data-spwidget-scope-uri="papercranewellness" data-spwidget-application-id="7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b" data-spwidget-channel="embedded_widget" data-spwidget-type="Contact form" data-spwidget-contact data-spwidget-scope-global data-spwidget-autobind>Contact</a>
-          </div>
-          <script src="https://widget-cdn.simplepractice.com/assets/integration-1.0.js"></script>
+          <!-- Contact form opens in a modal overlay -->
+          <button type="button" class="btn btn--primary" data-booking-modal data-widget-type="contact">Contact Us</button>
         </div>
 
         <!-- Fallback if widget doesn't load -->
@@ -282,6 +253,15 @@
           &nbsp;&nbsp;
           <a href="tel:+18432562016" class="btn btn--primary">Call 843-256-2016</a>
         </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner" aria-label="Call to action">
+      <div class="cta-banner__inner" data-reveal>
+        <h2 class="cta-banner__heading">Ready to start your journey?</h2>
+        <p class="cta-banner__body">Book a free 15-minute consultation and let's see if we're a good fit.</p>
+        <a href="https://papercranewellness.clientsecure.me/request" class="btn btn--secondary" data-booking-modal>Book a Free 15 Minute Consultation</a>
       </div>
     </section>
 
@@ -303,6 +283,7 @@
             <li><a href="about.html">About</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="contact.html" aria-current="page">Contact</a></li>
+            <li><a href="https://papercranewellness.clientsecure.me/request" data-booking-modal>Book Now</a></li>
           </ul>
         </nav>
         <div class="footer__contact">
@@ -320,6 +301,18 @@
         <a href="#" aria-label="Facebook (opens in new tab)" target="_blank" rel="noopener noreferrer">Facebook</a>
         <a href="#" aria-label="Instagram (opens in new tab)" target="_blank" rel="noopener noreferrer">Instagram</a>
         <a href="#" aria-label="LinkedIn (opens in new tab)" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="footer__trust-badges">
+        <!-- Psychology Today Verification Badge -->
+        <a href="https://www.psychologytoday.com/profile/956010" class="sx-verified-seal" aria-label="Verified on Psychology Today"></a>
+        <script type="text/javascript" src="https://member.psychologytoday.com/verified-seal.js" data-badge="10" data-id="956010" data-code="aHR0cHM6Ly93d3cucHN5Y2hvbG9neXRvZGF5LmNvbS9hcGkvdmVyaWZpZWQtc2VhbC9zZWFscy9bQkFER0VdL3Byb2ZpbGUvW1BST0ZJTEVfSURdP2NhbGxiYWNrPXN4Y2FsbGJhY2s="></script>
+
+        <!-- Safe Space Badge -->
+        <div class="trust-badge trust-badge--safe-space">
+          <img src="https://images.squarespace-cdn.com/content/v1/661863445145a83fe829c4fb/7dc29a00-cc9c-4535-9d52-de7764fc1dd3/Safe-Space-Alliance-logo-website-badge-transparent-background.png" alt="Safe Space" class="trust-badge__img" width="150" />
+        </div>
       </div>
 
       <hr class="footer__rule" />
