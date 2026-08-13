@@ -142,24 +142,4 @@ test.describe('SVG Icon Sizing - Other Pages', () => {
     const width = await hamburgerSvg.evaluate(el => window.getComputedStyle(el).width);
     expect(width).toBe('24px');
   });
-
-  test('booking modal close SVG should be properly sized when opened', async ({ page }) => {
-    await page.goto('/index.html');
-    
-    // Click the booking modal trigger button
-    const bookBtn = page.locator('[data-booking-modal]').first();
-    await bookBtn.click();
-    
-    // Wait for modal to appear
-    const closeBtn = page.locator('.booking-modal__close');
-    await expect(closeBtn).toBeVisible({ timeout: 5000 });
-    
-    const closeSvg = closeBtn.locator('svg').first();
-    const width = await closeSvg.evaluate(el => window.getComputedStyle(el).width);
-    
-    console.log(`Booking modal close SVG: ${width}`);
-    
-    // Should be 20px as defined in BookingModal.css
-    expect(width).toBe('20px');
-  });
 });

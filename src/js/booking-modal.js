@@ -5,7 +5,8 @@
  * [data-booking-modal] link is clicked. SimplePractice handles its own modal.
  * Keeps a plain href on the anchor as a no-JS / no-script fallback.
  *
- * Usage: add data-booking-modal to any <a> that should open the modal.
+ * Usage: add data-booking-modal to any <a> or <button> that should open the modal.
+ *        Add data-widget-type="contact" for a contact form instead of booking.
  */
 
 (function () {
@@ -14,29 +15,21 @@
   var integrationScriptLoaded = false;
   var INTEGRATION_SCRIPT_SRC = 'https://widget-cdn.simplepractice.com/assets/integration-1.0.js';
 
-  // Create and inject the SimplePractice widget button (hidden)
+  // Create and inject the hidden SimplePractice OAR widget button (for booking)
   function createWidgetButton() {
-    // Determine widget type from triggers on page (default OAR for booking buttons)
-    var widgetType = 'OAR';
-    var triggers = document.querySelectorAll('[data-booking-modal]');
-    for (var i = 0; i < triggers.length; i++) {
-      var type = triggers[i].getAttribute('data-widget-type');
-      if (type === 'contact') {
-        widgetType = 'Contact form';
-        break;
-      }
-    }
+    // Check if an OAR widget button already exists (don't conflict with Contact form button)
+    if (document.querySelector('.spwidget-button[data-spwidget-type="OAR"]')) return;
 
     var widgetContainer = document.createElement('div');
     widgetContainer.style.display = 'none'; // Hide the button
     widgetContainer.innerHTML =
       '<div class="spwidget-button-wrapper">' +
-      '<a href="https://papercranewellness.clientsecure.me" class="spwidget-button spwidget-button--' + widgetType.toLowerCase().replace(' ', '-') + '" ' +
+      '<a href="https://papercranewellness.clientsecure.me" class="spwidget-button" ' +
       'data-spwidget-scope-id="ef573a05-79ef-46ab-9b18-d5c65a183d97" ' +
       'data-spwidget-scope-uri="papercranewellness" ' +
       'data-spwidget-application-id="7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b" ' +
-      'data-spwidget-type="' + widgetType + '" data-spwidget-scope-global ' +
-      'data-spwidget-autobind>' + (widgetType === 'Contact form' ? 'Contact' : 'Request Appointment') + '</a>' +
+      'data-spwidget-type="OAR" data-spwidget-scope-global ' +
+      'data-spwidget-autobind>Request Appointment</a>' +
       '</div>';
 
     document.body.appendChild(widgetContainer);
@@ -69,11 +62,12 @@
     // Save scroll position before modal opens
     var savedScrollY = window.scrollY || window.pageYOffset;
 
-    // If SimplePractice script is loaded, trigger the widget
+    // If SimplePractice script is loaded, trigger the OAR widget
     if (integrationScriptLoaded) {
-      var widgetButton = document.querySelector('.spwidget-button--oar');
+      var widgetButton = document.querySelector('.spwidget-button[data-spwidget-type="OAR"]');
       if (widgetButton) {
         widgetButton.click();
+
         // Disable smooth scrolling while modal is open to prevent
         // animated scroll artifacts during open/close transition
         document.documentElement.style.setProperty('scroll-behavior', 'auto');
@@ -112,7 +106,7 @@
           spWidgetObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
           // Fallback: restore scroll after 5 seconds in case the modal never closes
           var observerActive = true;
-          var fallbackTimer = setTimeout(function() {
+          setTimeout(function() {
             if (observerActive) {
               observerActive = false;
               spWidgetObserver.disconnect();
