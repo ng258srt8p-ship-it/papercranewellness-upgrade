@@ -63,14 +63,34 @@
   function onDocumentClick(e) {
     var trigger = e.target.closest('[data-booking-modal]');
     if (!trigger) return;
-    
+
     e.preventDefault();
-    
+
+    // Save scroll position before modal opens
+    var savedScrollY = window.scrollY || window.pageYOffset;
+
     // If SimplePractice script is loaded, trigger the widget
     if (integrationScriptLoaded) {
       var widgetButton = document.querySelector('.spwidget-button--oar');
       if (widgetButton) {
         widgetButton.click();
+
+        // Restore scroll position when modal closes
+        // SimplePractice adds/removes overflow:hidden on body
+        function waitForModalClose() {
+          var bodyOverflow = document.body.style.overflow;
+          // If overflow is restored (modal closed), restore scroll position
+          if (bodyOverflow === '' || bodyOverflow === 'auto' || bodyOverflow === 'scroll') {
+            // Small delay to ensure modal is fully closed
+            setTimeout(function() {
+              window.scrollTo(0, savedScrollY);
+            }, 100);
+            return;
+          }
+          // Check again in 50ms
+          setTimeout(waitForModalClose, 50);
+        }
+        waitForModalClose();
       } else {
         // Fallback: open the direct booking page
         window.open(trigger.href, '_blank');
@@ -84,7 +104,7 @@
   // Initialize the widget system
   function init() {
     if (!document.querySelector('[data-booking-modal]')) return;
-    
+
     createWidgetButton();
     injectIntegrationScript();
     document.addEventListener('click', onDocumentClick);
