@@ -1,7 +1,7 @@
 /**
  * booking-modal.js
  *
- * Loads SimplePractice booking widget and handles fallback when any
+ * Loads SimplePractice booking widget (v2.1 - scroll fix deployed) and handles fallback when any
  * [data-booking-modal] link is clicked. SimplePractice handles its own modal.
  * Keeps a plain href on the anchor as a no-JS / no-script fallback.
  *
