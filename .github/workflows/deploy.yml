@@ -1,0 +1,57 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Allow manual triggers
+
+# Set concurrency to cancel in-progress deployments of the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Cloudflare Pages
+    environment:
+      name: production
+      url: https://papercranewellness.pages.dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Wrangler
+        run: npm install -g wrangler@latest
+
+      - name: Authenticate to Cloudflare
+        run: wrangler login --api-token ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Deploy to Cloudflare Pages
+        run: |
+          wrangler pages deploy . \
+            --project-name papercranewellness \
+            --branch main \
+            --commit-hash ${{ github.sha }} \
+            --commit-message "${{ github.event.head_commit.message }}"
+
+      - name: Verify Deployment
+        run: |
+          echo "Deployment initiated successfully"
+          echo "Preview URL: https://papercranewellness.pages.dev"
+          echo "Check the Cloudflare Pages dashboard for build status"
