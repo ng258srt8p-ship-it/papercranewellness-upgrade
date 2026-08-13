@@ -68,7 +68,7 @@
     
     // If SimplePractice script is loaded, trigger the widget
     if (integrationScriptLoaded) {
-      var widgetButton = document.querySelector('.spwidget-button');
+      var widgetButton = document.querySelector('.spwidget-button--oar');
       if (widgetButton) {
         widgetButton.click();
       } else {
