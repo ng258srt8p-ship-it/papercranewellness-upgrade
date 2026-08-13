@@ -237,6 +237,38 @@
    Responsive — ≤768px
 ------------------------------------------------------------------- */
 
+
+/* Mobile-only booking button */
+.navbar__mobile-cta-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: #ffffff;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.navbar__mobile-cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.navbar__mobile-cta-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+.navbar__mobile-cta-btn .material-icons {
+  font-size: 24px;
+  line-height: 1;
+}
+
 @media (max-width: 768px) {
   .navbar__links {
     display: none;
@@ -244,6 +276,10 @@
 
   .navbar__cta {
     display: none;
+  }
+
+  .navbar__mobile-cta-btn {
+    display: flex;
   }
 
   .navbar__hamburger {
