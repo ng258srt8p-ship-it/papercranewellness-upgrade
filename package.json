@@ -23,6 +23,7 @@
   "homepage": "https://github.com/ng258srt8p-ship-it/papercranewellness-upgrade#readme",
   "devDependencies": {
     "@playwright/test": "^1.62.1",
+    "playwright": "^1.62.1",
     "serve": "^14.2.6"
   }
 }

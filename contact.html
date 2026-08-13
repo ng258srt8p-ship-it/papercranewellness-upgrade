@@ -85,12 +85,15 @@
     .booking-section__heading {
       margin-bottom: var(--spacing-3);
     }
-    .booking-widget-wrap {
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      background: var(--color-bg-primary);
-      padding: var(--spacing-6) 0;
-      text-align: center;
+    /* Contact form widget - no white box, clean integration */
+    .booking-widget-wrap.contact-form-widget {
+      background: transparent !important;
+      border: none !important;
+      padding: var(--spacing-4) 0 !important;
+      border-radius: 0 !important;
+    }
+    .booking-widget-wrap.contact-form-widget .spwidget-button-wrapper {
+      margin-top: var(--spacing-3);
     }
 
     @media (max-width: 768px) {
@@ -106,7 +109,23 @@
         gap: 4px;
       }
     }
-  </style>
+  
+            /* Center all text in booking section */
+            .booking-section__heading,
+            .contact-hero__subhead {
+              text-align: center !important;
+            }
+                      /* Center all text in booking section */
+            .booking-section__heading,
+            .contact-hero__subhead {
+              text-align: center !important;
+              width: 100% !important;
+              max-width: none !important;
+            }
+          
+            
+            }
+          </style>
 
 
   <!-- Favicon -->
@@ -205,6 +224,8 @@
 
   <main id="main-content">
 
+
+
     <!-- CONTACT HERO -->
     <section class="contact-hero" aria-labelledby="contact-heading">
       <div class="contact-hero__inner" data-reveal>
@@ -234,14 +255,73 @@
     <!-- HAVE QUESTIONS / CONTACT CTA -->
     <section class="booking-section" aria-labelledby="booking-heading">
       <div class="booking-section__inner">
-        <h2 class="booking-section__heading" id="booking-heading">Have Questions?</h2>
-        <p class="contact-hero__subhead" style="margin-bottom: var(--spacing-6); text-align: center;">
+        <h2 class="booking-section__heading" id="booking-heading" style="text-align: center;">Have Questions?</h2>
+        <p class="contact-hero__subhead" style="margin-bottom: var(--spacing-6); text-align: center !important; width: 100% !important; max-width: none !important;">
           Reach out and a member of the team will get back to you as soon as we can, usually within 24 hours.
         </p>
 
-        <div class="booking-widget-wrap">
-          <!-- Contact form opens in a modal overlay -->
-          <button type="button" class="btn btn--primary" data-booking-modal data-widget-type="contact">Contact Us</button>
+        <div class="booking-widget-wrap contact-form-widget">
+          <!-- Start SimplePractice Contact Form Widget Embed Code -->
+          <style>
+            .spwidget-button-wrapper { text-align: center; }
+            .spwidget-button {
+              display: inline-flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              gap: var(--spacing-1) !important;
+              font-family: var(--font-primary) !important;
+              font-size: 0.9375rem !important;
+              font-weight: var(--weight-medium) !important;
+              text-decoration: none !important;
+              border: 2px solid transparent !important;
+              border-radius: var(--radius-button) !important;
+              cursor: pointer !important;
+              transition: background-color 0.2s ease, color 0.2s ease !important;
+              white-space: nowrap !important;
+
+              /* Primary button colors — matches .btn--primary */
+              background-color: #6B7C54 !important;
+              color: #ffffff !important;
+              padding: 12px 24px !important;
+            }
+            .spwidget-button:hover {
+              background-color: #5a6b48 !important; /* var(--color-accent-hover) */
+              color: #ffffff !important;
+            }
+            .spwidget-button:active {
+              transform: scale(0.98);
+            }
+          
+            /* Center all text in booking section */
+            .booking-section__heading,
+            .contact-hero__subhead {
+              text-align: center !important;
+            }
+                      /* Center all text in booking section */
+            .booking-section__heading,
+            .contact-hero__subhead {
+              text-align: center !important;
+              width: 100% !important;
+              max-width: none !important;
+            }
+          
+            
+            }
+          </style>
+          <div class="spwidget-button-wrapper">
+            <a href="https://papercranewellness.clientsecure.me" 
+               class="spwidget-button" 
+               data-spwidget-scope-id="ef573a05-79ef-46ab-9b18-d5c65a183d97" 
+               data-spwidget-scope-uri="papercranewellness" 
+               data-spwidget-application-id="7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b" 
+               data-spwidget-channel="embedded_widget" 
+               data-spwidget-type="Contact form" 
+               data-spwidget-contact 
+               data-spwidget-scope-global 
+               data-spwidget-autobind>Contact</a>
+          </div>
+          <script src="https://widget-cdn.simplepractice.com/assets/integration-1.0.js"></script>
+          <!-- End SimplePractice Contact Form Widget Embed Code -->
         </div>
 
         <!-- Fallback if widget doesn't load -->
@@ -253,6 +333,24 @@
           &nbsp;&nbsp;
           <a href="tel:+18432562016" class="btn btn--primary">Call 843-256-2016</a>
         </div>
+
+        <!-- Fallback check: if SimplePractice script fails, show fallback -->
+        <script>
+          (function() {
+            var widgetWrap = document.querySelector('.booking-widget-wrap.contact-form-widget');
+            var fallback = document.querySelector('.booking-widget-fallback');
+
+            // Check after 3 seconds if the widget loaded
+            setTimeout(function() {
+              var hasWidget = document.querySelector('[data-spwidget-type="Contact form"]') || 
+                              document.querySelector('.spwidget-button-wrapper');
+              if (!hasWidget) {
+                if (widgetWrap) widgetWrap.style.display = 'none';
+                if (fallback) fallback.removeAttribute('hidden');
+              }
+            }, 3000);
+          })();
+        </script>
       </div>
     </section>
 
