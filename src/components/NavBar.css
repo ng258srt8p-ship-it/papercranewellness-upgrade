@@ -276,8 +276,13 @@
     display: none;
   }
 
+  .navbar__inner {
+    gap: 0;
+  }
+
   .navbar__mobile-cta-btn {
     display: flex;
+    margin-left: auto;
   }
 
   .navbar__hamburger {
