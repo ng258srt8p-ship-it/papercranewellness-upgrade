@@ -74,23 +74,55 @@
       var widgetButton = document.querySelector('.spwidget-button--oar');
       if (widgetButton) {
         widgetButton.click();
+        // Disable smooth scrolling while modal is open to prevent
+        // animated scroll artifacts during open/close transition
+        document.documentElement.style.setProperty('scroll-behavior', 'auto');
 
-        // Restore scroll position when modal closes
-        // SimplePractice adds/removes overflow:hidden on body
-        function waitForModalClose() {
-          var bodyOverflow = document.body.style.overflow;
-          // If overflow is restored (modal closed), restore scroll position
-          if (bodyOverflow === '' || bodyOverflow === 'auto' || bodyOverflow === 'scroll') {
-            // Small delay to ensure modal is fully closed
-            setTimeout(function() {
-              window.scrollTo(0, savedScrollY);
-            }, 100);
-            return;
+        // Restore scroll position when modal closes.
+        // SimplePractice uses CSS classes (spwidget--scroll-locked, spwidget--no-scroll)
+        // and body.style.top = -scrollY to lock the viewport — NOT inline overflow.
+        // We use a MutationObserver to detect when the modal's classes are removed.
+        var spWidgetObserver = new MutationObserver(function(mutations) {
+          for (var i = 0; i < mutations.length; i++) {
+            var m = mutations[i];
+            if (m.attributeName === 'class') {
+              var hasWidgetClasses = document.body.classList.contains('spwidget--scroll-locked')
+                || document.body.classList.contains('spwidget--no-scroll');
+              if (!hasWidgetClasses && observerInitialized) {
+                // Modal closed — restore scroll position
+                observerActive = false;
+                spWidgetObserver.disconnect();
+                // Small delay to ensure the overlay has been removed from the DOM
+                setTimeout(function() {
+                  window.scrollTo(0, savedScrollY);
+                  // Re-enable smooth scrolling after modal interaction
+                  document.documentElement.style.setProperty('scroll-behavior', '');
+                }, 100);
+                return;
+              }
+            }
           }
-          // Check again in 50ms
-          setTimeout(waitForModalClose, 50);
+        });
+        var observerInitialized = false;
+        // Verify the widget classes exist before observing (guard against false triggers)
+        var initialHasWidgetClasses = document.body.classList.contains('spwidget--scroll-locked')
+          || document.body.classList.contains('spwidget--no-scroll');
+        if (initialHasWidgetClasses) {
+          observerInitialized = true;
+          spWidgetObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+          // Fallback: restore scroll after 5 seconds in case the modal never closes
+          var observerActive = true;
+          var fallbackTimer = setTimeout(function() {
+            if (observerActive) {
+              observerActive = false;
+              spWidgetObserver.disconnect();
+              window.scrollTo(0, savedScrollY);
+            }
+          }, 5000);
+        } else {
+          // Widget classes not detected — SimplePractice may not have rendered the modal.
+          // The scroll is handled by SimplePractice's own _close() method.
         }
-        waitForModalClose();
       } else {
         // Fallback: open the direct booking page
         window.open(trigger.href, '_blank');
