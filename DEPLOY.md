@@ -106,8 +106,9 @@ To generate a token:
 ### Deployment Not Triggering
 
 1. Check that the GitHub Actions workflow is enabled
-2. Verify the `CLOUDFLARE_API_TOKEN` secret is configured
+2. Verify the `CLOUDFLARE_API_TOKEN` secret is configured with Pages write access
 3. Check the Actions tab for failed runs
+4. Ensure the `wrangler.toml` has `pages_build_output_dir = "."` set correctly
 
 ### Old Content Still Served
 
