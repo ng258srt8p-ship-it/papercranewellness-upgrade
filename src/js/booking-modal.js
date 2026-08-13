@@ -16,9 +16,6 @@
 
   // Create and inject the SimplePractice widget button (hidden)
   function createWidgetButton() {
-    // Check if widget button already exists
-    if (document.querySelector('.spwidget-button')) return;
-
     // Determine widget type from triggers on page (default OAR for booking buttons)
     var widgetType = 'OAR';
     var triggers = document.querySelectorAll('[data-booking-modal]');
@@ -34,7 +31,7 @@
     widgetContainer.style.display = 'none'; // Hide the button
     widgetContainer.innerHTML =
       '<div class="spwidget-button-wrapper">' +
-      '<a href="https://papercranewellness.clientsecure.me" class="spwidget-button" ' +
+      '<a href="https://papercranewellness.clientsecure.me" class="spwidget-button spwidget-button--' + widgetType.toLowerCase().replace(' ', '-') + '" ' +
       'data-spwidget-scope-id="ef573a05-79ef-46ab-9b18-d5c65a183d97" ' +
       'data-spwidget-scope-uri="papercranewellness" ' +
       'data-spwidget-application-id="7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b" ' +
