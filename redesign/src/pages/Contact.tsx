@@ -1,11 +1,63 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "../lib/router";
 import { CraneMark } from "../components/Logo";
-import { PageHero, Reveal, SectionLabel, Shell } from "../components/ui";
+import { PageHero, Reveal, SectionLabel, Shell, WidgetButton } from "../components/ui";
+import { openSimplePractice, refreshSpAutoBind, SP_SCOPE_ID } from "../lib/simplepractice";
 import { site, specialties } from "../data/site";
-import { cn } from "../utils/cn";
 
-const reasons = ["Trauma / PTSD / EMDR", "Neurodivergent affirming", "General / individual", "Not sure yet"];
+/**
+ * SimplePractice Contact Form Widget (visible, brand-styled).
+ * Opens the SP contact modal. The anchor is autobound by the SP script via
+ * refreshSpAutoBind() after mount (the script only binds anchors present at
+ * its own execution). The fallback onClick + real href cover the no-bind and
+ * no-JS cases.
+ */
+function ContactWidget() {
+  useEffect(() => {
+    refreshSpAutoBind();
+  }, []);
+
+  return (
+    <div className="max-w-xl">
+      <p className="text-[0.9375rem] leading-relaxed text-navy/62 pretty">
+        Messages go straight to my front desk through SimplePractice, and I
+        usually reply within 24 hours.
+      </p>
+
+      <div className="spwidget-button-wrapper mt-9">
+        <a
+          href={site.booking}
+          className="spwidget-button"
+          data-spwidget-scope-id={SP_SCOPE_ID}
+          data-spwidget-scope-uri="papercranewellness"
+          data-spwidget-application-id="7c72cb9f9a9b913654bb89d6c7b4e71a77911b30192051da35384b4d0c6d505b"
+          data-spwidget-channel="embedded_widget"
+          data-spwidget-type="Contact form"
+          data-spwidget-contact
+          data-spwidget-scope-global
+          data-spwidget-autobind
+          onClick={(e) => {
+            // Fallback if SP autobind did not attach to this rendered anchor.
+            if (!window.SPWidgetInstances?.[`${SP_SCOPE_ID}-contact`]) {
+              e.preventDefault();
+              void openSimplePractice("contact");
+            }
+          }}
+        >
+          Contact
+        </a>
+      </div>
+
+      <p className="mt-6 text-[0.8125rem] leading-relaxed text-navy/50">
+        Prefer email?{" "}
+        <a href={`mailto:${site.email}`} className="link-underline hover:text-sage">
+          {site.email}
+        </a>{" "}
+        — and if you are in crisis, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline).
+      </p>
+    </div>
+  );
+}
 
 function BookingCard() {
   return (
@@ -22,13 +74,12 @@ function BookingCard() {
         <p className="mt-4 text-[0.9375rem] leading-relaxed text-mist/65 pretty">
           A free 15-minute call or video to see if we&apos;re a good fit. No intake paperwork required.
         </p>
-        <Link
-          to={site.booking}
-          className="mt-7 inline-flex w-full items-center justify-center gap-3 rounded-full bg-mist px-7 py-4 text-[0.8125rem] font-medium tracking-wide text-navy transition-colors duration-500 hover:bg-sage hover:text-mist"
+        <WidgetButton
+          variant="light"
+          className="mt-7 w-full justify-center border-transparent bg-mist px-7 py-4 text-navy hover:bg-sage hover:text-mist"
         >
           Book Free 15-Minute Consultation
-          <span>&rarr;</span>
-        </Link>
+        </WidgetButton>
         <div className="mt-6 grid gap-3 border-t border-white/12 pt-5 text-[0.8125rem] text-mist/55 sm:grid-cols-2">
           <div>
             <p className="text-[0.7rem] tracking-[0.08em] text-mist/35 uppercase">Location</p>
@@ -41,100 +92,6 @@ function BookingCard() {
         </div>
       </div>
     </div>
-  );
-}
-
-function InquiryForm() {
-  const [sent, setSent] = useState(false);
-  const [reason, setReason] = useState(reasons[0]);
-
-  if (sent) {
-    return (
-      <div className="rounded-[6px] border border-sage/40 bg-mist/60 p-10">
-        <CraneMark className="h-10 w-10 text-sage" />
-        <p className="display mt-6 text-[1.7rem] text-navy">Message received!</p>
-        <p className="mt-4 max-w-md text-[0.9375rem] leading-relaxed text-navy/62 pretty">
-          I&apos;ll get back to you soon. If this is urgent, please call 988 (Suicide &amp; Crisis Lifeline).
-        </p>
-        <button
-          onClick={() => setSent(false)}
-          className="link-underline mt-6 text-[0.8125rem] font-medium tracking-[0.04em] text-sage uppercase"
-        >
-          Send another message
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <form
-      className="space-y-7"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSent(true);
-      }}
-    >
-      <div className="grid gap-7 sm:grid-cols-2">
-        {[
-          { id: "name", label: "Name", type: "text", ph: "Your name" },
-          { id: "email", label: "Email", type: "email", ph: "you@example.com" },
-        ].map((f) => (
-          <div key={f.id}>
-            <label htmlFor={f.id} className="eyebrow text-navy/45">
-              {f.label}
-            </label>
-            <input
-              id={f.id}
-              type={f.type}
-              required
-              placeholder={f.ph}
-              className="mt-3 w-full border-b border-navy/20 bg-transparent pb-3 text-[0.9375rem] text-navy transition-colors duration-300 placeholder:text-navy/25 focus:border-sage focus:outline-none"
-            />
-          </div>
-        ))}
-      </div>
-
-      <div>
-        <span className="eyebrow text-navy/45">What brings you here</span>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {reasons.map((r) => (
-            <button
-              key={r}
-              type="button"
-              onClick={() => setReason(r)}
-              className={cn(
-                "rounded-full border px-4 py-2 text-[0.8125rem] transition-all duration-400",
-                reason === r
-                  ? "border-sage bg-sage text-mist"
-                  : "border-navy/12 text-navy/60 hover:border-navy/40 hover:text-navy",
-              )}
-            >
-              {r}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="msg" className="eyebrow text-navy/45">
-          Anything else?
-        </label>
-        <textarea
-          id="msg"
-          rows={4}
-          placeholder="Tell me a little about what's going on. No pressure."
-          className="mt-3 w-full resize-none border-b border-navy/20 bg-transparent pb-3 text-[0.9375rem] leading-relaxed text-navy transition-colors duration-300 placeholder:text-navy/25 focus:border-sage focus:outline-none"
-        />
-      </div>
-
-      <button
-        type="submit"
-        className="group inline-flex items-center gap-3 rounded-full bg-navy px-8 py-4 text-[0.8125rem] font-medium tracking-wide text-mist transition-colors duration-500 hover:bg-sage"
-      >
-        Send message
-        <span className="transition-transform duration-500 group-hover:translate-x-1">&rarr;</span>
-      </button>
-    </form>
   );
 }
 
@@ -164,7 +121,7 @@ export default function Contact() {
                 </p>
               </Reveal>
               <Reveal delay={80} className="mt-10">
-                <InquiryForm />
+                <ContactWidget />
               </Reveal>
             </div>
 

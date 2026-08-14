@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "../lib/router";
 import { img } from "../assets/images";
-import { Button, CTA, Card, Eyebrow, Reveal, SectionLabel, Shell, TextLink } from "../components/ui";
+import { CTA, Card, Eyebrow, Reveal, SectionLabel, Shell, TextLink, WidgetButton } from "../components/ui";
 import { healing, press, specialties, testimonials } from "../data/site";
 
 function Hero() {
@@ -54,7 +54,7 @@ function Hero() {
 
             <Reveal delay={380}>
               <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
-                <Button to="/contact">Book a Free Consult</Button>
+                <WidgetButton>Book a Free Consult</WidgetButton>
                 <TextLink to="/specialties" className="text-navy/60 hover:text-navy">
                   Explore Specialties
                 </TextLink>

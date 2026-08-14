@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useRouter } from "../lib/router";
 import { nav, site } from "../data/site";
 import { Wordmark } from "./Logo";
+import { WidgetButton } from "./ui";
 import { cn } from "../utils/cn";
 
 export default function Nav() {
@@ -68,12 +69,7 @@ export default function Nav() {
                 </div>
               );
             })}
-            <Link
-              to="/contact"
-              className="ml-4 inline-flex items-center gap-2 rounded-full bg-navy px-6 py-2.5 text-[0.8125rem] font-medium text-mist transition-colors duration-500 hover:bg-sage"
-            >
-              Free Consult
-            </Link>
+            <WidgetButton className="ml-4 gap-2 px-6 py-2.5">Free Consult</WidgetButton>
           </nav>
 
           <button
@@ -152,13 +148,9 @@ export default function Nav() {
             ))}
           </div>
           <div className="mt-auto pt-10">
-            <Link
-              to="/contact"
-              className="flex w-full items-center justify-center rounded-full bg-navy py-4 text-sm font-medium text-mist"
-              onClick={() => setOpen(false)}
-            >
+            <WidgetButton className="w-full justify-center py-4 text-sm" onAction={() => setOpen(false)}>
               Book a Free Consultation
-            </Link>
+            </WidgetButton>
             <p className="mt-5 text-[0.75rem] leading-relaxed text-navy/45">{site.virtual}</p>
           </div>
         </div>

@@ -127,6 +127,43 @@
   .hairline {
     border-color: rgba(36, 54, 58, 0.12);
   }
+
+  /* SimplePractice widget trigger button — brand styling
+     (overrides the SP default blue; !important required, see
+     ../plan/contact-widget-button-style.md) */
+  .spwidget-button-wrapper {
+    text-align: left;
+  }
+  .spwidget-button {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    background: #6b7c54 !important;
+    color: #fff !important;
+    border: 1px solid #6b7c54 !important;
+    border-radius: 999px !important;
+    padding: 14px 28px !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.8125rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition:
+      background-color 0.5s var(--ease-out-expo),
+      color 0.5s var(--ease-out-expo),
+      border-color 0.5s var(--ease-out-expo);
+  }
+  .spwidget-button:hover {
+    background: #55643f !important;
+    border-color: #55643f !important;
+    color: #fff !important;
+  }
+  .spwidget-button:active {
+    box-shadow: none !important;
+    color: #fff !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

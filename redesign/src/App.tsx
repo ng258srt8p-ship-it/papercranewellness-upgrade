@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { RouterProvider, useRouter } from "./lib/router";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import { Button, Shell } from "./components/ui";
+import { Button, Shell, WidgetButton } from "./components/ui";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Specialties from "./pages/Specialties";
@@ -34,9 +34,9 @@ function NotFound() {
         </p>
         <div className="mt-10 flex flex-wrap gap-4">
           <Button to="/">Back to home</Button>
-          <Button to="/contact" variant="ghost">
+          <WidgetButton variant="ghost">
             Book a consultation
-          </Button>
+          </WidgetButton>
         </div>
       </Shell>
     </section>

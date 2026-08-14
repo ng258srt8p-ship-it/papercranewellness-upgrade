@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "../lib/router";
+import { openSimplePractice, type WidgetKind } from "../lib/simplepractice";
+import { site } from "../data/site";
 import { cn } from "../utils/cn";
 
 /* ---------------------------------------------------------------- reveal */
@@ -67,6 +69,54 @@ export function Eyebrow({ children, className = "" }: { children: React.ReactNod
 }
 
 /* -------------------------------------------------------------- buttons */
+/**
+ * Booking CTA: opens the SimplePractice OAR/contact modal instead of navigating.
+ * Keeps a real href to the booking page as the no-JS fallback.
+ */
+export function WidgetButton({
+  children,
+  variant = "primary",
+  className = "",
+  kind = "appointment",
+  onAction,
+}: {
+  children: React.ReactNode;
+  variant?: "primary" | "ghost" | "light";
+  className?: string;
+  kind?: WidgetKind;
+  onAction?: () => void;
+}) {
+  const base =
+    "group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-3.5 text-[0.8125rem] font-medium tracking-[0.03em] transition-all duration-500";
+  const styles = {
+    primary: "bg-navy text-mist hover:bg-sage",
+    ghost: "border border-navy/20 text-navy hover:border-navy/60 hover:bg-navy hover:text-mist",
+    light: "border border-mist/30 text-mist hover:bg-mist hover:text-navy",
+  }[variant];
+  return (
+    <a
+      href={site.booking}
+      className={cn(base, styles, className)}
+      onClick={(e) => {
+        e.preventDefault();
+        onAction?.();
+        void openSimplePractice(kind);
+      }}
+    >
+      <span className="relative z-10">{children}</span>
+      <svg
+        viewBox="0 0 24 24"
+        className="relative z-10 h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-1"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+      >
+        <path d="M4 12h15M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </a>
+  );
+}
+
 export function Button({
   to,
   children,
@@ -281,9 +331,9 @@ export function CTA({
             <Reveal delay={120}>
               <p className="text-[1rem] leading-relaxed text-mist/70 pretty">{body}</p>
               <div className="mt-9 flex flex-wrap gap-4">
-                <Button to="/contact" variant="light">
+                <WidgetButton variant="light">
                   Book a Free Consult
-                </Button>
+                </WidgetButton>
                 <Link
                   to="/faq"
                   className="link-underline inline-flex items-center py-3.5 text-[0.8125rem] font-medium tracking-[0.04em] text-mist/60 uppercase hover:text-mist"
