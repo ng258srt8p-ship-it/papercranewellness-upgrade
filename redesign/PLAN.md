@@ -28,55 +28,59 @@ Build a **new version in subproject folder `redesign/`**, very much inspired by 
 
 ## 3. Phases
 
-### Phase 1 — Scaffold  [ ]
-- [ ] Create `redesign/`; copy from `_reference_arena/`: `src/`, `package.json`, `package-lock.json`, `tsconfig.json`, `vite.config.ts`, `index.html`.
-- [ ] `redesign/.gitignore` (node_modules, dist, audit-evidence, .DS_Store).
-- [ ] `cd redesign && npm install`; verify `npm run build` (single-file `dist/index.html`) and `npm run dev` render.
-- [ ] Baseline git commit.
+### Phase 1 — Scaffold  [x]
+- [x] Create `redesign/`; copy from `_reference_arena/`: `src/`, `package.json`, `package-lock.json`, `tsconfig.json`, `vite.config.ts`, `index.html`.
+- [x] `redesign/.gitignore` (node_modules, dist, audit-evidence, .DS_Store).
+- [x] `cd redesign && npm install`; verify `npm run build` (single-file `dist/index.html`) and `npm run dev` render.
+- [x] Baseline git commit.
 
-### Phase 2 — Asset swap  [ ]
-- [ ] Create `redesign/src/assets/images/` and copy real photos from root `src/assets/images/`:
+### Phase 2 — Asset swap  [x]
+- [x] Create `redesign/src/assets/images/` and copy real photos from root `src/assets/images/`:
   - `rebekah-headshot.webp` → `images.ts: rebekah` (Home hero + About)
   - `rebekah-outdoor.webp` → `images.ts: portrait` (Home secondary portrait)
   - `rebekah-tozer.webp` (spare)
   - `Office.png` → convert to `office.webp` (width ≤ 1600, quality ≈ 80) → `images.ts: office`
   - `favicon.png` → set in `redesign/index.html`
   - Conversion tool: `sips`/`cwebp` if available, else `npx sharp` one-liner in `redesign/`.
-- [ ] Update `src/assets/images.ts`; remove unused `room`/`paper` entries and delete arena placeholder jpgs (`rebekah.jpg`, `portrait.jpg`, `office.jpg`, `room.jpg`, `paper.jpg`).
-- [ ] Acceptance: every `<img>` shows a real photo; alt text still accurate; `dist/index.html` ≤ ~2 MB (single-file build inlines assets).
+- [x] Update `src/assets/images.ts`; remove unused `room`/`paper` entries and delete arena placeholder jpgs (`rebekah.jpg`, `portrait.jpg`, `office.jpg`, `room.jpg`, `paper.jpg`).
+- [x] Acceptance: every `<img>` shows a real photo; alt text still accurate; `dist/index.html` ≤ ~2 MB (single-file build inlines assets).
 
-### Phase 3 — SimplePractice widgets (modals)  [ ]
-- [ ] `redesign/index.html` (static head/body):
+### Phase 3 — SimplePractice widgets (modals)  [x]
+- [x] `redesign/index.html` (static head/body):
   - `<head>`: load SP integration script (classic script, runs before the deferred module bundle) so autobind sees the anchors.
   - `<body>` (outside `#root`): hidden container (`display:none`) containing **both** widget anchors, exactly as provided:
     - OAR: `href=clientsecure.me`, `class="spwidget-button"`, `data-spwidget-scope-id/scope-uri/application-id`, `data-spwidget-type="OAR"`, `data-spwidget-scope-global`, `data-spwidget-autobind` — text "Request Appointment".
     - Contact: same + `data-spwidget-channel="embedded_widget"`, `data-spwidget-type="Contact form"`, `data-spwidget-contact` — text "Contact".
   - Keep real `href` on both = no-JS fallback.
-- [ ] New `redesign/src/lib/simplepractice.ts`:
+- [x] New `redesign/src/lib/simplepractice.ts`:
   - constants (scopeId, booking URL) + `openSimplePractice(kind: 'appointment' | 'contact')`.
   - poll (≤ 5 s) for `window.SPWidgetInstances[`${scopeId}-${kind}`]` → `reveal()`; fallback 1: click hidden anchor; fallback 2: `window.open(booking URL)`.
   - TS declarations for `window.SPWidgetInstances` / `window.spWidgetAutoBind`.
-- [ ] Wire CTAs (replace plain `site.booking` links; keep `site.booking` as anchor href):
+- [x] Wire CTAs (replace plain `site.booking` links; keep `site.booking` as anchor href):
   - Nav "Free Consult" pill (desktop + mobile drawer button).
   - Home hero CTA, `CTA` component button, all Specialty page CTAs, Footer booking button, Contact `BookingCard` button → appointment modal.
-- [ ] Contact page: replace the fake `InquiryForm` (which only fakes success) with the SP **Contact form widget** button opening the contact modal; keep email/office/hours info + 988 crisis note.
+- [x] Contact page: replace the fake `InquiryForm` (which only fakes success) with the SP **Contact form widget** button opening the contact modal; keep email/office/hours info + 988 crisis note.
   - Restyle `.spwidget-button` in `redesign/src/index.css` to match brand: sage `#6B7C54` bg, white text, pill radius, hover `#55643F`, `!important` overrides (pattern documented in `../plan/contact-widget-button-style.md`).
 
-### Phase 4 — Modal QA ("modals work as designed")  [ ]
-- [ ] Add Playwright to `redesign/` (devDep; browsers already cached from root project) + minimal `playwright.config.ts` (webServer: `npm run preview` or `serve dist`).
-- [ ] Spec `redesign/tests/sp-widget.spec.ts`:
-  1. Desktop: `/` → click "Request Appointment" → `iframe[title="Request an Appointment"]` visible + body has `spwidget--scroll-locked`; close (Esc/overlay) → class removed, no residual `body.style.top` / scroll offset.
-  2. `#/contact` → click "Contact" → `iframe[title="Send message"]` visible; close works.
-  3. Mobile viewport (375×812): both modals open + close.
-  4. All 8 hash routes (`/`, `/about`, `/specialties`, `/trauma`, `/neurodivergent`, `/individual`, `/faq`, `/contact`) render; `document.title` updates; no page errors.
-  5. Hidden anchors carry correct `data-spwidget-*` attributes and real `href` (no-JS fallback).
-  6. Real photos load on `/` and `/about` (img src + naturalWidth > 0).
-- [ ] Run on desktop + mobile; fix any SP interaction issues found (scroll position, close behavior, z-index vs fixed nav); archive screenshots to `redesign/audit-evidence/`.
+**Phase 3 decisions (implemented):** SP script loaded with `defer` (document-order before the React module bundle; non-blocking). CTAs use a `WidgetButton` component (`src/components/ui.tsx`) — brand-styled anchor with real booking `href` + `onClick` → `openSimplePractice(kind)`; variants match the original `Button` styles. Contact page renders the visible SP contact anchor via a `ContactWidget` component and re-binds in `useEffect` (`refreshSpAutoBind()`) since React renders it after the SP script ran; fallback `onClick` + `href` cover no-bind/no-JS.
 
-### Phase 5 — Polish, docs, checkpoints  [ ]
-- [ ] Visual pass vs arena reference (desktop + mobile screenshots): fonts (Playfair/Inter), grain, reveal animations, palette exactly sage `#6B7C54` / navy `#24363A` / mist `#F0F4EE` / paper `#FBFAF6`.
-- [ ] `redesign/README.md`: run/build/deploy instructions, widget integration architecture, asset mapping table, QA results + how to re-run tests.
-- [ ] Keep this PLAN.md checkbox current; git commit per phase.
+### Phase 4 — Modal QA ("modals work as designed")  [x]
+- [x] Add Playwright to `redesign/` (devDep `@playwright/test`) + `playwright.config.ts` (webServer `npm run preview -- --port 4173 --strictPort`, 1 worker, 20 s expect timeouts, trace on retry).
+- [x] Spec `redesign/tests/sp-widget.spec.ts` (12 tests, verified against built site):
+  1. Hidden host: both anchors present with exact production attributes (scope-id/uri/app-id/channel/contact flag/href), host `display:none`.
+  2. No console/page errors from site code (SP noise filtered).
+  3. Hero CTA opens `.spwidget--overlay` (iframe visible) without navigating (URL stays localhost).
+  4. Nav pill + footer CTAs open the modal.
+  5. Contact page: visible `spwidget-button` is brand-styled (sage `rgb(107,124,84)`, radius 9999px, padding 14px 28px, white text); Contact button opens the contact modal; BookingCard CTA opens the OAR modal.
+  6. Lifecycle: close (backdrop click → Esc fallback) removes the overlay and restores body scroll state exactly (className/top/overflow); reopen works.
+  7. Mobile 375×812: hamburger (aria-label "Open menu") → drawer CTA opens modal; close restores scroll state.
+- [x] Run desktop + mobile; fix any SP interaction issues; archive evidence to `redesign/audit-evidence/`. Result: 12/12 passed (29.1 s) against the live SP production widget — close via backdrop click works, no z-index issues, scroll state restored exactly.
+
+### Phase 5 — Polish, docs, checkpoints  [x]
+- [x] Visual pass (desktop 1440 + mobile 375; 12 full-page screenshots in `audit-evidence/`): fonts (Playfair/Inter), palette (paper/mist/navy/sage), real photos, no horizontal overflow, mobile hamburger. Programmatic checks (`scripts/visual-checks.mjs`): **42/42 passed**. Caveat: no vision-capable model available in this environment (Anthropic 401), so the pixel-level aesthetic pass is left to manual review of the archived screenshots.
+- [x] `redesign/README.md`: run/build/deploy instructions, widget integration architecture, asset mapping, QA suite description + how to re-run tests.
+- [x] QA results + visual evidence: `audit-evidence/` (12 screenshots), README QA section updated with the verified 12/12 result.
+- [x] Keep this PLAN.md checkbox current; git commit per phase.
 
 ## 4. Definition of Done
 
@@ -100,3 +104,8 @@ Build a **new version in subproject folder `redesign/`**, very much inspired by 
 ## 6. Progress log
 
 - 2026-07-19: Plan drafted from reference export + root project research (SP autobind behavior verified against integration-1.0.js source).
+
+- 2026-08-14 — Phase 3 complete: hidden SP host in index.html (defer script), `simplepractice.ts` lib, `WidgetButton` in ui.tsx, all 8 CTAs wired (nav desktop/mobile, home hero, CTA component, footer, contact booking card, 404), contact page now embeds the real SP Contact widget with brand CSS in index.css. `tsc --noEmit` clean; build = single `dist/index.html` ~986 KB.
+- 2026-08-14 — Phase 4 setup: `@playwright/test` installed, `playwright.config.ts` + `tests/sp-widget.spec.ts` (12 tests) written and listed cleanly. Suite execution pending browser download.
+- 2026-08-14 — Phase 4 verified: `npx playwright test` → **12/12 passed (29.1 s)** against the live SP production widget (OAR + contact modals, all CTAs, desktop + 375×812 mobile, clean close/scroll-restore, no site-code errors). Fixes found during QA: none in site code — two spec corrections (OAR anchor has no `data-spwidget-channel`; console-error collection scoped to site origin because SP preloads a cross-origin Ember iframe).
+- 2026-08-14 — Phase 5 complete: visual screenshots archived, 42/42 programmatic brand checks, README + PLAN updated. All phases done; final commit made.

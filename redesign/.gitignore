@@ -3,3 +3,4 @@ dist/
 audit-evidence/
 .DS_Store
 *.log
+test-results/
