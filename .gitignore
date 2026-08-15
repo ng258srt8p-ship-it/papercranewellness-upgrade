@@ -66,3 +66,15 @@ pc/
 
 # Pi agent
 .pi/
+
+# DesignArena reference exports (working files, not needed in the repo)
+_reference_arena/
+_arena_export_tmp/
+editorial-therapy-website-development.zip
+PROMPT_FOR_DESIGNARENA.txt
+
+# Planning / goal-loop working docs (not needed in the repo)
+plan/
+.hermes/plans/
+GOAL_BRIEF.md
+redesign/PLAN.md
