@@ -121,7 +121,12 @@
     transition: clip-path 1.2s var(--ease-out-expo);
   }
   .reveal-clip.is-visible {
-    clip-path: inset(0 0 0 0);
+    /* End state deliberately extends PAST the border box: the hero
+       .display line-height (0.98) lets Playfair italic descenders (the
+       "y" in "way") paint below the span's own box, so inset(0 0 0 0)
+       clipped them permanently after the reveal. Negative insets keep
+       the value interpolable, so the 1.2s reveal transition is unchanged. */
+    clip-path: inset(-10% -5% -40% -5%);
   }
 
   .hairline {
