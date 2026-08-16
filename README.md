@@ -1,15 +1,14 @@
-# Paper Crane Wellness — Editorial Redesign
+# Paper Crane Wellness
 
-Editorial React SPA redesign of the Paper Crane Wellness site, built from the
-Design Arena export. It replaces the arena's placeholder assets with the
-practice's real photography and replaces the fake inquiry form and plain
-booking links with **live SimplePractice widgets**: every booking CTA opens the
-real OAR modal in place, and the contact page embeds the real SP contact form
-widget.
+Editorial single-page application for Paper Crane Wellness — trauma therapy in
+South Carolina with Rebekah P. Tozer, LISW-CP. The site runs
+**live SimplePractice widgets**: every booking CTA opens the real OAR modal
+in place, and the contact page embeds the real SP contact form widget.
 
-The repository root contains the untouched static site; `_reference_arena/`
-holds the read-only design reference (arena export + source zip). Neither is
-modified by this subproject.
+- **Production:** https://papercranewellness.pages.dev
+- **Custom domain:** https://www.papercranewellness.com (pending DNS switchover)
+- **Deploy guide:** [`DEPLOY.md`](./DEPLOY.md)
+- **Legacy static site:** archived in [`legacy/`](./legacy/) (see its README)
 
 ## Stack
 
@@ -21,16 +20,17 @@ modified by this subproject.
   static host with no rewrite rules
 - **vite-plugin-singlefile** — the production build is one self-contained
   `dist/index.html` (JS, CSS, and all images inlined as data URIs)
-- **Playwright** — E2E QA for the SimplePractice widget modals
+- **Playwright** — E2E QA for the SimplePractice widget modals + a broad
+  production QA scanner
 
 ## Quickstart
 
 ```bash
-npm install
+npm install        # or: npm ci
 npm run dev        # local dev server (Vite)
 npm run build      # → dist/index.html (single self-contained file)
-npm run preview    # serves dist/ locally
-npm test           # Playwright suite (auto-starts preview on port 4173)
+npm run preview    # serves dist/ locally (port 4173)
+npm test           # Playwright suite (auto-starts preview on :4173)
 ```
 
 ## Pages & routing
@@ -38,15 +38,18 @@ npm test           # Playwright suite (auto-starts preview on port 4173)
 | Route            | Page                                                        |
 | ---------------- | ----------------------------------------------------------- |
 | `/`              | Home — hero, approach, specialties, credentials, CTA        |
-| `/about`         | About Rebekah Tozer, LPC                                     |
+| `/about`         | About Rebekah Tozer, LISW-CP                                |
 | `/specialties`   | Specialty overview                                          |
-| `/specialties/:slug` | Specialty detail (data-driven, `src/data/site.ts`)        |
-| `/faq`           | Frequently asked questions                                   |
-| `/contact`       | Contact — SP contact widget + booking card                   |
-| anything else    | 404 with booking CTA                                         |
+| `/trauma`        | Trauma, PTSD & EMDR detail (data-driven, `src/data/site.ts`)|
+| `/neurodivergent`| Neurodivergent affirming detail                             |
+| `/individual`    | Individual therapy for adults detail                        |
+| `/faq`           | Frequently asked questions                                  |
+| `/contact`       | Contact — SP contact widget + booking card                  |
+| anything else    | 404 with booking CTA                                        |
 
 Routes are hash-based (`/#/contact`), so the single-file build can be opened
-or served from anywhere without server configuration.
+or served from anywhere without server configuration. Each route sets its own
+`<title>` and meta description (`src/App.tsx`).
 
 ## SimplePractice integration
 
@@ -96,19 +99,32 @@ Search for the scope ID in: `index.html`, `src/lib/simplepractice.ts`,
 ## Assets
 
 Real practice photography — `rebekah-headshot.webp`, `rebekah-outdoor.webp`,
-`rebekah-tozer.webp`, `office.webp` — plus the crane favicon. All images are
-inlined into the single-file build; `dist/index.html` is the entire site
-(~1 MB, ~590 KB gzipped).
+`rebekah-tozer.webp`, `office.webp` — plus the crane favicon (all in
+`src/assets/images/`) and a 1200×630 `public/og-image.png` for social cards.
+All images are inlined into the single-file build; `dist/index.html` is the
+entire site (~1 MB, ~590 KB gzipped).
+
+## SEO head
+
+`index.html` carries the canonical URL, Open Graph / Twitter card tags, and
+`MedicalOrganization` JSON-LD (the single-file build serves the same document
+for every hash route, so these are global; per-route titles and descriptions
+are set client-side in `src/App.tsx`).
 
 ## QA
 
-`tests/sp-widget.spec.ts` (config: `playwright.config.ts` — 1 worker,
-`webServer` on `:4173`, 20 s expect timeouts) exercises the **live** SP
-production widget, so a network connection to `simplepractice.com` is
-required. **Verified (2026-08-14): 12/12 tests passed (29.1 s)** against the live SP
-production widget, and 42/42 programmatic visual checks passed (fonts, palette,
-image loading, overflow, mobile). Full-page screenshots are archived in
-`audit-evidence/`.
+### `tests/sp-widget.spec.ts` (Playwright)
+
+Exercises the **live** SP production widget, so a network connection to
+`simplepractice.com` is required. **Verified (2026-08-15): 12/12 passed**
+against both the local preview and production.
+
+Run against any base URL (config uses `BASE_URL`):
+
+```bash
+npm test                                                     # local preview
+BASE_URL=https://papercranewellness.pages.dev npm test       # production
+```
 
 The suite verifies:
 
@@ -117,7 +133,7 @@ The suite verifies:
   hrefs) and stays visually hidden;
 - modals open from every CTA — home hero, nav pill, footer, contact page
   Contact button, contact page booking card, mobile drawer — **without**
-  navigating away from the site (URL stays on localhost);
+  navigating away from the site;
 - the SP contact button is brand-styled (sage `#6B7C54` background, pill
   radius, `14px 28px` padding, white text);
 - closing the modal is clean: the overlay is removed and the body scroll
@@ -128,7 +144,36 @@ The suite verifies:
 - mobile viewport `375×812`: drawer CTA opens the modal and close restores
   scroll state.
 
+### `scripts/prod-qa.mjs` (broad production scan)
+
+Sweeps all routes at desktop (1440×900) and mobile (375×812) plus an unknown
+route: page errors, site-origin console errors/warnings, horizontal overflow,
+webfont loading (Inter + Playfair Display), per-route titles, meta description,
+OG tags, JSON-LD, canonical, favicon, image `alt` coverage, broken images,
+and unnamed icon controls. Screenshots land in `audit-evidence/prod/`.
+
+```bash
+node scripts/prod-qa.mjs                        # scans production
+BASE_URL=http://localhost:4173 node scripts/prod-qa.mjs   # local preview
+```
+
+**Verified (2026-08-15): 0 errors, 0 gaps** against production. Third-party
+console noise from the SP widget (render-mode rehydrate warnings) is reported
+informationally and never fails the scan.
+
+### Other scripts
+
+| Script | Purpose |
+| ------ | ------- |
+| `scripts/visual-checks.mjs` | 42 programmatic visual checks (fonts, palette, images, overflow) |
+| `scripts/shots.mjs` | Full-page screenshot capture |
+| `scripts/find-clipped-headings.mjs` | clip-reveal descender scanner (all routes × viewports) |
+| `scripts/verify-descenders.mjs` / `verify-descenders-ab.mjs` | targeted A/B proof for the descender-clipping fix |
+| `scripts/convert-assets.mjs` | regenerate `src/assets/images/` from the arena export |
+
 ## Reference
 
-- `PLAN.md` — full plan, phases, decision log, and QA results
-- Arena export provenance: `_reference_arena/` (read-only; never modify)
+- `PLAN.md` — full plan, phases, decision log, and QA results (local working doc)
+- `_reference_arena/` — read-only Design Arena export used to build the design
+  (never modify)
+- `legacy/` — the previous static site, archived for reference
