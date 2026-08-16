@@ -54,10 +54,13 @@ async function bodyScrollState(page: Page) {
  *  - capture runtime errors only in the top window (via an init script).
  */
 async function collectSiteErrors(page: Page) {
-  const base = "http://localhost:4173";
   const consoleErrors: string[] = [];
   page.on("console", (msg) => {
-    if (msg.type() === "error" && msg.location().url.startsWith(base)) {
+    if (msg.type() !== "error") return;
+    const current = page.url();
+    if (!current || current === "about:blank") return;
+    const origin = new URL(current).origin;
+    if (msg.location().url.startsWith(origin)) {
       consoleErrors.push(msg.text());
     }
   });
@@ -131,9 +134,10 @@ test.describe("Booking modal — desktop", () => {
 
   test("hero Book a Free Consult opens the SP modal without navigating", async ({ page }) => {
     const getErrors = await collectSiteErrors(page);
+    const urlBefore = page.url();
     await page.locator('main a:has-text("Book a Free Consult")').first().click();
     await expect(page.locator(".spwidget--overlay")).toBeVisible({ timeout: 20_000 });
-    expect(page.url()).toContain("localhost");
+    expect(page.url()).toBe(urlBefore);
     expect(page.url()).not.toContain("clientsecure.me");
     const iframe = page.locator(".spwidget--scroller iframe, .spwidget--overlay iframe").first();
     await expect(iframe).toBeVisible({ timeout: 10_000 });
@@ -181,9 +185,10 @@ test.describe("Contact page", () => {
 
   test("Contact button opens the SP contact modal", async ({ page }) => {
     const getErrors = await collectSiteErrors(page);
+    const urlBefore = page.url();
     await page.locator('#root a.spwidget-button[data-spwidget-type="Contact form"]').click();
     await expect(page.locator(".spwidget--overlay")).toBeVisible({ timeout: 20_000 });
-    expect(page.url()).toContain("localhost");
+    expect(page.url()).toBe(urlBefore);
     expect(await getErrors()).toEqual([]);
     await closeModal(page);
   });
@@ -240,9 +245,10 @@ test.describe("Mobile (375x812)", () => {
     await waitForSp(page);
 
     await page.locator('button[aria-label*="menu" i]').first().click();
+    const urlBefore = page.url();
     await page.locator('a:has-text("Book a Free Consultation")').first().click();
     await expect(page.locator(".spwidget--overlay")).toBeVisible({ timeout: 20_000 });
-    expect(page.url()).toContain("localhost");
+    expect(page.url()).toBe(urlBefore);
     await closeModal(page);
   });
 

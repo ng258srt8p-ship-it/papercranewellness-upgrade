@@ -21,6 +21,17 @@ const titles: Record<string, string> = {
   "/contact": "Contact & Booking \u2014 Paper Crane Wellness",
 };
 
+const descriptions: Record<string, string> = {
+  "/": "Paper Crane Wellness \u2014 Trauma therapy in South Carolina with Rebekah P. Tozer, LISW-CP. EMDR, Prolonged Exposure, Neurodivergent Affirming Therapy, and Individual Therapy for Adults. Virtual across SC; in-person in Mount Pleasant.",
+  "/about": "Meet Rebekah P. Tozer, LISW-CP \u2014 licensed clinical social worker providing trauma therapy, EMDR, and neurodivergent affirming care in South Carolina.",
+  "/specialties": "Therapy specialties at Paper Crane Wellness: trauma, PTSD, EMDR & Prolonged Exposure; neurodivergent affirming care; and individual therapy for adults.",
+  "/trauma": "Trauma, PTSD & EMDR therapy in South Carolina. EMDR, Prolonged Exposure Therapy, and Trauma-Informed Yoga to help you reclaim your life, step by step.",
+  "/neurodivergent": "Neurodivergent affirming therapy for adults in South Carolina. Embrace your quirks \u2014 practical, affirming support for ADHD, autism, and everything in between.",
+  "/individual": "Individual therapy for adults in South Carolina. One-on-one support for trauma, anxiety, depression, and life's challenges \u2014 virtual or in-person in Mount Pleasant.",
+  "/faq": "FAQs about therapy at Paper Crane Wellness: EMDR, insurance (Cigna & Aetna), treatment length, where to find the office, and more.",
+  "/contact": "Contact Paper Crane Wellness to book a free 15-minute consultation. Virtual therapy anywhere in South Carolina; in-person in Mount Pleasant.",
+};
+
 function NotFound() {
   return (
     <section className="flex min-h-[70vh] items-center bg-paper pt-40 pb-24">
@@ -49,6 +60,8 @@ function Routes() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
     document.title = titles[path] ?? "Paper Crane Wellness";
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta && descriptions[path]) meta.setAttribute("content", descriptions[path]);
   }, [path]);
 
   switch (path) {
