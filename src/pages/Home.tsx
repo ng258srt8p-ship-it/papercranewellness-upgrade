@@ -3,6 +3,29 @@ import { Link } from "../lib/router";
 import { img } from "../assets/images";
 import { CTA, Card, Eyebrow, Reveal, SectionLabel, Shell, TextLink, WidgetButton } from "../components/ui";
 import { healing, press, specialties, testimonials } from "../data/site";
+import { loadCmsContent } from "../lib/content";
+
+/** CMS-driven notice strip above the hero; hidden when no announcement is set. */
+function AnnouncementBar() {
+  const [text, setText] = useState<string | null>(null);
+  useEffect(() => {
+    let live = true;
+    void loadCmsContent().then((c) => {
+      if (live && c.announcement?.text) setText(c.announcement.text);
+    });
+    return () => {
+      live = false;
+    };
+  }, []);
+  if (!text) return null;
+  return (
+    <div className="bg-navy text-mist">
+      <div className="mx-auto max-w-6xl px-5 py-2.5 text-center text-[0.8125rem] leading-relaxed tracking-wide text-mist/85">
+        {text}
+      </div>
+    </div>
+  );
+}
 
 function Hero() {
   const [y, setY] = useState(0);
@@ -351,6 +374,7 @@ function PressStrip() {
 export default function Home() {
   return (
     <>
+      <AnnouncementBar />
       <Hero />
       <PressStrip />
       <ItDoesntHaveToBe />

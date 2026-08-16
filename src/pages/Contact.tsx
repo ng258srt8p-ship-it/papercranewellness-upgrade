@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "../lib/router";
 import { CraneMark } from "../components/Logo";
 import { PageHero, Reveal, SectionLabel, Shell, WidgetButton } from "../components/ui";
 import { openSimplePractice, refreshSpAutoBind, SP_SCOPE_ID } from "../lib/simplepractice";
 import { site, specialties } from "../data/site";
+import { loadCmsContent, type ContactContent } from "../lib/content";
 
 /**
  * SimplePractice Contact Form Widget (visible, brand-styled).
@@ -12,7 +13,7 @@ import { site, specialties } from "../data/site";
  * its own execution). The fallback onClick + real href cover the no-bind and
  * no-JS cases.
  */
-function ContactWidget() {
+function ContactWidget({ contact }: { contact: ContactContent }) {
   useEffect(() => {
     refreshSpAutoBind();
   }, []);
@@ -37,11 +38,12 @@ function ContactWidget() {
           data-spwidget-scope-global
           data-spwidget-autobind
           onClick={(e) => {
-            // Fallback if SP autobind did not attach to this rendered anchor.
-            if (!window.SPWidgetInstances?.[`${SP_SCOPE_ID}-contact`]) {
-              e.preventDefault();
-              void openSimplePractice("contact");
-            }
+            // Always take the modal path. SP's autobind (when attached to this
+            // anchor) opens the same modal instance; our handler guarantees the
+            // button works even when SP's initial scan ran before React mounted
+            // the anchor (a timing race on slow/warm caches).
+            e.preventDefault();
+            void openSimplePractice("contact");
           }}
         >
           Contact
@@ -50,8 +52,8 @@ function ContactWidget() {
 
       <p className="mt-6 text-[0.8125rem] leading-relaxed text-navy/50">
         Prefer email?{" "}
-        <a href={`mailto:${site.email}`} className="link-underline hover:text-sage">
-          {site.email}
+        <a href={`mailto:${contact.email}`} className="link-underline hover:text-sage">
+          {contact.email}
         </a>{" "}
         — and if you are in crisis, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline).
       </p>
@@ -95,7 +97,22 @@ function BookingCard() {
   );
 }
 
+type MergedContact = typeof site & ContactContent;
+
 export default function Contact() {
+  const [cmsContact, setCmsContact] = useState<ContactContent | null>(null);
+  useEffect(() => {
+    let live = true;
+    void loadCmsContent().then((c) => {
+      if (live) setCmsContact(c.contact);
+    });
+    return () => {
+      live = false;
+    };
+  }, []);
+  // CMS-managed contact details override the bundled copy field-by-field.
+  const c: MergedContact = { ...site, ...(cmsContact ?? {}) };
+
   return (
     <>
       <PageHero
@@ -107,7 +124,7 @@ export default function Contact() {
           </>
         }
         lede="A free 15-minute consultation to see if we're a good match. No strings attached."
-        meta={[site.virtual, site.address, site.insurance]}
+        meta={[c.virtual, c.address, c.insurance]}
       />
 
       <section className="bg-paper py-20 md:py-28">
@@ -121,7 +138,7 @@ export default function Contact() {
                 </p>
               </Reveal>
               <Reveal delay={80} className="mt-10">
-                <ContactWidget />
+                <ContactWidget contact={c} />
               </Reveal>
             </div>
 
@@ -133,17 +150,17 @@ export default function Contact() {
                 <div className="mt-8 space-y-5 border-t border-navy/12 pt-6">
                   <div>
                     <p className="text-[0.7rem] tracking-[0.08em] text-navy/40 uppercase">Email</p>
-                    <a href={`mailto:${site.email}`} className="link-underline mt-1 inline-block text-[0.9375rem] text-navy hover:text-sage">
-                      {site.email}
+                    <a href={`mailto:${c.email}`} className="link-underline mt-1 inline-block text-[0.9375rem] text-navy hover:text-sage">
+                      {c.email}
                     </a>
                   </div>
                   <div>
                     <p className="text-[0.7rem] tracking-[0.08em] text-navy/40 uppercase">Office</p>
-                    <p className="mt-1 text-[0.9375rem] leading-relaxed text-navy/65">{site.address}</p>
+                    <p className="mt-1 text-[0.9375rem] leading-relaxed text-navy/65">{c.address}</p>
                   </div>
                   <div>
                     <p className="text-[0.7rem] tracking-[0.08em] text-navy/40 uppercase">Hours</p>
-                    <p className="mt-1 text-[0.9375rem] text-navy/65">{site.hours}</p>
+                    <p className="mt-1 text-[0.9375rem] text-navy/65">{c.hours}</p>
                   </div>
                 </div>
               </Reveal>

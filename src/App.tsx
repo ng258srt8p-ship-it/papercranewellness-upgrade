@@ -9,6 +9,7 @@ import Specialties from "./pages/Specialties";
 import Specialty from "./pages/Specialty";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
+import Admin from "./pages/Admin";
 
 const titles: Record<string, string> = {
   "/": "Paper Crane Wellness \u2014 Trauma Therapy in South Carolina",
@@ -19,6 +20,7 @@ const titles: Record<string, string> = {
   "/individual": "Individual Therapy for Adults \u2014 Paper Crane Wellness",
   "/faq": "FAQ \u2014 Paper Crane Wellness",
   "/contact": "Contact & Booking \u2014 Paper Crane Wellness",
+  "/admin": "Content Admin \u2014 Paper Crane Wellness",
 };
 
 const descriptions: Record<string, string> = {
@@ -79,6 +81,8 @@ function Routes() {
       return <FAQ />;
     case "/contact":
       return <Contact />;
+    case "/admin":
+      return <Admin />;
     default:
       return <NotFound />;
   }

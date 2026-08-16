@@ -65,6 +65,72 @@ node scripts/prod-qa.mjs
 BASE_URL=https://papercranewellness.pages.dev npm test
 ```
 
+## Content CMS (Cloudflare Worker + D1)
+
+The site's editable content (announcement bar, FAQ, contact details) is
+served by a separate **Worker** (`papercrane-cms`) backed by a **D1**
+database (`papercrane-content`). It is deployed and updated independently
+of the Pages site.
+
+- Worker URL: `https://papercrane-cms.vqh9mnrdbp.workers.dev`
+- Local worker config: `cms/wrangler.toml`
+
+### Deploying the worker (or after changes to `cms/worker.ts`)
+
+```bash
+cd cms
+npx wrangler deploy                # pushes the worker, keeps the D1 binding
+cd ..
+```
+
+### Provisioning (first time only)
+
+```bash
+# 1. Create the D1 database
+npx wrangler d1 create papercrane-content
+# → note the database_id, put it in cms/wrangler.toml under [[d1_databases]]
+
+# 2. Apply the schema + seed data
+npx wrangler d1 execute papercrane-content \
+  --remote --file cms/schema.sql
+npx wrangler d1 execute papercrane-content \
+  --remote --file cms/seed.sql
+
+# 3. Set the admin token secret on the worker (generate a 48-char hex value)
+cd cms && npx wrangler secret put CMS_ADMIN_TOKEN
+```
+
+Put the same token in the local, gitignored `.env.cms` as
+`CMS_ADMIN_TOKEN=...` so the admin UI and the Playwright round-trip test
+can use it.
+
+### Rotating the admin token
+
+```bash
+cd cms && npx wrangler secret put CMS_ADMIN_TOKEN   # paste the new value
+cd ..   # and update .env.cms with the same value
+```
+
+### Restoring content from an export
+
+```bash
+npx wrangler d1 export papercrane-content --remote --output cms/content-backup.json
+# ...re-apply schema + backup as needed...
+npx wrangler d1 execute papercrane-content --remote --file <restore.sql>
+```
+
+### Verifying the CMS
+
+```bash
+curl -s https://papercrane-cms.vqh9mnrdbp.workers.dev/api/health
+curl -s https://papercrane-cms.vqh9mnrdbp.workers.dev/api/content | head -c 300
+BASE_URL=https://papercranewellness.pages.dev npm test   # includes cms.spec.ts
+```
+
+Note: the SPA reads `VITE_CMS_API` at build time to know the worker URL
+(defaults to the production worker above). Changing the worker URL
+requires a rebuild of the SPA.
+
 ## Configuration
 
 ### wrangler.toml

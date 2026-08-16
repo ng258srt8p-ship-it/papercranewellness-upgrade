@@ -1,0 +1,10 @@
+name = "papercrane-cms"
+main = "worker.ts"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# D1 — CMS content store (production)
+[[d1_databases]]
+binding = "DB"
+database_name = "papercrane-content"
+database_id = "b8a06ab0-84e2-468a-9887-17c5daa45c6f"

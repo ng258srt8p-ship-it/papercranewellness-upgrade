@@ -111,6 +111,47 @@ entire site (~1 MB, ~590 KB gzipped).
 for every hash route, so these are global; per-route titles and descriptions
 are set client-side in `src/App.tsx`).
 
+## Content management (Cloudflare CMS + D1)
+
+Site copy (announcement bar, FAQ, contact details) is managed in a
+**Cloudflare Worker + D1** backend — no re-deploy needed to update copy:
+
+```
+Browser (SPA) ──GET──▶ papercrane-cms worker ──▶ D1 (papercrane-content)
+     ▲
+     └── GET /api/content/*  (public, CORS-open)
+Admin /admin ──PUT/DELETE──▶ /api/admin/*  (Bearer token, .env.cms)
+```
+
+**Why a standalone Worker?** A Pages Function could not receive the D1
+binding (verified empirically — Pages Functions get KV only). The Worker
+is the persistence/API layer; Pages serves the static SPA.
+
+**Live endpoints**
+
+- Public: `https://papercrane-cms.vqh9mnrdbp.workers.dev/api/content[/slug]`
+- SPA falls back to the bundled copy (`src/data/site.ts`) whenever the CMS
+  is unreachable — the site degrades gracefully.
+
+**Editing content (admin UI):** `/#/admin` on the site. Paste the admin
+token (from the untracked local `.env.cms`) → *Load content* → edit →
+*Save*. Changes go live immediately (the SPA fetches per page load).
+
+**Configuration**
+
+| Setting | Where | Notes |
+|---|---|---|
+| `CMS_ADMIN_TOKEN` | `.env.cms` (local, gitignored) **and** the worker secret (`wrangler secret put CMS_ADMIN_TOKEN`) | 48-char hex; the two must match |
+| `VITE_CMS_API` | build-time env | override the worker URL baked into the SPA (defaults to the production worker) |
+| `CMS_API_URL` | test-time env | override for the Playwright CMS suite |
+| `CMS_TEST_TOKEN` | test-time env | enables the admin round-trip test (falls back to `.env.cms`) |
+
+To rotate the token: generate a new 48-char hex value, put it in
+`.env.cms`, and re-put the worker secret
+(`cd cms && npx wrangler secret put CMS_ADMIN_TOKEN`). See `cms/README.md`.
+
+See `cms/` for the worker source, D1 schema, and seed data.
+
 ## QA
 
 ### `tests/sp-widget.spec.ts` (Playwright)
@@ -143,6 +184,19 @@ The suite verifies:
   filtered);
 - mobile viewport `375×812`: drawer CTA opens the modal and close restores
   scroll state.
+
+### `tests/cms.spec.ts` (Playwright — CMS API + SPA)
+
+**Verified (2026-08-15): 8/8 passed** against the live CMS worker. Covers
+API health, public list/detail, 404/401 handling, the announcement bar,
+CMS-driven FAQ and contact rendering, the admin UI, and a full
+**edit → live → restore** round trip (the round trip only runs when
+`CMS_TEST_TOKEN`/`.env.cms` is available; it restores the original value
+afterwards).
+
+```bash
+npm test                  # both suites (SP + CMS)
+```
 
 ### `scripts/prod-qa.mjs` (broad production scan)
 

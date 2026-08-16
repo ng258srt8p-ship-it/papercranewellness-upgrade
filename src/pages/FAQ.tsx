@@ -1,7 +1,22 @@
+import { useEffect, useState } from "react";
 import { Accordion, CTA, PageHero, Reveal, Shell } from "../components/ui";
 import { faqs } from "../data/site";
+import { loadCmsContent, type FaqContent } from "../lib/content";
 
 export default function FAQ() {
+  const [cmsFaqs, setCmsFaqs] = useState<FaqContent | null>(null);
+  useEffect(() => {
+    let live = true;
+    void loadCmsContent().then((c) => {
+      if (live) setCmsFaqs(c.faq);
+    });
+    return () => {
+      live = false;
+    };
+  }, []);
+  // CMS-managed FAQs when available; bundled copy as the fallback.
+  const items = cmsFaqs?.items ?? faqs;
+
   return (
     <>
       <PageHero
@@ -20,7 +35,7 @@ export default function FAQ() {
         <Shell>
           <div className="mx-auto max-w-3xl">
             <Reveal>
-              <Accordion items={faqs} />
+              <Accordion items={items} />
             </Reveal>
           </div>
         </Shell>
