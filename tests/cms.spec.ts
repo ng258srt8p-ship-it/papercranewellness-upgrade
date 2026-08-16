@@ -84,14 +84,21 @@ test("API: missing slug → 404; admin write without token → 401", async () =>
   expect(put.status).toBe(401);
 });
 
-test("SPA: home shows the CMS announcement bar", async ({ page }) => {
+test("SPA: home announcement bar follows the CMS value", async ({ page }) => {
   test.skip(!cmsUp, "CMS API unreachable");
-  const faq = (await (await fetch(`${CMS_API}/api/content/announcement`)).json()) as {
-    body: { text: string };
-  };
+  const ann = (await (
+    await fetch(`${CMS_API}/api/content/announcement`)
+  ).json()) as { body: { text: string } };
   await page.goto("/");
-  const bar = page.locator("div.bg-navy >> text=" + faq.body.text).first();
-  await expect(bar).toBeVisible({ timeout: 10_000 });
+  const bar = page.locator("div.bg-navy");
+  if (ann.body.text.trim()) {
+    // Non-empty text → the bar renders with that text.
+    await expect(bar.first()).toBeVisible({ timeout: 10_000 });
+    await expect(bar.first()).toContainText(ann.body.text);
+  } else {
+    // Empty text → the bar is hidden (the site ships with it disabled).
+    await expect(bar.first()).toHaveCount(0);
+  }
 });
 
 test("SPA: FAQ page renders the CMS-managed questions", async ({ page }) => {
