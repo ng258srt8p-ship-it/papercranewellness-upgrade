@@ -5,5 +5,5 @@ compatibility_date = "2024-01-01"
 production_branch = "main"
 
 [build]
-command = ""  # Static site - no build needed
-pages_build_output_dir = "."
+command = "npm ci && npm run build"
+pages_build_output_dir = "dist"

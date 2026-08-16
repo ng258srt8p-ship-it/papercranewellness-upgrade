@@ -1,29 +1,31 @@
 {
-  "name": "pc",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "react-vite-tailwind",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "test": "npx playwright test",
-    "test:headed": "npx playwright test --headed"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "playwright test"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "directories": {
-    "test": "tests"
+  "dependencies": {
+    "clsx": "2.1.1",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "tailwind-merge": "3.4.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ng258srt8p-ship-it/papercranewellness-upgrade.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ng258srt8p-ship-it/papercranewellness-upgrade/issues"
-  },
-  "homepage": "https://github.com/ng258srt8p-ship-it/papercranewellness-upgrade#readme",
   "devDependencies": {
     "@playwright/test": "^1.62.1",
-    "playwright": "^1.62.1",
-    "serve": "^14.2.6"
+    "@tailwindcss/vite": "4.1.17",
+    "@types/node": "22.19.17",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "5.1.1",
+    "sharp": "^0.35.3",
+    "tailwindcss": "4.1.17",
+    "typescript": "5.9.3",
+    "vite": "7.3.2",
+    "vite-plugin-singlefile": "2.3.0"
   }
 }
