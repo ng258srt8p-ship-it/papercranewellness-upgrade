@@ -78,7 +78,10 @@ function Hero() {
             <Reveal delay={380}>
               <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
                 <WidgetButton>Book a Free Consult</WidgetButton>
-                <TextLink to="/specialties" className="text-navy/60 hover:text-navy">
+                <TextLink
+                  to="/specialties"
+                  className="py-3 text-navy/60 hover:text-navy"
+                >
                   Explore Specialties
                 </TextLink>
               </div>

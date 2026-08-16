@@ -202,6 +202,17 @@ const SAMPLE = () => {
     if (rad >= 8 && (hasBg || s.borderStyle !== "none")) add(out.cards, el, 150);
   });
 
+  const isCollapsed = (el) => {
+    let p = el;
+    while (p && p !== document.documentElement) {
+      const s = getComputedStyle(p);
+      if (parseFloat(s.opacity) < 0.05 || s.display === "none" || s.visibility === "hidden") return true;
+      const mh = s.maxHeight;
+      if (mh !== "none" && parseFloat(mh) === 0 && (s.overflow === "hidden" || s.overflowY === "hidden")) return true;
+      p = p.parentElement;
+    }
+    return false;
+  };
   // Focusables + tap targets (mobile)
   document.querySelectorAll("a[href], button, input, select, textarea").forEach((el) => {
     if (el.closest("#sp-widget-host")) return;
@@ -211,6 +222,7 @@ const SAMPLE = () => {
       tag: el.tagName.toLowerCase(),
       text: (el.innerText || el.getAttribute("aria-label") || "").slice(0, 30),
       w: Math.round(r.width), h: Math.round(r.height),
+      collapsed: isCollapsed(el),
     });
   });
 
@@ -290,7 +302,7 @@ function reportFindings(data, base) {
 
       // tap targets (mobile)
       if (name === "mobile") {
-        const small = d.focusables.filter((f) => f.h < 44 && f.h > 0 && f.w > 0);
+        const small = d.focusables.filter((f) => f.h < 44 && f.h > 0 && f.w > 0 && !f.collapsed);
         if (small.length) add("MINOR", "tap-targets", route, name, `${small.length} focusable elements < 44px tall: ` + small.slice(0, 6).map((s) => `"${s.text || s.tag}" h=${s.h}`).join(", "), null);
       }
     }
