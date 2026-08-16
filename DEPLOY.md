@@ -152,15 +152,25 @@ Actions workflow runs the same steps itself and deploys the local `dist/`.
 
 ### GitHub secrets
 
-| Secret | Description |
-|--------|-------------|
-| `CLOUDFLARE_API_TOKEN` | Cloudflare API token with Pages write access |
+The workflow needs **one** repository secret:
 
-To generate a token:
-1. Go to the [Cloudflare Dashboard](https://dash.cloudflare.com/)
-2. **Profile** → **API Tokens** → create a token with **Cloudflare Pages**
-   → **Edit** permission
-3. Scope it to your account (`f94ced49d897e59303c8e1f292985182`)
+- `CLOUDFLARE_API_TOKEN` — a fine-grained Cloudflare API token with the
+  **"Edit Cloudflare Pages"** permission.
+
+Create it once (dashboard only — it cannot be minted via API/CLI):
+
+1. Cloudflare dashboard → **My Profile → API Tokens → Create Token**
+2. Use the **"Edit Cloudflare Pages"** template
+3. Choose the account that owns the `papercranewellness` Pages project
+   (`f94ced49d897e59303c8e1f292985182`)
+4. Copy the token → GitHub repo → **Settings → Secrets and variables →
+   Actions** → new secret `CLOUDFLARE_API_TOKEN`
+
+> ⚠️ **Known issue (2026-08-16):** this secret was never set, so
+> push-triggered deploys fail with
+> `The 'CLOUDFLARE_API_TOKEN' environment variable is required but was not set`
+> — the site keeps serving the last local deploy until it is set. Until then,
+> deploy locally (see *Manual deployment*); that is what has been in use.
 
 ## URLs
 
