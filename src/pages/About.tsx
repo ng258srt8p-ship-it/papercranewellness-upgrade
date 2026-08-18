@@ -23,7 +23,7 @@ export default function About() {
             <Reveal className="lg:col-span-5">
               <div className="sticky top-32">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-mist shadow-lg shadow-navy/8">
-                  <img src={img.rebekah} alt="Rebekah Tozer, LISW-CP" className="h-full w-full object-cover" />
+                  <img src={img.spare} alt="Rebekah Tozer, LISW-CP" className="h-full w-full object-cover" />
                 </div>
                 <div className="mt-6 border-t border-navy/12 pt-5">
                   <p className="display text-[1.15rem] text-navy">Rebekah P. Tozer, LISW-CP</p>
