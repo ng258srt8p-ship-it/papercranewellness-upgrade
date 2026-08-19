@@ -59,10 +59,31 @@ export function Shell({ children, className = "" }: { children: React.ReactNode;
   return <div className={cn("mx-auto w-full max-w-[1320px] px-6 md:px-10 lg:px-14", className)}>{children}</div>;
 }
 
-export function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+const EYEBROW_TONES = {
+  deep: "text-sage-deep",
+  muted: "text-navy/40",
+  light: "text-sage-soft",
+} as const;
+export type EyebrowTone = keyof typeof EYEBROW_TONES;
+
+/**
+ * Eyebrow label: uppercase micro-type with a signature 32px rule (CSS ::before).
+ * Tone: deep (sage, light bgs) | muted (navy/40, light bgs) | light (soft sage, dark bgs).
+ * Set `center` for centered eyebrows (rules on both sides).
+ */
+export function Eyebrow({
+  children,
+  className = "",
+  tone = "deep",
+  center = false,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  tone?: EyebrowTone;
+  center?: boolean;
+}) {
   return (
-    <span className={cn("eyebrow inline-flex items-center gap-3 text-sage", className)}>
-      <span className="h-px w-8 bg-current opacity-50" />
+    <span className={cn("eyebrow", EYEBROW_TONES[tone], center && "eyebrow-center", className)}>
       {children}
     </span>
   );
@@ -150,7 +171,7 @@ export function TextLink({ to, children, className = "" }: { to: string; childre
     <Link
       to={to}
       className={cn(
-        "link-underline group inline-flex items-center gap-2 text-[0.8125rem] font-medium tracking-[0.04em] uppercase",
+        "link-underline group inline-flex items-center gap-2 py-2 text-[0.8125rem] font-medium tracking-[0.04em] uppercase",
         className,
       )}
     >
@@ -221,8 +242,8 @@ export function PageHero({
 export function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
   return (
     <div className="flex items-baseline gap-4">
-      <span className="display text-sm text-sage">{n}</span>
-      <span className="eyebrow text-navy/45">{children}</span>
+      <span className="display text-sm text-sage-deep">{n}</span>
+      <Eyebrow tone="muted">{children}</Eyebrow>
     </div>
   );
 }
@@ -259,7 +280,7 @@ export function Accordion({ items }: { items: { q: string; a: string }[] }) {
             <button
               onClick={() => setOpen(isOpen ? null : i)}
               aria-expanded={isOpen}
-              className="flex w-full items-start justify-between gap-8 py-7 text-left transition-colors duration-300 hover:text-sage"
+              className="flex w-full items-start justify-between gap-8 py-7 text-left transition-colors duration-300 hover:text-sage-deep"
             >
               <span className="display max-w-2xl text-[1.15rem] leading-snug md:text-[1.4rem]">{item.q}</span>
               <span
@@ -323,7 +344,7 @@ export function CTA({
         <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <Reveal>
-              <Eyebrow className="text-sage-soft">Ready?</Eyebrow>
+              <Eyebrow tone="light">Ready?</Eyebrow>
               <h2 className="display mt-8 text-[clamp(2.4rem,5.4vw,4.4rem)] balance">{title}</h2>
             </Reveal>
           </div>

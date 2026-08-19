@@ -11,7 +11,7 @@ export default function Specialties() {
         title={
           <>
             Trauma, neurodivergence,
-            <br className="hidden md:block" /> <span className="italic text-sage">and everything in between.</span>
+            <br className="hidden md:block" /> <span className="italic text-sage-deep">and everything in between.</span>
           </>
         }
         lede="Whether it's memories that ambush your peace, feeling like an outsider, or constantly battling self-doubt — these aren't just minor annoyances. Let's work on it together."
@@ -28,7 +28,7 @@ export default function Specialties() {
                   className="group grid gap-8 border-t border-navy/12 pt-10 lg:grid-cols-12 lg:gap-10"
                 >
                   <div className="lg:col-span-1">
-                    <span className="display text-[0.85rem] text-sage">{s.n}</span>
+                    <span className="display text-[0.85rem] text-sage-deep">{s.n}</span>
                   </div>
                   <div className="lg:col-span-4">
                     <h2 className="display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.05] text-navy transition-colors duration-500 group-hover:text-sage">
@@ -50,7 +50,7 @@ export default function Specialties() {
                         </li>
                       ))}
                     </ul>
-                    <span className="mt-6 inline-flex items-center gap-2 text-[0.75rem] font-medium tracking-[0.06em] text-navy/50 uppercase transition-colors duration-500 group-hover:text-sage">
+                    <span className="mt-6 inline-flex items-center gap-2 text-[0.75rem] font-medium tracking-[0.06em] text-navy/50 uppercase transition-colors duration-500 group-hover:text-sage-deep">
                       Learn more
                       <span className="transition-transform duration-500 group-hover:translate-x-1">&rarr;</span>
                     </span>

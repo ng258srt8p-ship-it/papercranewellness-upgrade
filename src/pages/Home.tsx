@@ -198,7 +198,7 @@ function SpecialtiesSection() {
               <Link to={s.slug} className="block h-full">
                 <Card className="flex h-full flex-col">
                   <div className="flex items-start justify-between gap-4">
-                    <span className="display text-[0.8rem] text-sage">{s.n}</span>
+                    <span className="display text-[0.8rem] text-sage-deep">{s.n}</span>
                     <span className="grid h-9 w-9 place-items-center rounded-full border border-navy/10 text-navy/40 transition-all duration-500 group-hover:border-sage group-hover:bg-sage group-hover:text-mist">
                       <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.6">
                         <path d="M7 17L17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
@@ -209,7 +209,7 @@ function SpecialtiesSection() {
                     {s.title}
                   </h3>
                   <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-navy/60 pretty">{s.short}</p>
-                  <span className="mt-6 inline-flex items-center gap-2 border-t border-navy/8 pt-5 text-[0.75rem] font-medium tracking-[0.06em] text-sage uppercase">
+                  <span className="mt-6 inline-flex items-center gap-2 border-t border-navy/8 pt-5 text-[0.75rem] font-medium tracking-[0.06em] text-sage-deep uppercase">
                     Learn more
                     <span className="transition-transform duration-500 group-hover:translate-x-1">&rarr;</span>
                   </span>
@@ -240,7 +240,7 @@ function Modalities() {
       <Shell className="relative">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <Reveal className="lg:col-span-6">
-            <Eyebrow className="text-sage-soft">IV &mdash; Modalities</Eyebrow>
+            <Eyebrow tone="light">IV &mdash; Modalities</Eyebrow>
             <h2 className="display mt-7 text-[clamp(2.2rem,5vw,3.8rem)] balance">
               A couple trauma-informed modalities I use.
             </h2>
@@ -251,7 +251,7 @@ function Modalities() {
           {items.map((m, i) => (
             <Reveal key={m.name} delay={i * 90}>
               <div className="h-full rounded-[4px] border border-white/10 p-8 transition-all duration-500 hover:border-white/25 md:p-10">
-                <span className="display text-[2.8rem] leading-none text-white/15">{String(i + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true" className="display text-[2.8rem] leading-none text-white/15">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="display mt-6 text-[1.6rem] text-mist">{m.name}</h3>
                 <p className="mt-5 text-[0.9375rem] leading-relaxed text-mist/65 pretty">{m.desc}</p>
               </div>
@@ -297,7 +297,7 @@ function Testimonials() {
     <section className="border-y border-navy/10 bg-mist py-24 md:py-32">
       <Shell>
         <Reveal>
-          <p className="eyebrow text-center text-sage">What clients say</p>
+          <p className="text-center"><Eyebrow center>What clients say</Eyebrow></p>
         </Reveal>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {testimonials.map((t, i) => (
@@ -360,7 +360,7 @@ function PressStrip() {
     <section className="border-y border-navy/10 bg-mist/60 py-14">
       <Shell>
         <Reveal>
-          <p className="eyebrow mb-8 text-center text-navy/40">As seen on</p>
+          <p className="mb-8 text-center"><Eyebrow center tone="muted">As seen on</Eyebrow></p>
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-5">
             {press.map((p) => (
               <span key={p.outlet} className="display text-[clamp(1rem,2vw,1.5rem)] text-navy/30 transition-colors hover:text-navy/60">

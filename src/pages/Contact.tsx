@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "../lib/router";
 import { CraneMark } from "../components/Logo";
-import { PageHero, Reveal, SectionLabel, Shell, WidgetButton } from "../components/ui";
+import { Eyebrow, PageHero, Reveal, SectionLabel, Shell, WidgetButton } from "../components/ui";
 import { openSimplePractice, refreshSpAutoBind, SP_SCOPE_ID } from "../lib/simplepractice";
 import { site, specialties } from "../data/site";
 import { loadCmsContent, type ContactContent } from "../lib/content";
@@ -52,7 +52,7 @@ function ContactWidget({ contact }: { contact: ContactContent }) {
 
       <p className="mt-6 text-[0.8125rem] leading-relaxed text-navy/50">
         Prefer email?{" "}
-        <a href={`mailto:${contact.email}`} className="link-underline hover:text-sage">
+        <a href={`mailto:${contact.email}`} className="link-underline hover:text-sage-deep">
           {contact.email}
         </a>{" "}
         — and if you are in crisis, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline).
@@ -71,7 +71,7 @@ function BookingCard() {
       />
       <div className="relative">
         <CraneMark className="h-9 w-9 text-sage-soft" />
-        <p className="eyebrow mt-6 text-sage-soft">Preferred route</p>
+        <p className="mt-6"><Eyebrow tone="light">Preferred route</Eyebrow></p>
         <h2 className="display mt-3 text-[1.8rem] leading-tight">Book your free consultation</h2>
         <p className="mt-4 text-[0.9375rem] leading-relaxed text-mist/65 pretty">
           A free 15-minute call or video to see if we&apos;re a good fit. No intake paperwork required.
@@ -150,7 +150,7 @@ export default function Contact() {
                 <div className="mt-8 space-y-5 border-t border-navy/12 pt-6">
                   <div>
                     <p className="text-[0.7rem] tracking-[0.08em] text-navy/40 uppercase">Email</p>
-                    <a href={`mailto:${c.email}`} className="link-underline mt-1 inline-block text-[0.9375rem] text-navy hover:text-sage">
+                    <a href={`mailto:${c.email}`} className="link-underline mt-1 inline-block text-[0.9375rem] text-navy hover:text-sage-deep">
                       {c.email}
                     </a>
                   </div>
@@ -172,7 +172,7 @@ export default function Contact() {
       <section className="border-y border-navy/10 bg-mist py-16 md:py-20">
         <Shell>
           <Reveal>
-            <p className="eyebrow text-navy/40">Or explore a specialty</p>
+            <Eyebrow tone="muted">Or explore a specialty</Eyebrow>
             <div className="mt-8 grid gap-6 md:grid-cols-3">
               {specialties.map((s) => (
                 <Link
@@ -180,8 +180,8 @@ export default function Contact() {
                   to={s.slug}
                   className="group rounded-[4px] border border-navy/10 bg-paper p-6 transition-all duration-500 hover:border-sage/40 hover:shadow-lg hover:shadow-navy/6"
                 >
-                  <span className="display text-[0.75rem] text-sage">{s.n}</span>
-                  <p className="display mt-3 text-[1.2rem] text-navy transition-colors duration-500 group-hover:text-sage">
+                  <span className="display text-[0.75rem] text-sage-deep">{s.n}</span>
+                  <p className="display mt-3 text-[1.2rem] text-navy transition-colors duration-500 group-hover:text-sage-deep">
                     {s.title}
                   </p>
                 </Link>

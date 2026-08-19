@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { RouterProvider, useRouter } from "./lib/router";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import { Button, Shell, WidgetButton } from "./components/ui";
+import { Button, Eyebrow, Shell, WidgetButton } from "./components/ui";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Specialties from "./pages/Specialties";
@@ -38,9 +38,9 @@ function NotFound() {
   return (
     <section className="flex min-h-[70vh] items-center bg-paper pt-40 pb-24">
       <Shell>
-        <p className="eyebrow text-sage">Error 404</p>
+        <Eyebrow>Error 404</Eyebrow>
         <h1 className="display mt-6 text-[clamp(2.6rem,8vw,5.5rem)] text-navy">
-          Page not <span className="italic text-sage">found.</span>
+          Page not <span className="italic text-sage-deep">found.</span>
         </h1>
         <p className="mt-7 max-w-md text-[1.0625rem] leading-relaxed text-navy/65">
           The page you&apos;re looking for doesn&apos;t exist. Head back home or book a consultation.

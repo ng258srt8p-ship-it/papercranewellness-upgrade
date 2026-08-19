@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Shell } from "../components/ui";
+import { Eyebrow, Shell } from "../components/ui";
 import { CMS_API_URL } from "../lib/content";
 
 type Entry = {
@@ -104,9 +104,9 @@ export default function Admin() {
     <section className="min-h-screen bg-mist pt-32 pb-24">
       <Shell>
         <div className="mx-auto max-w-3xl">
-          <p className="eyebrow text-sage">Content admin</p>
+          <Eyebrow>Content admin</Eyebrow>
           <h1 className="display mt-5 text-[clamp(2rem,5vw,3.2rem)] text-navy">
-            Edit site <span className="italic text-sage">content.</span>
+            Edit site <span className="italic text-sage-deep">content.</span>
           </h1>
           <p className="mt-4 max-w-lg text-[0.9375rem] leading-relaxed text-navy/60">
             Edits go to the CMS (Cloudflare D1) and appear on the live site without a
@@ -146,7 +146,7 @@ export default function Admin() {
               {entries.map((e) => (
                 <div key={e.slug} data-cms-entry={e.slug} className="rounded-[6px] border border-navy/10 bg-paper p-6 md:p-8">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h2 className="display text-[1.15rem] text-sage">{e.slug}</h2>
+                    <h2 className="display text-[1.15rem] text-sage-deep">{e.slug}</h2>
                     <span className="text-[0.75rem] text-navy/40">updated {new Date(e.updated_at).toLocaleString()}</span>
                   </div>
                   <label className="mt-5 block">

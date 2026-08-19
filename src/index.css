@@ -79,6 +79,38 @@
     text-transform: uppercase;
   }
 
+  /* Signature leading rule on every eyebrow. */
+  .eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    margin-right: 0.75rem;
+    background: currentColor;
+    opacity: 0.5;
+    vertical-align: middle;
+  }
+
+  /* Centered eyebrows get rules on both sides. */
+  .eyebrow-center::before {
+    margin-left: 0.75rem;
+  }
+  .eyebrow-center::after {
+    content: "";
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+    vertical-align: middle;
+  }
+
+  /* Bare eyebrows (e.g. logo lockup) opt out of the rule. */
+  .eyebrow-bare::before,
+  .eyebrow-bare::after {
+    content: none;
+  }
+
   .grain::before {
     content: "";
     position: absolute;

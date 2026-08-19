@@ -24,7 +24,7 @@ export default function FAQ() {
         title={
           <>
             Frequently asked
-            <br className="hidden md:block" /> <span className="italic text-sage">questions.</span>
+            <br className="hidden md:block" /> <span className="italic text-sage-deep">questions.</span>
           </>
         }
         lede="Everything you might want to know before booking your first session."

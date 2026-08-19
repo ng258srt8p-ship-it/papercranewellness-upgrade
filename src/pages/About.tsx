@@ -10,7 +10,7 @@ export default function About() {
         title={
           <>
             Meet Rebekah Tozer,
-            <br className="hidden md:block" /> <span className="italic text-sage">LISW-CP</span>
+            <br className="hidden md:block" /> <span className="italic text-sage-deep">LISW-CP</span>
           </>
         }
         lede="Harry Potter fan, podcast connoisseur, and therapist who has seen her own fair share of therapy."
@@ -112,7 +112,7 @@ export default function About() {
       <section className="border-t border-navy/10 bg-mist/50 py-20 md:py-24">
         <Shell>
           <Reveal>
-            <p className="eyebrow text-center text-navy/40">Get to know me</p>
+            <p className="text-center"><Eyebrow center tone="muted">Get to know me</Eyebrow></p>
             <h2 className="display mt-6 text-center text-[clamp(1.8rem,3.6vw,2.8rem)] text-navy">
               The important stuff.
             </h2>
@@ -133,7 +133,7 @@ export default function About() {
       <section className="border-t border-navy/10 bg-paper py-14">
         <Shell>
           <Reveal>
-            <p className="eyebrow mb-6 text-center text-navy/40">As seen on</p>
+            <p className="mb-6 text-center"><Eyebrow center tone="muted">As seen on</Eyebrow></p>
             <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
               {press.map((p) => (
                 <span key={p.outlet} className="display text-[1.15rem] text-navy/30">{p.outlet}</span>

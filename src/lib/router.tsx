@@ -6,8 +6,12 @@ const Ctx = createContext<RouterCtx>({ path: "/", navigate: () => {} });
 
 function currentPath() {
   const h = window.location.hash.replace(/^#/, "");
-  if (!h) return "/";
-  return h.split("?")[0] || "/";
+  if (h) return h.split("?")[0] || "/";
+  // No hash: the pathname decides. A bare "/" (or "/index.html", how static
+  // hosts serve the SPA) is home; any other pathname (e.g. /bogus) falls
+  // through to the NotFound page instead of silently rendering Home.
+  const p = window.location.pathname.replace(/\/index\.html$/, "/");
+  return p === "/" ? "/" : p.split("?")[0] || "/";
 }
 
 export function RouterProvider({ children }: { children: React.ReactNode }) {

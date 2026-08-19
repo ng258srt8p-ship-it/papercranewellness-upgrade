@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useRouter } from "../lib/router";
 import { nav, site } from "../data/site";
 import { Wordmark } from "./Logo";
-import { WidgetButton } from "./ui";
+import { Eyebrow, WidgetButton } from "./ui";
 import { cn } from "../utils/cn";
 
 export default function Nav() {
@@ -56,7 +56,7 @@ export default function Nav() {
                     to={item.to}
                     className={cn(
                       "relative inline-flex items-center gap-1.5 px-4 py-2 text-[0.8125rem] font-medium tracking-wide transition-colors duration-300",
-                      active ? "text-sage" : "text-navy/60 hover:text-navy",
+                      active ? "text-sage-deep" : "text-navy/60 hover:text-navy",
                     )}
                   >
                     {item.label}
@@ -92,7 +92,7 @@ export default function Nav() {
         >
           <div className="mx-auto grid w-full max-w-[1320px] gap-10 px-14 py-10 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <p className="eyebrow text-sage">Areas of Focus</p>
+              <Eyebrow>Areas of Focus</Eyebrow>
               <p className="display mt-4 text-[1.5rem] leading-tight text-navy">
                 You&apos;re welcome here. And you&apos;re enough.
               </p>
@@ -132,7 +132,7 @@ export default function Nav() {
                   className="display block py-5 text-[1.8rem] text-navy"
                   onClick={() => setOpen(false)}
                 >
-                  <span className="mr-4 align-middle font-sans text-[0.6rem] tracking-widest text-sage">
+                  <span className="mr-4 align-middle font-sans text-[0.6rem] tracking-widest text-sage-deep">
                     {String(i).padStart(2, "0")}
                   </span>
                   {item.label}

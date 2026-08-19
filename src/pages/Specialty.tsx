@@ -1,6 +1,6 @@
 import { Link } from "../lib/router";
 import { PaperFold } from "../components/Logo";
-import { CTA, Card, PageHero, Reveal, SectionLabel, Shell } from "../components/ui";
+import { CTA, Card, Eyebrow, PageHero, Reveal, SectionLabel, Shell } from "../components/ui";
 import { specialties } from "../data/site";
 
 export default function Specialty({ slug }: { slug: string }) {
@@ -56,7 +56,7 @@ export default function Specialty({ slug }: { slug: string }) {
                 <div className="mb-6 h-14 w-20 text-sage/40">
                   <PaperFold className="h-full w-full" seed={Number(s.n)} />
                 </div>
-                <p className="eyebrow text-sage">Who this therapy is for</p>
+                <Eyebrow>Who this therapy is for</Eyebrow>
                 <ul className="mt-5 space-y-3.5">
                   {s.whoFor.map((w) => (
                     <li key={w} className="flex items-start gap-3 text-[0.9rem] leading-snug text-navy/68">
@@ -85,7 +85,7 @@ export default function Specialty({ slug }: { slug: string }) {
               {s.techniques.map((t, i) => (
                 <Reveal key={t.name} delay={i * 80}>
                   <Card className="h-full">
-                    <span className="display text-[0.8rem] text-sage">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="display text-[0.8rem] text-sage-deep">{String(i + 1).padStart(2, "0")}</span>
                     <h3 className="display mt-5 text-[1.4rem] text-navy">{t.name}</h3>
                     <p className="mt-4 text-[0.9375rem] leading-relaxed text-navy/62 pretty">{t.body}</p>
                   </Card>
@@ -111,7 +111,7 @@ export default function Specialty({ slug }: { slug: string }) {
       <section className="border-t border-navy/10 bg-mist/50 py-16 md:py-20">
         <Shell>
           <Reveal>
-            <p className="eyebrow text-navy/40">Other specialties</p>
+            <Eyebrow tone="muted">Other specialties</Eyebrow>
             <div className="mt-8 grid gap-6 md:grid-cols-2">
               {others.map((o) => (
                 <Link
@@ -119,8 +119,8 @@ export default function Specialty({ slug }: { slug: string }) {
                   to={o.slug}
                   className="group rounded-[4px] border border-navy/10 bg-paper p-8 transition-all duration-500 hover:border-sage/40 hover:shadow-lg hover:shadow-navy/8"
                 >
-                  <span className="display text-[0.8rem] text-sage">{o.n}</span>
-                  <p className="display mt-4 text-[1.4rem] text-navy transition-colors duration-500 group-hover:text-sage">
+                  <span className="display text-[0.8rem] text-sage-deep">{o.n}</span>
+                  <p className="display mt-4 text-[1.4rem] text-navy transition-colors duration-500 group-hover:text-sage-deep">
                     {o.title}
                   </p>
                   <p className="mt-3 text-[0.875rem] leading-relaxed text-navy/55">{o.short}</p>
