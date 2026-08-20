@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "../lib/router";
 import { openSimplePractice, type WidgetKind } from "../lib/simplepractice";
 import { site } from "../data/site";
+import { toRoman } from "../lib/roman";
 import { cn } from "../utils/cn";
 
 /* ---------------------------------------------------------------- reveal */
@@ -240,10 +241,16 @@ export function PageHero({
 
 /* ----------------------------------------------------------------- misc */
 export function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
+  const numeral = toRoman(n);
   return (
     <div className="flex items-baseline gap-4">
-      <span className="display text-sm text-sage-deep">{n}</span>
-      <Eyebrow tone="muted">{children}</Eyebrow>
+      <Eyebrow tone="muted">
+        {numeral}
+        <span aria-hidden className="mx-3">
+          &mdash;
+        </span>
+        {children}
+      </Eyebrow>
     </div>
   );
 }
