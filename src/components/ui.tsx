@@ -29,6 +29,11 @@ export function Reveal({
       setSeen(true);
       return;
     }
+    // clip-path:hidden elements report intersectionRatio 0 (clip-path clips
+    // the visible box), so threshold 0.12 never fires → hero stays
+    // permanently at inset(100% 0 0). Use threshold 0 for clip variants so
+    // any pixel (or the 0→1 edge) triggers, and keep 0.12 for rise.
+    const isClip = variant === "clip";
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -38,11 +43,20 @@ export function Reveal({
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      isClip ? { threshold: 0, rootMargin: "0px 0px -8% 0px" } : { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
     );
     io.observe(el);
-    return () => io.disconnect();
-  }, []);
+    // Re-check after paint: if already in viewport, some engines still
+    // report ratio 0 while clipped; force reveal for above-the-fold.
+    const tid = window.setTimeout(() => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.92 && r.bottom > 0) setSeen(true);
+    }, 80);
+    return () => {
+      clearTimeout(tid);
+      io.disconnect();
+    };
+  }, [variant]);
 
   return (
     <Tag

@@ -35,7 +35,7 @@ export function Wordmark({
       <CraneMark className={markClass} />
       <span className="flex flex-col items-center leading-none">
         <span className="display text-[1.06rem] tracking-[-0.01em]">Paper Crane</span>
-        <span className="eyebrow eyebrow-bare mt-[5px] text-[0.5625rem] opacity-60">Wellness</span>
+        <span className="eyebrow eyebrow-bare mt-[5px] w-full text-center text-[0.5625rem] opacity-60">Wellness</span>
       </span>
     </span>
   );
