@@ -151,7 +151,7 @@
   }
 
   .reveal-clip {
-    clip-path: inset(0 0 100% 0);
+    clip-path: inset(100% 0 0 0);
     transition: clip-path 1.2s var(--ease-out-expo);
   }
   .reveal-clip.is-visible {
