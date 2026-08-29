@@ -346,7 +346,7 @@ function MeetRebekah() {
           </div>
           <Reveal delay={120} className="order-1 lg:order-2 lg:col-span-4 lg:col-start-9">
             <div className="relative aspect-[3/4] overflow-hidden rounded-[6px] bg-mist shadow-lg shadow-navy/10">
-              <img src={img.portrait} alt="Rebekah Tozer in her therapy office" className="h-full w-full object-cover" />
+              <img src={img.portrait} alt="Rebekah Tozer, LISW-CP" className="h-full w-full object-cover object-[44%_center]" />
             </div>
           </Reveal>
         </div>
