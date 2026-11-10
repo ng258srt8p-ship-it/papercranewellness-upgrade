@@ -39,7 +39,7 @@ export default function FAQ() {
         </Shell>
       </section>
 
-      <section className="border-t border-navy/10 bg-mist py-16 md:py-20">
+      <section className="border-t border-navy/10 bg-mist py-14 md:py-20">
         <Shell>
           <div className="text-center">
             <p className="display text-[clamp(1.5rem,3vw,2.2rem)] leading-snug text-navy balance">

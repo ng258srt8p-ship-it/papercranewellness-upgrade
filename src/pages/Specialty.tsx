@@ -85,7 +85,7 @@ export default function Specialty({ slug }: { slug: string }) {
       )}
 
       {/* CTA statement */}
-      <section className="bg-paper py-16 md:py-20">
+      <section className="bg-paper py-14 md:py-20">
         <Shell>
           <h2 className="display mx-auto max-w-2xl text-center text-[clamp(2rem,4vw,3.2rem)] text-navy balance">
             {s.cta}
@@ -94,7 +94,7 @@ export default function Specialty({ slug }: { slug: string }) {
       </section>
 
       {/* Related specialties */}
-      <section className="border-t border-navy/10 bg-mist/50 py-16 md:py-20">
+      <section className="border-t border-navy/10 bg-mist/50 py-14 md:py-20">
         <Shell>
           <Eyebrow tone="muted">Other specialties</Eyebrow>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -102,9 +102,9 @@ export default function Specialty({ slug }: { slug: string }) {
               <Link
                 key={o.slug}
                 to={o.slug}
-                className="group block rounded-[4px] border border-navy/10 bg-paper p-8 transition-all duration-500 hover:border-sage/40 hover:shadow-lg hover:shadow-navy/8"
+                className="group block rounded-[4px] border border-navy/10 bg-paper p-8 transition-[border-color,box-shadow] duration-300 hover:border-sage/40 hover:shadow-lg hover:shadow-navy/8"
               >
-                <p className="display text-[1.4rem] text-navy transition-colors duration-500 group-hover:text-sage-deep">
+                <p className="display text-[1.4rem] text-navy transition-colors duration-300 group-hover:text-sage-deep">
                   {o.title}
                 </p>
                 <p className="mt-3 text-[0.875rem] leading-relaxed text-navy/55">{o.short}</p>

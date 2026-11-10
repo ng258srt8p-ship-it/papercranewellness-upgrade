@@ -39,7 +39,7 @@ export default function Nav() {
         className={cn(
           // top offset: when the CMS announcement bar is visible it publishes
           // --announcement-h on <html>, so the header sits below it at scroll 0.
-          "fixed inset-x-0 z-50 transition-all duration-700",
+          "fixed inset-x-0 z-50 transition-[background-color,box-shadow,border-color,padding] duration-700",
           scrolled
             ? "top-0 border-b border-navy/8 bg-paper/90 backdrop-blur-xl"
             : "top-[var(--announcement-h,0px)] border-b border-transparent",
@@ -48,7 +48,7 @@ export default function Nav() {
       >
         <div className="mx-auto flex w-full max-w-[1320px] items-center justify-between px-6 py-4 md:px-10 lg:px-14">
           <Link to="/" className="text-navy transition-opacity duration-300 hover:opacity-70" ariaLabel="Paper Crane Wellness home">
-            <Wordmark markClass={cn("transition-all duration-700", scrolled ? "h-7 w-7" : "h-9 w-9")} />
+            <Wordmark markClass={cn("transition-[height,width] duration-700", scrolled ? "h-7 w-7" : "h-9 w-9")} />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
@@ -82,15 +82,15 @@ export default function Nav() {
             aria-expanded={open}
             className="relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-[7px] rounded-full border border-navy/12 lg:hidden"
           >
-            <span className={cn("h-px w-4.5 bg-navy transition-all duration-500", open && "translate-y-[4px] rotate-45")} />
-            <span className={cn("h-px w-4.5 bg-navy transition-all duration-500", open && "-translate-y-[4px] -rotate-45")} />
+            <span className={cn("h-px w-4.5 bg-navy transition-transform duration-300", open && "translate-y-[4px] rotate-45")} />
+            <span className={cn("h-px w-4.5 bg-navy transition-transform duration-300", open && "-translate-y-[4px] -rotate-45")} />
           </button>
         </div>
 
         {/* desktop dropdown */}
         <div
           className={cn(
-            "pointer-events-none absolute inset-x-0 top-full hidden overflow-hidden border-b border-navy/8 bg-paper/95 backdrop-blur-xl transition-all duration-500 lg:block",
+            "pointer-events-none absolute inset-x-0 top-full hidden overflow-hidden border-b border-navy/8 bg-paper/95 backdrop-blur-xl transition-[opacity,transform] duration-300 lg:block",
             menu ? "pointer-events-auto max-h-[24rem] opacity-100" : "max-h-0 opacity-0",
           )}
         >
@@ -106,9 +106,9 @@ export default function Nav() {
                 <Link
                   key={c.to}
                   to={c.to}
-                  className="group flex items-start gap-3 rounded-[4px] border border-transparent p-4 transition-all duration-500 hover:border-navy/8 hover:bg-mist/70"
+                  className="group flex items-start gap-3 rounded-[4px] border border-transparent p-4 transition-colors duration-300 hover:border-navy/8 hover:bg-mist/70"
                 >
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sage/40 transition-colors duration-500 group-hover:bg-sage" />
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sage/40 transition-colors duration-300 group-hover:bg-sage" />
                   <span>
                     <span className="block text-[0.9rem] font-medium text-navy">{c.label}</span>
                     <span className="mt-1 block text-[0.8rem] leading-snug text-navy/50">{c.note}</span>
@@ -123,7 +123,7 @@ export default function Nav() {
       {/* mobile drawer */}
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-paper transition-all duration-700 lg:hidden",
+          "fixed inset-0 z-40 bg-paper transition-[opacity,transform] duration-400 lg:hidden",
           // invisible (not just opacity-0): the closed drawer must leave the
           // tab order and the accessibility tree.
           open ? "visible pointer-events-auto opacity-100" : "invisible pointer-events-none opacity-0",

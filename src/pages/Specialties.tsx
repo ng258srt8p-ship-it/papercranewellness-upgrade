@@ -33,10 +33,10 @@ export default function Specialties() {
                 )}
               >
                 <div className="lg:col-span-5">
-                  <h2 className="display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.05] text-navy transition-colors duration-500 group-hover:text-sage">
+                  <h2 className="display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.05] text-navy transition-colors duration-300 group-hover:text-sage">
                     {s.title}
                   </h2>
-                  <div className="mt-5 hidden h-20 w-32 text-sage/25 transition-colors duration-700 group-hover:text-sage/50 lg:block">
+                  <div className="mt-5 hidden h-20 w-32 text-sage/25 transition-colors duration-300 group-hover:text-sage/50 lg:block">
                     <PaperFold className="h-full w-full" seed={i} />
                   </div>
                 </div>
@@ -52,9 +52,9 @@ export default function Specialties() {
                       </li>
                     ))}
                   </ul>
-                  <span className="mt-6 inline-flex items-center gap-2 text-[0.75rem] font-medium tracking-[0.06em] text-navy/50 uppercase transition-colors duration-500 group-hover:text-sage-deep">
+                  <span className="mt-6 inline-flex items-center gap-2 text-[0.75rem] font-medium tracking-[0.06em] text-navy/50 uppercase transition-colors duration-300 group-hover:text-sage-deep">
                     Learn more
-                    <span className="transition-transform duration-500 group-hover:translate-x-1">&rarr;</span>
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
                   </span>
                 </div>
               </Link>

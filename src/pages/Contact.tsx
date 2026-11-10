@@ -162,7 +162,7 @@ export default function Contact() {
         </Shell>
       </section>
 
-      <section className="border-y border-navy/10 bg-mist py-16 md:py-20">
+      <section className="border-y border-navy/10 bg-mist py-14 md:py-20">
         <Shell>
           <Eyebrow tone="muted">Or explore a specialty</Eyebrow>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
@@ -170,9 +170,9 @@ export default function Contact() {
               <Link
                 key={s.slug}
                 to={s.slug}
-                className="group block rounded-[4px] border border-navy/10 bg-paper p-6 transition-all duration-500 hover:border-sage/40 hover:shadow-lg hover:shadow-navy/6"
+                className="group block rounded-[4px] border border-navy/10 bg-paper p-6 transition-[border-color,box-shadow] duration-300 hover:border-sage/40 hover:shadow-lg hover:shadow-navy/6"
               >
-                <p className="display text-[1.2rem] text-navy transition-colors duration-500 group-hover:text-sage-deep">
+                <p className="display text-[1.2rem] text-navy transition-colors duration-300 group-hover:text-sage-deep">
                   {s.title}
                 </p>
               </Link>

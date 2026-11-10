@@ -99,7 +99,7 @@ export default function About() {
         </Shell>
       </section>
 
-      <section className="border-t border-navy/10 bg-mist/50 py-20 md:py-24">
+      <section className="border-t border-navy/10 bg-mist/50 py-20 md:py-28">
         <Shell>
           <p className="text-center"><Eyebrow center tone="muted">Get to know me</Eyebrow></p>
           <h2 className="display mt-6 text-center text-[clamp(1.8rem,3.6vw,2.8rem)] text-navy">
@@ -118,7 +118,7 @@ export default function About() {
         </Shell>
       </section>
 
-      <section className="border-t border-navy/10 bg-paper py-14">
+      <section className="border-t border-navy/10 bg-paper py-14 md:py-20">
         <Shell>
           <p className="mb-6 text-center"><Eyebrow center tone="muted">As seen on</Eyebrow></p>
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4">

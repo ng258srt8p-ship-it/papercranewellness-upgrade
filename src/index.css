@@ -190,9 +190,9 @@
     text-decoration: none !important;
     cursor: pointer;
     transition:
-      background-color 0.5s var(--ease-out-expo),
-      color 0.5s var(--ease-out-expo),
-      border-color 0.5s var(--ease-out-expo);
+      background-color 0.3s var(--ease-out-expo),
+      color 0.3s var(--ease-out-expo),
+      border-color 0.3s var(--ease-out-expo);
   }
   .spwidget-button:hover {
     background: #24363a !important;
@@ -235,9 +235,36 @@
   animation-delay: 0.39s;
 }
 
+/* Announcement bar — one-shot drop-in on first paint. Height is published to
+   --announcement-h via offsetHeight (transform-independent), and the rule is
+   only mounted when text exists & not dismissed, so the fixed header's top
+   offset never animates. */
+@keyframes announcement-in {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.announcement-in {
+  animation: announcement-in 0.4s var(--ease-out-expo) backwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  /* global guard: emulators + users get the destinations, not the journeys */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
   .reveal,
   .reveal-clip {

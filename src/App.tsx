@@ -37,7 +37,7 @@ const descriptions: Record<string, string> = {
 
 function NotFound() {
   return (
-    <section className="flex min-h-[70vh] items-center bg-paper pt-40 pb-24">
+    <section className="flex min-h-[70vh] items-center bg-paper pt-28 pb-20 md:pt-44 md:pb-28">
       <Shell>
         <Eyebrow>Error 404</Eyebrow>
         <h1 className="display mt-6 text-[clamp(2.6rem,8vw,5.5rem)] text-navy">

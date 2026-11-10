@@ -45,7 +45,7 @@ function AnnouncementBar() {
   }, []);
   if (!text || dismissed) return null;
   return (
-    <div ref={publishRef} className="announcement-bar relative bg-navy text-mist">
+    <div ref={publishRef} className="announcement-bar announcement-in relative bg-navy text-mist">
       <div className="mx-auto max-w-6xl px-12 py-2.5 text-center text-[0.8125rem] leading-relaxed tracking-wide text-mist/85">
         {text}
       </div>
@@ -79,7 +79,7 @@ function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-paper pt-32 pb-20 md:pt-44 md:pb-28">
+    <section className="relative overflow-hidden bg-paper pt-28 pb-20 md:pt-44 md:pb-28">
       {/* Decorative background gradient */}
       <div
         aria-hidden
@@ -107,21 +107,21 @@ function Hero() {
               <Reveal as="span" variant="clip" className="block">
                 Things don&apos;t have
               </Reveal>
-              <Reveal as="span" variant="clip" delay={100} className="block pl-[0.04em] italic text-sage">
+              <Reveal as="span" variant="clip" delay={90} className="block pl-[0.04em] italic text-sage">
                 to stay this way
               </Reveal>
-              <Reveal as="span" variant="clip" delay={190} className="block">
+              <Reveal as="span" variant="clip" delay={180} className="block">
                 forever.
               </Reveal>
             </h1>
 
-            <Reveal delay={300}>
+            <Reveal delay={270}>
               <p className="mt-8 max-w-xl text-[1.1rem] leading-[1.75] text-navy/65 pretty md:text-[1.2rem]">
                 It&apos;s like you&apos;re playing the same video game level over and over and over&hellip; And it&apos;s exhausting. Whether it&apos;s memories that ambush your peace, feeling like an outsider in everyday conversations, or constantly battling self-doubt and burnout &mdash; these aren&apos;t just minor annoyances.
               </p>
             </Reveal>
 
-            <Reveal delay={380}>
+            <Reveal delay={360}>
               <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
                 <WidgetButton>Book a free consultation</WidgetButton>
                 <TextLink
@@ -136,7 +136,7 @@ function Hero() {
 
           {/* Right column: portrait */}
           <div className="relative lg:col-span-5">
-            <Reveal delay={200} className="relative">
+            <Reveal delay={180} className="relative">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-mist shadow-2xl shadow-navy/10">
                 <img
                   src={img.rebekah}
@@ -166,7 +166,7 @@ function Hero() {
 
 function ItDoesntHaveToBe() {
   return (
-    <section className="relative bg-mist py-24 md:py-32">
+    <section className="relative bg-mist py-20 md:py-28">
       <Shell>
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -190,7 +190,7 @@ function ItDoesntHaveToBe() {
 
 function WelcomeSection() {
   return (
-    <section className="bg-paper py-24 md:py-32">
+    <section className="bg-paper py-20 md:py-28">
       <Shell>
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-5">
@@ -202,7 +202,7 @@ function WelcomeSection() {
             <h2 className="display text-[clamp(2rem,4.2vw,3.2rem)] leading-[1.08] text-navy balance">
               You&apos;re welcome here. And you&apos;re enough.
             </h2>
-            <p className="mt-7 max-w-lg text-[1.0625rem] leading-[1.8] text-navy/68 pretty">
+            <p className="mt-6 max-w-lg text-[1.0625rem] leading-[1.8] text-navy/68 pretty">
               In our sessions you&apos;ll find a space where you can relax completely and feel genuinely understood. With me, therapy isn&apos;t a sterile set of protocols; it&apos;s a dynamic, personal, level-up journey tailored to your specific needs.
             </p>
             <p className="mt-5 max-w-lg text-[1.0625rem] leading-[1.8] text-navy/68 pretty">
@@ -222,7 +222,7 @@ function WelcomeSection() {
 
 function SpecialtiesSection() {
   return (
-    <section className="border-y border-navy/10 bg-paper py-24 md:py-32">
+    <section className="border-y border-navy/10 bg-paper py-20 md:py-28">
       <Shell>
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
@@ -242,19 +242,19 @@ function SpecialtiesSection() {
             <Link key={s.slug} to={s.slug} className="block h-full">
               <Card className="flex h-full flex-col">
                 <div className="flex items-start justify-end">
-                  <span className="grid h-9 w-9 place-items-center rounded-full border border-navy/10 text-navy/40 transition-all duration-500 group-hover:border-sage group-hover:bg-sage group-hover:text-mist">
+                  <span className="grid h-9 w-9 place-items-center rounded-full border border-navy/10 text-navy/40 transition-[background-color,border-color,color] duration-300 group-hover:border-sage group-hover:bg-sage group-hover:text-mist">
                     <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.6">
                       <path d="M7 17L17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
                 </div>
-                <h3 className="display mt-6 text-[1.5rem] leading-snug text-navy transition-colors duration-500 group-hover:text-sage">
+                <h3 className="display mt-6 text-[1.5rem] leading-snug text-navy transition-colors duration-300 group-hover:text-sage">
                   {s.title}
                 </h3>
                 <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-navy/60 pretty">{s.short}</p>
                 <span className="mt-6 inline-flex items-center gap-2 border-t border-navy/8 pt-5 text-[0.75rem] font-medium tracking-[0.06em] text-sage-deep uppercase">
                   Learn more
-                  <span className="transition-transform duration-500 group-hover:translate-x-1">&rarr;</span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
                 </span>
               </Card>
             </Link>
@@ -273,7 +273,7 @@ function Modalities() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-navy py-24 text-mist md:py-32">
+    <section className="relative overflow-hidden bg-navy py-20 text-mist md:py-28">
       <div
         aria-hidden
         className="pointer-events-none absolute -right-32 -bottom-32 h-[30rem] w-[30rem] rounded-full opacity-[0.1] blur-2xl"
@@ -288,7 +288,7 @@ function Modalities() {
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {items.map((m) => (
-            <div key={m.name} className="h-full rounded-[4px] border border-white/10 p-8 transition-all duration-500 hover:border-white/25 md:p-10">
+            <div key={m.name} className="h-full rounded-[4px] border border-white/10 p-8 transition-colors duration-300 hover:border-white/25 md:p-10">
               <h3 className="display text-[1.6rem] text-mist">{m.name}</h3>
               <p className="mt-5 text-[0.9375rem] leading-relaxed text-mist/65 pretty">{m.desc}</p>
             </div>
@@ -301,7 +301,7 @@ function Modalities() {
 
 function HealingLooks() {
   return (
-    <section className="bg-paper py-24 md:py-32">
+    <section className="bg-paper py-20 md:py-28">
       <Shell>
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -327,7 +327,7 @@ function HealingLooks() {
 
 function Testimonials() {
   return (
-    <section className="border-y border-navy/10 bg-mist py-24 md:py-32">
+    <section className="border-y border-navy/10 bg-mist py-20 md:py-28">
       <Shell>
         <p className="text-center"><Eyebrow center>What clients say</Eyebrow></p>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -348,14 +348,14 @@ function Testimonials() {
 
 function MeetRebekah() {
   return (
-    <section className="bg-paper py-24 md:py-32">
+    <section className="bg-paper py-20 md:py-28">
       <Shell>
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           <div className="order-2 lg:order-1 lg:col-span-7">
             <h2 className="display text-[clamp(2rem,4.4vw,3.4rem)] leading-[1.08] text-navy balance">
               Hi! I&apos;m Rebekah
             </h2>
-            <p className="mt-7 max-w-xl text-[1.0625rem] leading-[1.8] text-navy/70 pretty">
+            <p className="mt-6 max-w-xl text-[1.0625rem] leading-[1.8] text-navy/70 pretty">
               Harry Potter fan, podcast connoisseur, and therapist who&apos;s seen my own fair share of therapy. I&apos;ve done a lot of work to get where I am, figuring out how my own unique mind works as a member of the neurodivergent community.
             </p>
             <p className="mt-5 max-w-xl text-[1.0625rem] leading-[1.8] text-navy/70 pretty">
@@ -383,12 +383,12 @@ function MeetRebekah() {
 
 function PressStrip() {
   return (
-    <section className="border-y border-navy/10 bg-mist/60 py-14">
+    <section className="border-y border-navy/10 bg-mist/60 py-14 md:py-20">
       <Shell>
         <p className="mb-8 text-center"><Eyebrow center tone="muted">As seen on</Eyebrow></p>
         <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-5">
           {press.map((p) => (
-            <span key={p.outlet} className="display text-[clamp(1rem,2vw,1.5rem)] text-navy/55 transition-colors hover:text-navy">
+            <span key={p.outlet} className="display text-[clamp(1rem,2vw,1.5rem)] text-navy/55 transition-colors duration-300 hover:text-navy">
               {p.outlet}
             </span>
           ))}

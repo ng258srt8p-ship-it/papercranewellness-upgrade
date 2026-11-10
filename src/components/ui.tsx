@@ -123,7 +123,7 @@ export function WidgetButton({
 }) {
   // no arrow affordance: this opens a modal, it does not navigate (Button/TextLink keep theirs)
   const base =
-    "relative inline-flex items-center overflow-hidden rounded-full px-7 py-3.5 text-[0.8125rem] font-medium tracking-[0.03em] transition-all duration-500";
+    "relative inline-flex items-center overflow-hidden rounded-full px-7 py-3.5 text-[0.8125rem] font-medium tracking-[0.03em] transition-[background-color,border-color,color] duration-300";
   const styles = {
     primary: "bg-navy text-mist hover:bg-sage",
     ghost: "border border-navy/20 text-navy hover:border-navy/60 hover:bg-navy hover:text-mist",
@@ -156,7 +156,7 @@ export function Button({
   className?: string;
 }) {
   const base =
-    "group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-3.5 text-[0.8125rem] font-medium tracking-[0.03em] transition-all duration-500";
+    "group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-3.5 text-[0.8125rem] font-medium tracking-[0.03em] transition-[background-color,border-color,color] duration-300";
   const styles = {
     primary: "bg-navy text-mist hover:bg-sage",
     ghost: "border border-navy/20 text-navy hover:border-navy/60 hover:bg-navy hover:text-mist",
@@ -165,7 +165,7 @@ export function Button({
   return (
     <Link to={to} className={cn(base, styles, className)}>
       <span className="relative z-10">{children}</span>
-      <svg viewBox="0 0 24 24" className="relative z-10 h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <svg viewBox="0 0 24 24" className="relative z-10 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="1.6">
         <path d="M4 12h15M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </Link>
@@ -182,7 +182,7 @@ export function TextLink({ to, children, className = "" }: { to: string; childre
       )}
     >
       {children}
-      <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
+      <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
     </Link>
   );
 }
@@ -204,7 +204,7 @@ export function PageHero({
   return (
     // rule sits on the content grid (not the header/Shell box) so its length
     // matches the row dividers and the meta rule — all content-width
-    <header className="relative overflow-hidden bg-paper pt-40 md:pt-48">
+    <header className="relative overflow-hidden bg-paper pt-32 md:pt-48">
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 right-[-10%] h-[38rem] w-[38rem] rounded-full opacity-60 blur-3xl"
@@ -216,18 +216,18 @@ export function PageHero({
             <Reveal>
               <Eyebrow>{eyebrow}</Eyebrow>
             </Reveal>
-            <Reveal delay={80}>
+            <Reveal delay={90}>
               <h1 className="display mt-7 text-[clamp(2.6rem,7.2vw,5.6rem)] text-navy balance">{title}</h1>
             </Reveal>
           </div>
           <div className="lg:col-span-4">
             {lede && (
-              <Reveal delay={160}>
+              <Reveal delay={180}>
                 <p className="max-w-sm text-[1.0625rem] leading-relaxed text-navy/70 pretty">{lede}</p>
               </Reveal>
             )}
             {meta && (
-              <Reveal delay={220}>
+              <Reveal delay={270}>
                 <ul className="mt-7 space-y-2 border-t hairline pt-5">
                   {meta.map((m) => (
                     <li key={m} className="flex items-start gap-3 text-[0.8125rem] text-navy/60">
@@ -262,7 +262,7 @@ export function Card({
     navy: "bg-navy text-mist border-white/10 hover:border-white/25",
   }[tone];
   return (
-    <div className={cn("group relative rounded-[2px] border p-8 transition-all duration-700 md:p-10", tones, className)}>
+    <div className={cn("group relative rounded-[2px] border p-8 transition-[border-color,box-shadow] duration-300 md:p-10", tones, className)}>
       {children}
     </div>
   );
@@ -285,7 +285,7 @@ export function Accordion({ items }: { items: { q: string; a: string }[] }) {
               <span className="display max-w-2xl text-[1.15rem] leading-snug md:text-[1.4rem]">{item.q}</span>
               <span
                 className={cn(
-                  "mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border hairline transition-all duration-500",
+                  "mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border hairline transition-[background-color,border-color,color,transform] duration-300",
                   isOpen && "rotate-45 border-sage bg-sage text-mist",
                 )}
               >
@@ -295,7 +295,7 @@ export function Accordion({ items }: { items: { q: string; a: string }[] }) {
               </span>
             </button>
             <div
-              className="grid transition-all duration-700"
+              className="grid transition-[grid-template-rows,opacity] duration-500"
               style={{ gridTemplateRows: isOpen ? "1fr" : "0fr", opacity: isOpen ? 1 : 0 }}
             >
               <div className="overflow-hidden">
@@ -323,11 +323,11 @@ export function CTA({
         className="pointer-events-none absolute -right-32 -bottom-40 h-[34rem] w-[34rem] rounded-full opacity-[0.12] blur-2xl"
         style={{ background: "radial-gradient(circle,#6B7C54 0%,transparent 70%)" }}
       />
-      <Shell className="relative py-24 md:py-36">
+      <Shell className="relative py-20 md:py-28">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <Eyebrow tone="light">Ready?</Eyebrow>
-            <h2 className="display mt-8 text-[clamp(2.4rem,5.4vw,4.4rem)] balance">{title}</h2>
+            <h2 className="display mt-6 text-[clamp(2.4rem,5.4vw,4.4rem)] balance">{title}</h2>
           </div>
           <div className="lg:col-span-5">
             <p className="text-[1rem] leading-relaxed text-mist/70 pretty">{body}</p>
