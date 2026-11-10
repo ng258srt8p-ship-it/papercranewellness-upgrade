@@ -186,7 +186,7 @@ export function TextLink({ to, children, className = "" }: { to: string; childre
     <Link
       to={to}
       className={cn(
-        "link-underline group inline-flex items-center gap-2 py-2 text-[0.8125rem] font-medium tracking-[0.04em] uppercase",
+        "link-underline group inline-flex min-h-11 items-center gap-2 py-2 text-[0.8125rem] font-medium tracking-[0.04em] uppercase",
         className,
       )}
     >
@@ -326,23 +326,6 @@ export function Accordion({ items }: { items: { q: string; a: string }[] }) {
           </div>
         );
       })}
-    </div>
-  );
-}
-
-export function Marquee({ items }: { items: string[] }) {
-  const row = [...items, ...items];
-  return (
-    <div className="relative flex overflow-hidden border-y hairline bg-mist/60 py-5">
-      <div className="flex min-w-full shrink-0 animate-[scroll_38s_linear_infinite] items-center gap-14 pr-14">
-        {row.map((t, i) => (
-          <span key={i} className="display flex shrink-0 items-center gap-14 text-[1.05rem] whitespace-nowrap text-navy/50">
-            {t}
-            <span className="h-1 w-1 rounded-full bg-sage/60" />
-          </span>
-        ))}
-      </div>
-      <style>{`@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}`}</style>
     </div>
   );
 }

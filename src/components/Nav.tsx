@@ -37,8 +37,12 @@ export default function Nav() {
       </a>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-700",
-          scrolled ? "border-b border-navy/8 bg-paper/90 backdrop-blur-xl" : "border-b border-transparent",
+          // top offset: when the CMS announcement bar is visible it publishes
+          // --announcement-h on <html>, so the header sits below it at scroll 0.
+          "fixed inset-x-0 z-50 transition-all duration-700",
+          scrolled
+            ? "top-0 border-b border-navy/8 bg-paper/90 backdrop-blur-xl"
+            : "top-[var(--announcement-h,0px)] border-b border-transparent",
         )}
         onMouseLeave={() => setMenu(null)}
       >
@@ -120,7 +124,9 @@ export default function Nav() {
       <div
         className={cn(
           "fixed inset-0 z-40 bg-paper transition-all duration-700 lg:hidden",
-          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
+          // invisible (not just opacity-0): the closed drawer must leave the
+          // tab order and the accessibility tree.
+          open ? "visible pointer-events-auto opacity-100" : "invisible pointer-events-none opacity-0",
         )}
       >
         <div className="flex h-full flex-col overflow-y-auto px-6 pt-24 pb-12">
@@ -133,16 +139,22 @@ export default function Nav() {
                   onClick={() => setOpen(false)}
                 >
                   <span className="mr-4 align-middle font-sans text-[0.6rem] tracking-widest text-sage-deep">
-                    {String(i).padStart(2, "0")}
+                    {String(i + 1).padStart(2, "0")}
                   </span>
                   {item.label}
                 </Link>
               </div>
             ))}
           </nav>
-          <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+          <div className="mt-6 flex flex-col">
+            <p className="eyebrow mb-1 text-navy/40">Specialties</p>
             {nav[1].children?.map((c) => (
-              <Link key={c.to} to={c.to} className="text-[0.8125rem] text-navy/55" onClick={() => setOpen(false)}>
+              <Link
+                key={c.to}
+                to={c.to}
+                className="flex min-h-11 items-center text-[0.8125rem] text-navy/55"
+                onClick={() => setOpen(false)}
+              >
                 {c.label}
               </Link>
             ))}

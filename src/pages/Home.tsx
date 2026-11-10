@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "../lib/router";
 import { img } from "../assets/images";
 import { CTA, Card, Eyebrow, Reveal, SectionLabel, Shell, TextLink, WidgetButton } from "../components/ui";
@@ -6,8 +6,17 @@ import { healing, press, specialties, testimonials } from "../data/site";
 import { loadCmsContent } from "../lib/content";
 
 /** CMS-driven notice strip above the hero; hidden when no announcement is set. */
+const ANNOUNCEMENT_DISMISS_KEY = "pc-announcement-dismissed";
+
 function AnnouncementBar() {
   const [text, setText] = useState<string | null>(null);
+  const [dismissed, setDismissed] = useState(() => {
+    try {
+      return sessionStorage.getItem(ANNOUNCEMENT_DISMISS_KEY) === "1";
+    } catch {
+      return false;
+    }
+  });
   useEffect(() => {
     let live = true;
     void loadCmsContent().then((c) => {
@@ -17,12 +26,46 @@ function AnnouncementBar() {
       live = false;
     };
   }, []);
-  if (!text) return null;
+  // Publish the bar's height so the fixed header can sit below it (see Nav.tsx).
+  const publishRef = useCallback((el: HTMLDivElement | null) => {
+    const root = document.documentElement;
+    const prop = "--announcement-h";
+    if (el) {
+      const set = () => root.style.setProperty(prop, `${el.offsetHeight}px`);
+      set();
+      const ro = new ResizeObserver(set);
+      ro.observe(el);
+      return () => {
+        ro.disconnect();
+        root.style.removeProperty(prop);
+      };
+    }
+    if (!root.querySelector(".announcement-bar")) root.style.removeProperty(prop);
+    return undefined;
+  }, []);
+  if (!text || dismissed) return null;
   return (
-    <div className="bg-navy text-mist">
-      <div className="mx-auto max-w-6xl px-5 py-2.5 text-center text-[0.8125rem] leading-relaxed tracking-wide text-mist/85">
+    <div ref={publishRef} className="announcement-bar relative bg-navy text-mist">
+      <div className="mx-auto max-w-6xl px-12 py-2.5 text-center text-[0.8125rem] leading-relaxed tracking-wide text-mist/85">
         {text}
       </div>
+      <button
+        type="button"
+        onClick={() => {
+          try {
+            sessionStorage.setItem(ANNOUNCEMENT_DISMISS_KEY, "1");
+          } catch {
+            /* private mode: dismiss for this view only */
+          }
+          setDismissed(true);
+        }}
+        aria-label="Dismiss announcement"
+        className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-mist/60 transition-colors duration-300 hover:bg-white/10 hover:text-mist"
+      >
+        <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8">
+          <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+        </svg>
+      </button>
     </div>
   );
 }
@@ -57,7 +100,10 @@ function Hero() {
               <Eyebrow>Mount Pleasant, SC &bull; Virtual across South Carolina</Eyebrow>
             </Reveal>
 
-            <h1 className="display mt-8 text-[clamp(2.8rem,8vw,6.8rem)] text-navy">
+            {/* Three-line lockup: tiered clamp keeps each authored line on one
+                line at every width ≥320px (line 1 is 7.47em wide; a single
+                vw-based size orphans "have" on desktop AND mobile). */}
+            <h1 className="display mt-8 text-[clamp(2.25rem,10.8vw,3.5rem)] text-navy md:text-[clamp(3rem,8vw,4.4rem)] lg:text-[clamp(3.8rem,6.3vw,5.6rem)]">
               <Reveal as="span" variant="clip" className="block">
                 Things don&apos;t have
               </Reveal>
@@ -363,7 +409,7 @@ function PressStrip() {
           <p className="mb-8 text-center"><Eyebrow center tone="muted">As seen on</Eyebrow></p>
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-5">
             {press.map((p) => (
-              <span key={p.outlet} className="display text-[clamp(1rem,2vw,1.5rem)] text-navy/30 transition-colors hover:text-navy/60">
+              <span key={p.outlet} className="display text-[clamp(1rem,2vw,1.5rem)] text-navy/55 transition-colors hover:text-navy">
                 {p.outlet}
               </span>
             ))}

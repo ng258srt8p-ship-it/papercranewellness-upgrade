@@ -177,9 +177,9 @@
     display: inline-flex !important;
     align-items: center;
     gap: 0.5rem;
-    background: #6b7c54 !important;
+    background: #55643f !important;
     color: #fff !important;
-    border: 1px solid #6b7c54 !important;
+    border: 1px solid #55643f !important;
     border-radius: 999px !important;
     padding: 14px 28px !important;
     font-family: var(--font-sans) !important;
@@ -195,8 +195,8 @@
       border-color 0.5s var(--ease-out-expo);
   }
   .spwidget-button:hover {
-    background: #55643f !important;
-    border-color: #55643f !important;
+    background: #24363a !important;
+    border-color: #24363a !important;
     color: #fff !important;
   }
   .spwidget-button:active {
@@ -214,6 +214,10 @@
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
+    transition: none !important;
+  }
+  /* route crossfade (App.tsx <main>) must be instant too */
+  main#main {
     transition: none !important;
   }
 }

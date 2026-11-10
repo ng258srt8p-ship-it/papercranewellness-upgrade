@@ -136,7 +136,7 @@ export default function About() {
             <p className="mb-6 text-center"><Eyebrow center tone="muted">As seen on</Eyebrow></p>
             <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
               {press.map((p) => (
-                <span key={p.outlet} className="display text-[1.15rem] text-navy/30">{p.outlet}</span>
+                <span key={p.outlet} className="display text-[1.15rem] text-navy/55">{p.outlet}</span>
               ))}
             </div>
           </Reveal>

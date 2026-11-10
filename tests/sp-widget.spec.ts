@@ -177,7 +177,7 @@ test.describe("Contact page", () => {
       const s = getComputedStyle(el);
       return { bg: s.backgroundColor, radius: s.borderRadius, padding: s.padding, color: s.color };
     });
-    expect(styles.bg).toBe("rgb(107, 124, 84)"); // sage #6B7C54
+    expect(styles.bg).toBe("rgb(85, 100, 63)"); // sage-deep #55643F (AA contrast with white)
     expect(styles.radius).toBe("999px"); // pill (brand CSS: 999px)
     expect(styles.padding).toBe("14px 28px");
     expect(styles.color).toBe("rgb(255, 255, 255)");

@@ -1,5 +1,4 @@
 import { Link } from "../lib/router";
-import { toRoman } from "../lib/roman";
 import { PaperFold } from "../components/Logo";
 import { CTA, Card, Eyebrow, PageHero, Reveal, SectionLabel, Shell } from "../components/ui";
 import { specialties } from "../data/site";
@@ -12,7 +11,7 @@ export default function Specialty({ slug }: { slug: string }) {
   return (
     <>
       <PageHero
-        eyebrow={`${toRoman(s.n)} — Specialty`}
+        eyebrow={`${s.n} — Specialty`}
         title={s.title}
         lede={s.short}
         meta={["Virtual across South Carolina", "In-person in Mount Pleasant", "Free 15-minute consultation"]}

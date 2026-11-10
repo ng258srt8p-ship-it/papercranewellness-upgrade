@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { RouterProvider, useRouter } from "./lib/router";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { Button, Eyebrow, Shell, WidgetButton } from "./components/ui";
+import { cn } from "./utils/cn";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Specialties from "./pages/Specialties";
@@ -56,16 +57,7 @@ function NotFound() {
   );
 }
 
-function Routes() {
-  const { path } = useRouter();
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" });
-    document.title = titles[path] ?? "Paper Crane Wellness";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta && descriptions[path]) meta.setAttribute("content", descriptions[path]);
-  }, [path]);
-
+function Routes({ path }: { path: string }) {
   switch (path) {
     case "/":
       return <Home />;
@@ -91,13 +83,50 @@ function Routes() {
 export default function App() {
   return (
     <RouterProvider>
-      <div className="min-h-screen bg-paper">
-        <Nav />
-        <main id="main">
-          <Routes />
-        </main>
-        <Footer />
-      </div>
+      <Chrome />
     </RouterProvider>
+  );
+}
+
+/**
+ * Shell around the routed page. On navigation the outgoing page gets a brief
+ * fade-out before the new one mounts, so route changes don't pop to blank.
+ */
+function Chrome() {
+  const { path } = useRouter();
+  const [shown, setShown] = useState(path);
+  const [exiting, setExiting] = useState(false);
+
+  useEffect(() => {
+    document.title = titles[path] ?? "Paper Crane Wellness";
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta && descriptions[path]) meta.setAttribute("content", descriptions[path]);
+  }, [path]);
+
+  useEffect(() => {
+    if (path === shown) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // No fade at all — swap immediately instead of blanking for 180ms.
+      setShown(path);
+      window.scrollTo({ top: 0, behavior: "auto" });
+      return;
+    }
+    setExiting(true);
+    const t = window.setTimeout(() => {
+      setShown(path);
+      setExiting(false);
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }, 180);
+    return () => window.clearTimeout(t);
+  }, [path, shown]);
+
+  return (
+    <div className="min-h-screen bg-paper">
+      <Nav />
+      <main id="main" className={cn("transition-opacity duration-200", exiting && "opacity-0")}>
+        <Routes path={shown} />
+      </main>
+      <Footer />
+    </div>
   );
 }

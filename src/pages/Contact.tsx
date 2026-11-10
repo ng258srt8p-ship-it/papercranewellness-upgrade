@@ -46,7 +46,7 @@ function ContactWidget({ contact }: { contact: ContactContent }) {
             void openSimplePractice("contact");
           }}
         >
-          Contact
+          Send a message
         </a>
       </div>
 
@@ -150,7 +150,7 @@ export default function Contact() {
                 <div className="mt-8 space-y-5 border-t border-navy/12 pt-6">
                   <div>
                     <p className="text-[0.7rem] tracking-[0.08em] text-navy/40 uppercase">Email</p>
-                    <a href={`mailto:${c.email}`} className="link-underline mt-1 inline-block text-[0.9375rem] text-navy hover:text-sage-deep">
+                    <a href={`mailto:${c.email}`} className="link-underline mt-1 inline-flex min-h-11 items-center text-[0.9375rem] text-navy hover:text-sage-deep">
                       {c.email}
                     </a>
                   </div>
