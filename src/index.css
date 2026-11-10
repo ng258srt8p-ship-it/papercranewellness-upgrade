@@ -205,6 +205,36 @@
   }
 }
 
+/* PaperFold fold-settle — the site's one decorative motion moment (specialty
+   aside). One-shot, staggered, respects reduced-motion below. */
+@keyframes fold-settle {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94);
+  }
+  to {
+    opacity: var(--fold-o, 1);
+    transform: none;
+  }
+}
+.fold-settle path {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: fold-settle 0.9s var(--ease-out-expo) backwards;
+}
+.fold-settle path:nth-child(1) {
+  --fold-o: 0.9;
+  animation-delay: 0.05s;
+}
+.fold-settle path:nth-child(2) {
+  --fold-o: 0.55;
+  animation-delay: 0.22s;
+}
+.fold-settle path:nth-child(3) {
+  --fold-o: 0.28;
+  animation-delay: 0.39s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -215,6 +245,10 @@
     transform: none !important;
     clip-path: none !important;
     transition: none !important;
+  }
+  /* fold-settle lands instantly on its final state */
+  .fold-settle path {
+    animation: none !important;
   }
   /* route crossfade (App.tsx <main>) must be instant too */
   main#main {

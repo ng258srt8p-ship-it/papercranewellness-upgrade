@@ -73,7 +73,7 @@ export default function Nav() {
                 </div>
               );
             })}
-            <WidgetButton className="ml-4 gap-2 px-6 py-2.5">Free Consult</WidgetButton>
+            <WidgetButton className="ml-4 px-6 py-2.5">Book a free consultation</WidgetButton>
           </nav>
 
           <button
@@ -161,7 +161,7 @@ export default function Nav() {
           </div>
           <div className="mt-auto pt-10">
             <WidgetButton className="w-full justify-center py-4 text-sm" onAction={() => setOpen(false)}>
-              Book a Free Consultation
+              Book a free consultation
             </WidgetButton>
             <p className="mt-5 text-[0.75rem] leading-relaxed text-navy/45">{site.virtual}</p>
           </div>

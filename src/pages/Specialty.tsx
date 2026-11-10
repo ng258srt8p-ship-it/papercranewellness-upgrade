@@ -1,6 +1,6 @@
 import { Link } from "../lib/router";
 import { PaperFold } from "../components/Logo";
-import { CTA, Card, Eyebrow, PageHero, Reveal, SectionLabel, Shell } from "../components/ui";
+import { CTA, Card, Eyebrow, PageHero, Shell } from "../components/ui";
 import { specialties } from "../data/site";
 
 export default function Specialty({ slug }: { slug: string }) {
@@ -20,12 +20,10 @@ export default function Specialty({ slug }: { slug: string }) {
       {/* Quote banner */}
       <section className="border-b border-navy/10 bg-mist py-14 md:py-20">
         <Shell>
-          <Reveal>
-            <blockquote className="display mx-auto max-w-3xl text-center text-[clamp(1.3rem,3vw,2.2rem)] leading-snug text-navy italic balance">
-              &ldquo;{s.quote}&rdquo;
-            </blockquote>
-            <p className="mt-4 text-center text-[0.7rem] tracking-[0.1em] text-navy/40 uppercase">&mdash; Rebekah P. Tozer, LISW-CP</p>
-          </Reveal>
+          <blockquote className="display mx-auto max-w-3xl text-center text-[clamp(1.3rem,3vw,2.2rem)] leading-snug text-navy italic balance">
+            &ldquo;{s.quote}&rdquo;
+          </blockquote>
+          <p className="mt-4 text-center text-[0.7rem] tracking-[0.1em] text-navy/40 uppercase">&mdash; Rebekah P. Tozer, LISW-CP</p>
         </Shell>
       </section>
 
@@ -34,27 +32,23 @@ export default function Specialty({ slug }: { slug: string }) {
         <Shell>
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <Reveal>
-                <p className="text-[1.1rem] leading-[1.8] text-navy/72 pretty">{s.intro}</p>
-              </Reveal>
+              <p className="text-[1.1rem] leading-[1.8] text-navy/72 pretty">{s.intro}</p>
               {s.vision && (
-                <Reveal delay={60}>
+                <>
                   <h2 className="display mt-12 text-[clamp(1.7rem,3.4vw,2.6rem)] leading-[1.1] text-navy balance">
                     {slug === "/trauma" ? "You can\u2019t outrun the shadow, but you can turn around and face it." : slug === "/neurodivergent" ? "I\u2019ve got you." : "The upside of sorting it out."}
                   </h2>
                   <p className="mt-6 text-[1.0625rem] leading-[1.8] text-navy/72 pretty">{s.vision}</p>
-                </Reveal>
+                </>
               )}
               {s.approach && (
-                <Reveal delay={80}>
-                  <p className="mt-6 text-[1.0625rem] leading-[1.8] text-navy/72 pretty">{s.approach}</p>
-                </Reveal>
+                <p className="mt-6 text-[1.0625rem] leading-[1.8] text-navy/72 pretty">{s.approach}</p>
               )}
             </div>
-            <Reveal delay={100} className="lg:col-span-4 lg:col-start-9">
+            <div className="lg:col-span-4 lg:col-start-9">
               <div className="sticky top-32 rounded-[4px] border border-navy/12 bg-mist/60 p-8">
                 <div className="mb-6 h-14 w-20 text-sage/40">
-                  <PaperFold className="h-full w-full" seed={Number(s.n)} />
+                  <PaperFold className="h-full w-full" seed={Number(s.n)} settle />
                 </div>
                 <Eyebrow>Who this therapy is for</Eyebrow>
                 <ul className="mt-5 space-y-3.5">
@@ -66,7 +60,7 @@ export default function Specialty({ slug }: { slug: string }) {
                   ))}
                 </ul>
               </div>
-            </Reveal>
+            </div>
           </div>
         </Shell>
       </section>
@@ -75,21 +69,15 @@ export default function Specialty({ slug }: { slug: string }) {
       {s.techniques.length > 0 && (
         <section className="border-y border-navy/10 bg-mist py-20 md:py-28">
           <Shell>
-            <Reveal>
-              <SectionLabel n="II">My therapy techniques</SectionLabel>
-              <h2 className="display mt-7 max-w-2xl text-[clamp(1.9rem,4vw,3rem)] text-navy balance">
-                The specific tools, explained.
-              </h2>
-            </Reveal>
+            <h2 className="display max-w-2xl text-[clamp(1.9rem,4vw,3rem)] text-navy balance">
+              The specific tools, explained.
+            </h2>
             <div className="mt-14 grid gap-6 md:grid-cols-3">
-              {s.techniques.map((t, i) => (
-                <Reveal key={t.name} delay={i * 80}>
-                  <Card className="h-full">
-                    <span className="display text-[0.8rem] text-sage-deep">{String(i + 1).padStart(2, "0")}</span>
-                    <h3 className="display mt-5 text-[1.4rem] text-navy">{t.name}</h3>
-                    <p className="mt-4 text-[0.9375rem] leading-relaxed text-navy/62 pretty">{t.body}</p>
-                  </Card>
-                </Reveal>
+              {s.techniques.map((t) => (
+                <Card key={t.name} className="h-full">
+                  <h3 className="display text-[1.4rem] text-navy">{t.name}</h3>
+                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-navy/62 pretty">{t.body}</p>
+                </Card>
               ))}
             </div>
           </Shell>
@@ -99,35 +87,30 @@ export default function Specialty({ slug }: { slug: string }) {
       {/* CTA statement */}
       <section className="bg-paper py-16 md:py-20">
         <Shell>
-          <Reveal>
-            <h2 className="display mx-auto max-w-2xl text-center text-[clamp(2rem,4vw,3.2rem)] text-navy balance">
-              {s.cta}
-            </h2>
-          </Reveal>
+          <h2 className="display mx-auto max-w-2xl text-center text-[clamp(2rem,4vw,3.2rem)] text-navy balance">
+            {s.cta}
+          </h2>
         </Shell>
       </section>
 
       {/* Related specialties */}
       <section className="border-t border-navy/10 bg-mist/50 py-16 md:py-20">
         <Shell>
-          <Reveal>
-            <Eyebrow tone="muted">Other specialties</Eyebrow>
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
-              {others.map((o) => (
-                <Link
-                  key={o.slug}
-                  to={o.slug}
-                  className="group rounded-[4px] border border-navy/10 bg-paper p-8 transition-all duration-500 hover:border-sage/40 hover:shadow-lg hover:shadow-navy/8"
-                >
-                  <span className="display text-[0.8rem] text-sage-deep">{o.n}</span>
-                  <p className="display mt-4 text-[1.4rem] text-navy transition-colors duration-500 group-hover:text-sage-deep">
-                    {o.title}
-                  </p>
-                  <p className="mt-3 text-[0.875rem] leading-relaxed text-navy/55">{o.short}</p>
-                </Link>
-              ))}
-            </div>
-          </Reveal>
+          <Eyebrow tone="muted">Other specialties</Eyebrow>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {others.map((o) => (
+              <Link
+                key={o.slug}
+                to={o.slug}
+                className="group block rounded-[4px] border border-navy/10 bg-paper p-8 transition-all duration-500 hover:border-sage/40 hover:shadow-lg hover:shadow-navy/8"
+              >
+                <p className="display text-[1.4rem] text-navy transition-colors duration-500 group-hover:text-sage-deep">
+                  {o.title}
+                </p>
+                <p className="mt-3 text-[0.875rem] leading-relaxed text-navy/55">{o.short}</p>
+              </Link>
+            ))}
+          </div>
         </Shell>
       </section>
 

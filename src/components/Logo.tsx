@@ -41,8 +41,39 @@ export function Wordmark({
   );
 }
 
+import { useEffect, useRef, useState } from "react";
+
 /** Decorative folded-paper geometry used in place of stock photography. */
-export function PaperFold({ className = "", seed = 0 }: { className?: string; seed?: number }) {
+export function PaperFold({
+  className = "",
+  seed = 0,
+  settle = false,
+}: {
+  className?: string;
+  seed?: number;
+  /** One-shot fold-in when scrolled into view (specialty aside). */
+  settle?: boolean;
+}) {
+  const ref = useRef<SVGSVGElement>(null);
+  const [live, setLive] = useState(false);
+
+  useEffect(() => {
+    if (!settle) return;
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLive(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [settle]);
+
   const sets = [
     ["M0 240 L180 0 L400 120 Z", "M180 0 L400 120 L400 400 Z", "M0 240 L400 400 L120 400 Z"],
     ["M400 0 L400 260 L120 60 Z", "M0 80 L120 60 L400 400 Z", "M0 80 L400 400 L0 400 Z"],
@@ -50,7 +81,13 @@ export function PaperFold({ className = "", seed = 0 }: { className?: string; se
   ];
   const s = sets[seed % sets.length];
   return (
-    <svg viewBox="0 0 400 400" className={className} preserveAspectRatio="none" aria-hidden="true">
+    <svg
+      ref={ref}
+      viewBox="0 0 400 400"
+      className={settle ? `${className}${live ? " fold-settle" : " opacity-0"}` : className}
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
       <path d={s[0]} fill="currentColor" opacity="0.9" />
       <path d={s[1]} fill="currentColor" opacity="0.55" />
       <path d={s[2]} fill="currentColor" opacity="0.28" />

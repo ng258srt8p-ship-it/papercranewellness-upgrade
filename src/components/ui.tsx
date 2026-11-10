@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "../lib/router";
 import { openSimplePractice, type WidgetKind } from "../lib/simplepractice";
 import { site } from "../data/site";
-import { toRoman } from "../lib/roman";
 import { cn } from "../utils/cn";
 
 /* ---------------------------------------------------------------- reveal */
@@ -122,8 +121,9 @@ export function WidgetButton({
   kind?: WidgetKind;
   onAction?: () => void;
 }) {
+  // no arrow affordance: this opens a modal, it does not navigate (Button/TextLink keep theirs)
   const base =
-    "group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-3.5 text-[0.8125rem] font-medium tracking-[0.03em] transition-all duration-500";
+    "relative inline-flex items-center overflow-hidden rounded-full px-7 py-3.5 text-[0.8125rem] font-medium tracking-[0.03em] transition-all duration-500";
   const styles = {
     primary: "bg-navy text-mist hover:bg-sage",
     ghost: "border border-navy/20 text-navy hover:border-navy/60 hover:bg-navy hover:text-mist",
@@ -140,15 +140,6 @@ export function WidgetButton({
       }}
     >
       <span className="relative z-10">{children}</span>
-      <svg
-        viewBox="0 0 24 24"
-        className="relative z-10 h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-1"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      >
-        <path d="M4 12h15M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
     </a>
   );
 }
@@ -256,21 +247,6 @@ export function PageHero({
 }
 
 /* ----------------------------------------------------------------- misc */
-export function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
-  const numeral = toRoman(n);
-  return (
-    <div className="flex items-baseline gap-4">
-      <Eyebrow tone="muted">
-        {numeral}
-        <span aria-hidden className="mx-3">
-          &mdash;
-        </span>
-        {children}
-      </Eyebrow>
-    </div>
-  );
-}
-
 export function Card({
   children,
   className = "",
@@ -350,26 +326,20 @@ export function CTA({
       <Shell className="relative py-24 md:py-36">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <Reveal>
-              <Eyebrow tone="light">Ready?</Eyebrow>
-              <h2 className="display mt-8 text-[clamp(2.4rem,5.4vw,4.4rem)] balance">{title}</h2>
-            </Reveal>
+            <Eyebrow tone="light">Ready?</Eyebrow>
+            <h2 className="display mt-8 text-[clamp(2.4rem,5.4vw,4.4rem)] balance">{title}</h2>
           </div>
           <div className="lg:col-span-5">
-            <Reveal delay={120}>
-              <p className="text-[1rem] leading-relaxed text-mist/70 pretty">{body}</p>
-              <div className="mt-9 flex flex-wrap gap-4">
-                <WidgetButton variant="light">
-                  Book a Free Consult
-                </WidgetButton>
-                <Link
-                  to="/faq"
-                  className="link-underline inline-flex items-center py-3.5 text-[0.8125rem] font-medium tracking-[0.04em] text-mist/60 uppercase hover:text-mist"
-                >
-                  View FAQ
-                </Link>
-              </div>
-            </Reveal>
+            <p className="text-[1rem] leading-relaxed text-mist/70 pretty">{body}</p>
+            <div className="mt-9 flex flex-wrap gap-4">
+              <WidgetButton variant="light">Book a free consultation</WidgetButton>
+              <Link
+                to="/faq"
+                className="link-underline inline-flex items-center py-3.5 text-[0.8125rem] font-medium tracking-[0.04em] text-mist/60 uppercase hover:text-mist"
+              >
+                View FAQ
+              </Link>
+            </div>
           </div>
         </div>
       </Shell>

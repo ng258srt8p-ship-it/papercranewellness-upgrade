@@ -194,7 +194,7 @@ test.describe("Contact page", () => {
   });
 
   test("contact page BookingCard CTA opens the modal", async ({ page }) => {
-    await page.locator('a:has-text("Book Free 15-Minute Consultation")').click();
+    await page.locator('main a:has-text("Book a free consultation")').first().click();
     await expect(page.locator(".spwidget--overlay")).toBeVisible({ timeout: 20_000 });
     await closeModal(page);
   });
@@ -246,7 +246,7 @@ test.describe("Mobile (375x812)", () => {
 
     await page.locator('button[aria-label*="menu" i]').first().click();
     const urlBefore = page.url();
-    await page.locator('a:has-text("Book a Free Consultation")').first().click();
+    await page.locator('a:has-text("Book a Free Consultation"):visible').first().click();
     await expect(page.locator(".spwidget--overlay")).toBeVisible({ timeout: 20_000 });
     expect(page.url()).toBe(urlBefore);
     await closeModal(page);

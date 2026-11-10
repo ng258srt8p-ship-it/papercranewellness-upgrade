@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "../lib/router";
 import { CraneMark } from "../components/Logo";
-import { Eyebrow, PageHero, Reveal, SectionLabel, Shell, WidgetButton } from "../components/ui";
+import { Eyebrow, PageHero, Shell, WidgetButton } from "../components/ui";
 import { openSimplePractice, refreshSpAutoBind, SP_SCOPE_ID } from "../lib/simplepractice";
 import { site, specialties } from "../data/site";
 import { loadCmsContent, type ContactContent } from "../lib/content";
@@ -80,7 +80,7 @@ function BookingCard() {
           variant="light"
           className="mt-7 w-full justify-center border-transparent bg-mist px-7 py-4 text-navy hover:bg-sage hover:text-mist"
         >
-          Book Free 15-Minute Consultation
+          Book a free consultation
         </WidgetButton>
         <div className="mt-6 grid gap-3 border-t border-white/12 pt-5 text-[0.8125rem] text-mist/55 sm:grid-cols-2">
           <div>
@@ -131,39 +131,32 @@ export default function Contact() {
         <Shell>
           <div className="grid gap-14 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <Reveal>
-                <SectionLabel n="I">Send a message</SectionLabel>
-                <p className="display mt-7 max-w-lg text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.12] text-navy balance">
-                  Reach out however feels right.
-                </p>
-              </Reveal>
-              <Reveal delay={80} className="mt-10">
+              <p className="display max-w-lg text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.12] text-navy balance">
+                Reach out however feels right.
+              </p>
+              <div className="mt-10">
                 <ContactWidget contact={c} />
-              </Reveal>
+              </div>
             </div>
 
             <div className="lg:col-span-4 lg:col-start-9">
-              <Reveal delay={120}>
-                <BookingCard />
-              </Reveal>
-              <Reveal delay={160}>
-                <div className="mt-8 space-y-5 border-t border-navy/12 pt-6">
-                  <div>
-                    <p className="text-[0.7rem] tracking-[0.08em] text-navy/40 uppercase">Email</p>
-                    <a href={`mailto:${c.email}`} className="link-underline mt-1 inline-flex min-h-11 items-center text-[0.9375rem] text-navy hover:text-sage-deep">
-                      {c.email}
-                    </a>
-                  </div>
-                  <div>
-                    <p className="text-[0.7rem] tracking-[0.08em] text-navy/40 uppercase">Office</p>
-                    <p className="mt-1 text-[0.9375rem] leading-relaxed text-navy/65">{c.address}</p>
-                  </div>
-                  <div>
-                    <p className="text-[0.7rem] tracking-[0.08em] text-navy/40 uppercase">Hours</p>
-                    <p className="mt-1 text-[0.9375rem] text-navy/65">{c.hours}</p>
-                  </div>
+              <BookingCard />
+              <div className="mt-8 space-y-5 border-t border-navy/12 pt-6">
+                <div>
+                  <p className="text-[0.7rem] tracking-[0.08em] text-navy/40 uppercase">Email</p>
+                  <a href={`mailto:${c.email}`} className="link-underline mt-1 inline-flex min-h-11 items-center text-[0.9375rem] text-navy hover:text-sage-deep">
+                    {c.email}
+                  </a>
                 </div>
-              </Reveal>
+                <div>
+                  <p className="text-[0.7rem] tracking-[0.08em] text-navy/40 uppercase">Office</p>
+                  <p className="mt-1 text-[0.9375rem] leading-relaxed text-navy/65">{c.address}</p>
+                </div>
+                <div>
+                  <p className="text-[0.7rem] tracking-[0.08em] text-navy/40 uppercase">Hours</p>
+                  <p className="mt-1 text-[0.9375rem] text-navy/65">{c.hours}</p>
+                </div>
+              </div>
             </div>
           </div>
         </Shell>
@@ -171,23 +164,20 @@ export default function Contact() {
 
       <section className="border-y border-navy/10 bg-mist py-16 md:py-20">
         <Shell>
-          <Reveal>
-            <Eyebrow tone="muted">Or explore a specialty</Eyebrow>
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {specialties.map((s) => (
-                <Link
-                  key={s.slug}
-                  to={s.slug}
-                  className="group rounded-[4px] border border-navy/10 bg-paper p-6 transition-all duration-500 hover:border-sage/40 hover:shadow-lg hover:shadow-navy/6"
-                >
-                  <span className="display text-[0.75rem] text-sage-deep">{s.n}</span>
-                  <p className="display mt-3 text-[1.2rem] text-navy transition-colors duration-500 group-hover:text-sage-deep">
-                    {s.title}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          </Reveal>
+          <Eyebrow tone="muted">Or explore a specialty</Eyebrow>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {specialties.map((s) => (
+              <Link
+                key={s.slug}
+                to={s.slug}
+                className="group block rounded-[4px] border border-navy/10 bg-paper p-6 transition-all duration-500 hover:border-sage/40 hover:shadow-lg hover:shadow-navy/6"
+              >
+                <p className="display text-[1.2rem] text-navy transition-colors duration-500 group-hover:text-sage-deep">
+                  {s.title}
+                </p>
+              </Link>
+            ))}
+          </div>
         </Shell>
       </section>
     </>

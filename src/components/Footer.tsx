@@ -17,7 +17,7 @@ export default function Footer() {
               Paper Crane Wellness provides virtual therapy anywhere in South Carolina and in-person therapy in Mount Pleasant. Specializing in trauma, PTSD, EMDR, neurodivergent affirming therapy, and individual therapy for adults.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <WidgetButton className="gap-2 px-6 py-3">Book a Free Consultation</WidgetButton>
+              <WidgetButton className="px-6 py-3">Book a free consultation</WidgetButton>
             </div>
           </div>
 
