@@ -2,6 +2,7 @@ import { Link } from "../lib/router";
 import { CTA, PageHero, Reveal, Shell } from "../components/ui";
 import { specialties } from "../data/site";
 import { PaperFold } from "../components/Logo";
+import { cn } from "../utils/cn";
 
 export default function Specialties() {
   return (
@@ -25,7 +26,11 @@ export default function Specialties() {
               <Reveal key={s.slug} delay={i * 60}>
                 <Link
                   to={s.slug}
-                  className="group grid gap-8 border-t border-navy/12 pt-10 lg:grid-cols-12 lg:gap-10"
+                  className={cn(
+                    "group grid gap-8 lg:grid-cols-12 lg:gap-10",
+                    // the hero's own bottom hairline already rules above row 0
+                    i > 0 && "border-t border-navy/12 pt-10"
+                  )}
                 >
                   <div className="lg:col-span-1">
                     <span className="display text-[0.85rem] text-sage-deep">{s.n}</span>

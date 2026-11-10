@@ -293,7 +293,8 @@ export function Card({
 export function Accordion({ items }: { items: { q: string; a: string }[] }) {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <div className="border-t hairline">
+    // no top border: PageHero's bottom hairline (the only usage site, /faq) already rules here
+    <div>
       {items.map((item, i) => {
         const isOpen = open === i;
         return (
