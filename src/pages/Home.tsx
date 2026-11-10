@@ -142,7 +142,11 @@ function Hero() {
                   src={img.rebekah}
                   alt="Rebekah P. Tozer, LISW-CP, founder of Paper Crane Wellness"
                   className="h-full w-full object-cover object-center"
-                  style={{ transform: `translate3d(0,${y * -0.03}px,0) scale(1.06)` }}
+                  // Cap the drift at 2.5% of the image box — scale(1.06) only
+                  // leaves ~3% bleed above/below, and an uncapped scrollY *
+                  // 0.03 outran it on tall mobile heroes, exposing the bg-mist
+                  // container as a gray bar under the bottom gradient.
+                  style={{ transform: `translate3d(0, calc(min(${y * 0.03}px, 2.5%) * -1), 0) scale(1.06)` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/20 via-transparent to-transparent" />
               </div>
