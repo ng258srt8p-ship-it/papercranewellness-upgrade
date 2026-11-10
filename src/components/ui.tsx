@@ -211,14 +211,16 @@ export function PageHero({
   index?: string;
 }) {
   return (
-    <header className="relative overflow-hidden border-b hairline bg-paper pt-40 pb-16 md:pt-48 md:pb-24">
+    // rule sits on the content grid (not the header/Shell box) so its length
+    // matches the row dividers and the meta rule — all content-width
+    <header className="relative overflow-hidden bg-paper pt-40 md:pt-48">
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 right-[-10%] h-[38rem] w-[38rem] rounded-full opacity-60 blur-3xl"
         style={{ background: "radial-gradient(circle, rgba(240,244,238,1) 0%, rgba(251,250,246,0) 70%)" }}
       />
       <Shell className="relative">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+        <div className="grid gap-10 border-b hairline pb-16 md:pb-24 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <Reveal>
               <Eyebrow>{eyebrow}</Eyebrow>
