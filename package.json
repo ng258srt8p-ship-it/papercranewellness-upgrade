@@ -8,7 +8,8 @@
     "prebuild": "node scripts/sync-og.mjs",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "playwright test"
+    "test": "playwright test",
+    "gen:logo": "node scripts/gen-logo-assets.mjs"
   },
   "dependencies": {
     "clsx": "2.1.1",
