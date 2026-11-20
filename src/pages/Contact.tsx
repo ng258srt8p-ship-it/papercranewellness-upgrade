@@ -8,10 +8,10 @@ import { loadCmsContent, type ContactContent } from "../lib/content";
 
 /**
  * SimplePractice Contact Form Widget (visible, brand-styled).
- * Opens the SP contact modal. The anchor is autobound by the SP script via
- * refreshSpAutoBind() after mount (the script only binds anchors present at
- * its own execution). The fallback onClick + real href cover the no-bind and
- * no-JS cases.
+ * Opens the SP contact modal. The SP script loads on first click (see
+ * src/lib/simplepractice.ts); refreshSpAutoBind() after mount rebinds this
+ * anchor once the script is present. The onClick + real href cover the
+ * no-bind and no-JS cases.
  */
 function ContactWidget({ contact }: { contact: ContactContent }) {
   useEffect(() => {

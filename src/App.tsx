@@ -10,6 +10,7 @@ import Specialties from "./pages/Specialties";
 import Specialty from "./pages/Specialty";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
 import Admin from "./pages/Admin";
 
 const titles: Record<string, string> = {
@@ -21,6 +22,7 @@ const titles: Record<string, string> = {
   "/individual": "Individual Therapy for Adults \u2014 Paper Crane Wellness",
   "/faq": "FAQ \u2014 Paper Crane Wellness",
   "/contact": "Contact & Booking \u2014 Paper Crane Wellness",
+  "/privacy": "Privacy \u2014 Paper Crane Wellness",
   "/admin": "Content Admin \u2014 Paper Crane Wellness",
 };
 
@@ -33,6 +35,7 @@ const descriptions: Record<string, string> = {
   "/individual": "Individual therapy for adults in South Carolina. One-on-one support for trauma, anxiety, depression, and life's challenges \u2014 virtual or in-person in Mount Pleasant.",
   "/faq": "FAQs about therapy at Paper Crane Wellness: EMDR, insurance (Cigna & Aetna), treatment length, where to find the office, and more.",
   "/contact": "Contact Paper Crane Wellness to book a free 15-minute consultation. Virtual therapy anywhere in South Carolina; in-person in Mount Pleasant.",
+  "/privacy": "How Paper Crane Wellness protects your privacy: no trackers, no ad pixels, no analytics — the booking widget loads only when you click it.",
 };
 
 function NotFound() {
@@ -73,6 +76,8 @@ function Routes({ path }: { path: string }) {
       return <FAQ />;
     case "/contact":
       return <Contact />;
+    case "/privacy":
+      return <Privacy />;
     case "/admin":
       return <Admin />;
     default:

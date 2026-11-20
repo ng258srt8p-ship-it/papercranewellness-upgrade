@@ -1,8 +1,10 @@
 /**
  * SimplePractice widget integration (appointment + contact modals).
  *
- * The SP integration script (loaded with `defer` in index.html) autobinds the
- * hidden anchors in #sp-widget-host and registers:
+ * The SP integration script is loaded ON FIRST CLICK (see loadSpScript) — never
+ * at page load — so no third-party request happens before the visitor acts on
+ * the booking/contact CTA. Once loaded it autobinds the hidden anchors in
+ * #sp-widget-host and registers:
  *   window.SPWidgetInstances["<scopeId>-appointment"]  (OAR modal)
  *   window.SPWidgetInstances["<scopeId>-contact"]      (contact form modal)
  *
@@ -13,6 +15,7 @@
 
 export const SP_SCOPE_ID = "ef573a05-79ef-46ab-9b18-d5c65a183d97";
 export const SP_BOOKING_URL = "https://papercranewellness.clientsecure.me";
+const SP_SCRIPT_URL = "https://widget-cdn.simplepractice.com/assets/integration-1.0.js";
 
 export type WidgetKind = "appointment" | "contact";
 
@@ -44,6 +47,34 @@ function waitForInstance(kind: WidgetKind, timeoutMs = 5000) {
   });
 }
 
+let spScriptPromise: Promise<void> | null = null;
+
+/**
+ * Inject the SP integration script on first use (never at page load).
+ * Resolves when it has loaded, or when loading failed — openSimplePractice
+ * then falls through to the booking-page fallback. Idempotent.
+ */
+function loadSpScript(): Promise<void> {
+  if (!spScriptPromise) {
+    spScriptPromise = new Promise((resolve) => {
+      if (typeof window.spWidgetAutoBind === "function") return resolve(); // already present (e.g. back-nav)
+      const s = document.createElement("script");
+      s.src = SP_SCRIPT_URL;
+      s.async = true;
+      s.onload = () => {
+        window.spWidgetAutoBind?.();
+        resolve();
+      };
+      s.onerror = () => {
+        spScriptPromise = null; // allow a later click to retry
+        resolve();
+      };
+      document.head.appendChild(s);
+    });
+  }
+  return spScriptPromise;
+}
+
 function clickHiddenAnchor(kind: WidgetKind): boolean {
   const sel =
     kind === "appointment"
@@ -60,6 +91,7 @@ function clickHiddenAnchor(kind: WidgetKind): boolean {
  * Resolves after the modal is triggered (or the fallback is used).
  */
 export async function openSimplePractice(kind: WidgetKind) {
+  await loadSpScript();
   const inst = await waitForInstance(kind);
   if (inst) {
     inst.reveal();

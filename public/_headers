@@ -1,0 +1,9 @@
+# Security headers for Cloudflare Pages.
+# No strict CSP: the production build is a single HTML file with inlined
+# module script + styles (vite-plugin-singlefile), so 'unsafe-inline' would
+# be required anyway and would add no real protection.
+/*
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()

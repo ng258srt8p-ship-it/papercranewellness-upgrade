@@ -70,7 +70,10 @@ export default function Footer() {
 
         <div className="mt-8 flex flex-col gap-4 border-t border-navy/10 pt-7 text-[0.75rem] text-navy/40 md:flex-row md:items-center md:justify-between">
           <p>&copy; {new Date().getFullYear()} {site.name} LLC. All rights reserved.</p>
-          <a href={site.url} className="link-underline inline-block py-1.5 hover:text-navy">{site.url.replace("https://", "")}</a>
+          <div className="flex items-center gap-6">
+            <Link to="/privacy" className="link-underline inline-block py-1.5 hover:text-navy">Privacy</Link>
+            <a href={site.url} className="link-underline inline-block py-1.5 hover:text-navy">{site.url.replace("https://", "")}</a>
+          </div>
         </div>
       </Shell>
     </footer>
