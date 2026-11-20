@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper Crane Wellness — Domain Switch: Your Instructions</title>
+<style>
+  :root{
+    --ink:#2b2b33;
+    --muted:#6b6b76;
+    --crane:#b4553f;          /* terracotta accent */
+    --crane-soft:#faf1ee;
+    --paper:#fdfcf9;
+    --card:#ffffff;
+    --line:#e8e4dd;
+    --ok:#2e7d5b;
+    --warn:#a4551c;
+    --warn-soft:#fdf3e7;
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{font-size:16px}
+  body{
+    margin:0;padding:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:40px 22px 64px}
+  header.hero{border-bottom:1px solid var(--line);padding-bottom:26px;margin-bottom:30px}
+  .crane{font-size:30px;line-height:1;display:block;margin-bottom:10px}
+  h1{font-family:var(--serif);font-weight:400;font-size:1.9rem;margin:0 0 8px;letter-spacing:.2px}
+  .meta{color:var(--muted);font-size:.9rem}
+  .meta strong{color:var(--ink);font-weight:600}
+  .lede{font-size:1.02rem;margin:18px 0 0}
+  .lede em{color:var(--crane);font-style:normal;font-weight:600}
+  h2{font-family:var(--serif);font-weight:400;font-size:1.35rem;margin:0 0 4px}
+  .step{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:22px 24px;margin:22px 0;
+  }
+  .step-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+  .num{
+    flex:0 0 auto;width:30px;height:30px;border-radius:50%;
+    background:var(--crane);color:#fff;font-weight:700;font-size:.95rem;
+    display:inline-flex;align-items:center;justify-content:center;
+    transform:translateY(4px);
+  }
+  .time{margin-left:auto;font-size:.8rem;color:var(--muted);border:1px solid var(--line);
+    border-radius:99px;padding:2px 10px;white-space:nowrap}
+  .why{color:var(--muted);font-size:.92rem;margin:0 0 14px}
+  ol{margin:10px 0 14px;padding-left:22px}
+  ol li{margin:8px 0}
+  ul.check{list-style:none;padding:0;margin:10px 0}
+  ul.check li{
+    padding:8px 10px 8px 36px;position:relative;margin:6px 0;
+    background:var(--crane-soft);border-radius:8px;font-size:.95rem;
+  }
+  ul.check li::before{
+    content:"";position:absolute;left:12px;top:13px;width:14px;height:14px;
+    border:2px solid var(--crane);border-radius:4px;background:#fff;
+  }
+  code,.path{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:.85em;background:#f2efe9;border:1px solid var(--line);
+    border-radius:5px;padding:1px 6px;white-space:nowrap;
+  }
+  .callout{border-radius:10px;padding:14px 18px;margin:14px 0;font-size:.95rem}
+  .callout.warn{background:var(--warn-soft);border:1px solid #ecd9bd;color:#5c3d1a}
+  .callout.info{background:#eef4f9;border:1px solid #d8e6f0;color:#2c475c}
+  .callout .tag{font-weight:700;display:block;margin-bottom:3px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+  .callout.warn .tag{color:var(--warn)}
+  .callout.info .tag{color:#33608a}
+  .choice{border:1px dashed #c9c2b6;border-radius:10px;padding:4px 18px 12px;margin:14px 0;background:#fffdf9}
+  .choice h3{font-size:.98rem;margin:12px 0 4px;font-weight:700}
+  .choice p{margin:6px 0}
+  .done{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin:30px 0}
+  .done h2{margin-bottom:12px}
+  .done ol li{margin:7px 0}
+  .qa{margin:12px 0 2px}
+  .qa details{border-bottom:1px solid var(--line);padding:10px 2px}
+  .qa summary{cursor:pointer;font-weight:600;list-style:none}
+  .qa summary::before{content:"＋";color:var(--crane);display:inline-block;width:1.4em;font-weight:400}
+  .qa details[open] summary::before{content:"－"}
+  .qa p{color:var(--muted);margin:8px 0 4px;padding-left:1.4em}
+  .timeline{width:100%;border-collapse:collapse;font-size:.93rem;margin-top:10px}
+  .timeline th,.timeline td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  .timeline th{background:var(--crane-soft);font-weight:600}
+  footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+  a{color:var(--crane)}
+  @media print{
+    body{background:#fff}
+    .step,.done{border-color:#ccc;box-shadow:none;break-inside:avoid}
+    .time{border-color:#ccc}
+    .wrap{padding:0}
+  }
+  @media (max-width:520px){
+    .wrap{padding:26px 16px 48px}
+    h1{font-size:1.55rem}
+    .time{margin-left:0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="crane" aria-hidden="true">🕊</span>
+    <h1>Switching your website to its new home</h1>
+    <p class="meta"><strong>For:</strong> Rebekah — Paper Crane Wellness &nbsp;·&nbsp; <strong>From:</strong> George &nbsp;·&nbsp; November 2026</p>
+    <p class="lede">Your new, privacy-compliant site is already built and waiting at <code>papercranewellness.pages.dev</code>. These are the <em>three things only you can do</em> to move <strong>papercranewellness.com</strong> over to it — and one small thing we each take care of after that. Total time on your side: about <strong>30 minutes</strong>, split over two days.</p>
+  </header>
+
+  <!-- STEP 1 -->
+  <section class="step" id="step-1">
+    <div class="step-head">
+      <span class="num">1</span>
+      <h2>Reply with two confirmations</h2>
+      <span class="time">2 minutes · today</span>
+    </div>
+    <p class="why">So I can set everything up before touching anything.</p>
+    <ul class="check">
+      <li><strong>The web address.</strong> Confirm the new site should live at <strong>papercranewellness.com</strong> (and <code>www.</code>).<br>
+        <span style="color:var(--muted);font-size:.9rem">If you'd rather switch to a shorter address like <code>papercrane.com</code>, say so — that's a separate domain purchase, and the old address would automatically redirect visitors to the new one.</span></li>
+      <li><strong>Your email for Cloudflare.</strong> Send me the inbox you'd like to use for the hosting account. I'll create the domain setup in my Cloudflare account and invite you as a member, so you always have your own view of everything without a separate account to manage.</li>
+    </ul>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step" id="step-2">
+    <div class="step-head">
+      <span class="num">2</span>
+      <h2>Point your domain at Cloudflare</h2>
+      <span class="time">10 minutes · after I send the nameservers</span>
+    </div>
+    <p class="why">One setting change tells the internet your website now lives with Cloudflare. It's reversible, causes no downtime, and is the only step I can't do for you because it's behind your domain account login.</p>
+    <ol>
+      <li>Wait for my message with <strong>two nameservers</strong> (they'll look like <code>abc.ns.cloudflare.com</code> and <code>xyz.ns.cloudflare.com</code>). I'll also confirm your email records carried over before I send them.</li>
+      <li>Log in to wherever your domain is managed — most likely <strong>Squarespace</strong>: <span class="path">Settings → Domains → papercranewellness.com</span> (then the DNS / nameserver / “connect existing domain” option). If you bought the domain elsewhere (GoDaddy, Namecheap, …), it's that account's <em>domain → DNS / nameservers</em> settings.</li>
+      <li>Replace the existing nameservers with the two Cloudflare ones. Save.</li>
+      <li>Done. The change spreads across the internet over 15 minutes to 24 hours; the status will show <strong>“Active”</strong> and I'll confirm it on my side the same day.</li>
+    </ol>
+    <div class="callout info">
+      <span class="tag">Your email is safe</span>
+      <code>rebekah@papercranewellness.com</code> runs separately from the website and keeps working throughout. I verify the MX / SPF / DKIM / DMARC records before the switch — you don't touch any of them. If mail ever acts odd afterward, tell me immediately.
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step" id="step-3">
+    <div class="step-head">
+      <span class="num">3</span>
+      <h2>Remove the ad trackers from Squarespace — today</h2>
+      <span class="time">5 minutes · urgent</span>
+    </div>
+    <div class="callout warn">
+      <span class="tag">Do this before anything else</span>
+      The currently-live page loads Facebook and Google advertising trackers for every visitor — the exact thing therapy practices are getting demand letters over. Removing these two settings today closes that risk immediately, even before the domain switches.
+    </div>
+    <div class="choice">
+      <h3>Option A — you do it (no access sharing)</h3>
+      <p>In Squarespace:</p>
+      <ol>
+        <li><span class="path">Settings → Advanced → Integrations (Google, Facebook, and Pinterest)</span> — delete the <strong>Facebook Pixel ID</strong> and the <strong>Google tag</strong> (it starts with <code>AW-</code>).</li>
+        <li><span class="path">Settings → Advanced → Code Injection</span> — remove anything that mentions <code>facebook</code>, <code>fbevents</code>, or <code>gtag</code>.</li>
+      </ol>
+    </div>
+    <div class="choice">
+      <h3>Option B — I do it</h3>
+      <p>Invite me as an administrator (<span class="path">Settings → Website → Permissions</span>) and I'll strip the trackers and send you a list of exactly what I removed.</p>
+    </div>
+    <p><strong>Later:</strong> once the new site is verified on your domain, cancel / don't renew Squarespace. I'll keep the old site dormant for 1–2 weeks as a safety net, then it gets deleted.</p>
+  </section>
+
+  <!-- MY PART -->
+  <section class="done">
+    <h2>What I handle — nothing needed from you</h2>
+    <ol>
+      <li>Attach <code>papercranewellness.com</code> + <code>www</code> to the new site and switch on its secure (HTTPS) certificate.</li>
+      <li>Set up automatic redirects so every old link — <code>/faq</code>, <code>/contact</code>, search-engine links, bookmarked pages — lands on the matching new page.</li>
+      <li>Re-run the full third-party tracker audit on the real domain and send you the final report: <em>“zero trackers fire until a visitor deliberately clicks Book/Contact”</em> — keep it for your records.</li>
+      <li>Confirm your email still sends and receives.</li>
+    </ol>
+  </section>
+
+  <!-- FAQ -->
+  <section class="done">
+    <h2>Questions you might be wondering</h2>
+    <div class="qa">
+      <details>
+        <summary>Will my website go down during the switch?</summary>
+        <p>No downtime. For a short window while the change spreads, some visitors may see the old page and some the new one — both work the whole time.</p>
+      </details>
+      <details>
+        <summary>Will booking still work?</summary>
+        <p>Yes. The Book/Contact buttons open your SimplePractice secure form exactly as now — with the compliance fix that nothing loads until a visitor clicks.</p>
+      </details>
+      <details>
+        <summary>Do I still need Squarespace?</summary>
+        <p>No. After the switch it's only hosting the page we replaced. Cancel the subscription and keep the domain wherever it renews now, or move renewals to Cloudflare later if you want to compare prices (~$11/yr vs ~$20+/yr).</p>
+      </details>
+      <details>
+        <summary>Who owns what afterward?</summary>
+        <p>You own the domain, the Cloudflare access (free plan), and the site content. I stay as your invited developer until you remove me.</p>
+      </details>
+      <details>
+        <summary>Why is this happening now?</summary>
+        <p>Therapy websites are being swept by automated crawlers that look for ad trackers firing without consent, followed by settlement demand letters (wiretapping/privacy claims, $5–10k per violation). The new site was built specifically to carry none of that.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="done">
+    <h2>Timeline at a glance</h2>
+    <table class="timeline">
+      <tr><th>When</th><th>Who</th><th>What</th></tr>
+      <tr><td>Today</td><td>You</td><td>Step 1 reply · Step 3 tracker removal (urgent)</td></tr>
+      <tr><td>Same day</td><td>George</td><td>Create the Cloudflare zone, verify email records, send nameservers</td></tr>
+      <tr><td>When nameservers arrive</td><td>You</td><td>Step 2 — 10 minutes at the domain settings</td></tr>
+      <tr><td>Within 24h of “Active”</td><td>George</td><td>Domain attached, redirects live, audit report to you</td></tr>
+      <tr><td>+1–2 weeks</td><td>You</td><td>Cancel Squarespace</td></tr>
+    </table>
+  </section>
+
+  <footer>
+    Paper Crane Wellness · Rebekah Crane, LCSW — Columbia, SC · Questions: reply to George's email any time.
+  </footer>
+</div>
+</body>
+</html>
